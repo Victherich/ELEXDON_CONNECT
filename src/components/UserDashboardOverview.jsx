@@ -1,0 +1,507 @@
+import React , {useContext} from 'react';
+import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { 
+  FaCreditCard, 
+  FaFileInvoiceDollar, 
+  FaUserGear, 
+  FaPiggyBank, 
+  FaArrowUpRightFromSquare, 
+  FaWallet,
+  FaShieldHalved,
+  FaArrowRightArrowLeft,
+
+  
+  FaShield, FaPenToSquare, FaCalendarCheck, FaAddressCard, 
+  FaMobileScreenButton, FaUsersViewfinder, FaMapLocationDot,
+  FaUserCheck, FaPhoneVolume, FaBuildingShield, FaCode
+} from 'react-icons/fa6';
+import { Context } from './Context';
+
+const UserDashboardOverview = () => {
+  // Pull data safely from the Redux state, matching your fallback structural configuration
+  const userInfo = useSelector((state) => state.userInfo) || { 
+    name: "Alex Elexdon Node", 
+    accountNumber: "8820491823", 
+    balance: 45280.50,
+    savings: 12400.00
+  };
+const {user}=useContext(Context);
+  // Quick Action Matrix map matching dashboard sub-view paths
+const serviceActions = [
+    { 
+      path: "/userdashboard/scuml", 
+      title: "SCUML Registration", 
+      badge: "NEW", 
+      badgeColor: "#7c3aed",
+      icon: <FaShield size={14} />, 
+      color: "#dc2626" 
+    },
+    { 
+      path: "/userdashboard/cac-modification", 
+      title: "CAC Modification", 
+      badge: "9 new services", 
+      badgeColor: "#7c3aed",
+      icon: <FaPenToSquare size={14} />, 
+      color: "#dc2626" 
+    },
+    { 
+      path: "/userdashboard/cac-annual", 
+      title: "CAC Annual Return", 
+      badge: "NEW", 
+      badgeColor: "#7c3aed",
+      icon: <FaCalendarCheck size={14} />, 
+      color: "#dc2626" 
+    },
+    { 
+      path: "/userdashboard/service/nindirectverification", 
+      title: "Print NIN Slip", 
+      icon: <FaAddressCard size={14} />, 
+      color: "#6366f1" 
+    },
+    { 
+      path: "/userdashboard/service/printbvn", 
+      title: "Print BVN Slip", 
+      icon: <FaCreditCard size={14} />, 
+      color: "#059669" 
+    },
+    { 
+      path: "/userdashboard/service/ninphoneverification", 
+      title: "Retrieve NIN With Phone", 
+      icon: <FaMobileScreenButton size={14} />, 
+      color: "#6366f1" 
+    },
+    { 
+      path: "/userdashboard/service/nindemographyverification", 
+      title: "NIN Retrieval with Demography", 
+      badge: "Fully Active", 
+      badgeColor: "#4f46e5",
+      icon: <FaUsersViewfinder size={14} />, 
+      color: "#dc2626" 
+    },
+    { 
+      path: "/userdashboard/tin-registration", 
+      title: "TIN Registration / Retrieval", 
+      icon: <FaMapLocationDot size={14} />, 
+      color: "#6366f1" 
+    },
+    { 
+      path: "/userdashboard/service/ninmodificationmanagement", 
+      title: "NIN Validation", 
+      icon: <FaUserCheck size={14} />, 
+      color: "#6366f1" 
+    },
+    { 
+      path: "/userdashboard/service/bvnphoneprint", 
+      title: "BVN Retrieval with Phone", 
+      icon: <FaPhoneVolume size={14} />, 
+      color: "#059669" 
+    },
+    { 
+      path: "/userdashboard/cac-registration", 
+      title: "CAC Registration", 
+      icon: <FaBuildingShield size={14} />, 
+      color: "#dc2626" 
+    },
+
+{ 
+  path: "/userdashboard/service/airtimerecharge", 
+  title: "Airtime Recharge", 
+  badge: "Instant", 
+  badgeColor: "#16a34a", // Vibrant green accent
+  icon: <FaPhoneVolume size={14} />, 
+  color: "#2563eb" // Elexdon Blue primary shell
+},
+{ 
+  path: "/userdashboard/service/datarecharge", 
+  title: "Mobile Data Recharge", 
+  icon: <FaMobileScreenButton size={14} />, 
+  color: "#7c3aed" // Royal purple shell
+},
+{ 
+  path: "/userdashboard/electricity", 
+  title: "Electricity Bill Payment", 
+  badge: "24/7 Auto", 
+  badgeColor: "#ea580c", // Warning amber active notice
+  icon: <FaCode size={14} />, // Feel free to swap out with an energy icon if preferred
+  color: "#059669" // Stable deep green shell
+}
+  ];
+
+  return (
+    <OverviewWrapper>
+      {/* SECTION 1: CUSTOMER RECOGNITION BLOCK */}
+      <WelcomeHeaderBlock>
+        <div>
+          <WelcomeGreeting>Welcome Back,</WelcomeGreeting>
+          <ClientAccountName>{userInfo.name}</ClientAccountName>
+        </div>
+        <SecuredTag>
+          <FaShieldHalved size={12} />
+          <span>AES-256 Core Encrypted</span>
+        </SecuredTag>
+      </WelcomeHeaderBlock>
+
+      {/* SECTION 2: DIGITAL BANKING LEDGER CARDS */}
+      <FinancesDisplayGrid>
+        {/* PREMIUM VISUAL DEBIT CARD HOUSING ELEMENT */}
+        <PremiumVirtualCard>
+          <CardHeaderRow>
+            <BankCardBrand>ELEXDON<span>CONNECT</span></BankCardBrand>
+            <FaWallet size={18} />
+          </CardHeaderRow>
+          <CardBalanceGroup>
+            <BalanceLabelText>Available Account Balance</BalanceLabelText>
+            <PrimaryBalanceDisplay>
+              NGN {user?.balance?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </PrimaryBalanceDisplay>
+          </CardBalanceGroup>
+          <CardFooterMetrics>
+            <div>
+              <MetaFieldLabel>AMOUNT SPENT</MetaFieldLabel>
+              <MetaFieldValue>•••• {userInfo.accountNumber?.slice(-4) || "4321"}</MetaFieldValue>
+            </div>
+            <ActiveChipElement />
+          </CardFooterMetrics>
+        </PremiumVirtualCard>
+
+        {/* COMPANION LIQUID SAVINGS ACCOUNT BLOCK */}
+        <VaultAccountCard>
+          <VaultIconShell>
+            <FaPiggyBank size={18} />
+          </VaultIconShell>
+          <VaultDataBlock>
+            <BalanceLabelText>Secure Vault Reserves</BalanceLabelText>
+            <SecondaryBalanceDisplay>
+              ${userInfo.savings?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </SecondaryBalanceDisplay>
+          </VaultDataBlock>
+          <TransferVaultBtn to="/userdashboard/payments">
+            <span>Manage Ledger</span>
+            <FaArrowRightArrowLeft size={12} />
+          </TransferVaultBtn>
+        </VaultAccountCard>
+      </FinancesDisplayGrid>
+
+      {/* SECTION 3: INTERACTIVE PLATFORM SERVICE HUB */}
+      <SectionHeadingLabel>ALL SERVICES</SectionHeadingLabel>
+      <ServiceTileGridStructure>
+        {serviceActions.map((service, index) => (
+          <ServiceInteractiveCard key={index} to={service.path}>
+            <ActionIconBoundary themeColor={service.color}>
+              {service.icon}
+            </ActionIconBoundary>
+            <ServiceCardTextContainer>
+              <ServiceCardTitleGroup>
+                <h4>{service.title}</h4>
+                <FaArrowUpRightFromSquare size={10} className="launch-icon" />
+              </ServiceCardTitleGroup>
+              <p>{service.desc}</p>
+            </ServiceCardTextContainer>
+          </ServiceInteractiveCard>
+        ))}
+      </ServiceTileGridStructure>
+    </OverviewWrapper>
+  );
+};
+
+export default UserDashboardOverview;
+
+/* -------------------------------------------------------------------------- */
+/* STYLED HOOK COMPONENT ELEMENTS (10PX GRID ARCHITECTURE HARD CONSTRAINTS)  */
+/* -------------------------------------------------------------------------- */
+
+const OverviewWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Locked at strict layout limit rule */
+  width: 100%;
+  box-sizing: border-box;
+`;
+
+const WelcomeHeaderBlock = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px; /* Locked at strict layout limit rule */
+`;
+
+const WelcomeGreeting = styled.p`
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  margin: 0;
+`;
+
+const ClientAccountName = styled.h2`
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.02em;
+`;
+
+const SecuredTag = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #166534;
+  white-space: nowrap;
+`;
+
+const FinancesDisplayGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 10px; /* Locked at strict layout limit rule */
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const PremiumVirtualCard = styled.div`
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #2563eb 100%);
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 10px; /* Locked at strict layout limit rule */
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 130px;
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.15);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+`;
+
+const CardHeaderRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  svg { color: rgba(255, 255, 255, 0.7); }
+`;
+
+const BankCardBrand = styled.div`
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  span {
+    color: #60a5fa;
+    margin-left: 3px;
+  }
+`;
+
+const CardBalanceGroup = styled.div`
+  margin-top: 4px;
+`;
+
+const BalanceLabelText = styled.span`
+  font-size: 10px;
+  font-weight: 500;
+  color: #94a3b8;
+  display: block;
+`;
+
+const PrimaryBalanceDisplay = styled.h1`
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  margin: 0;
+`;
+
+const CardFooterMetrics = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
+
+const MetaFieldLabel = styled.span`
+  font-size: 8px;
+  font-weight: 600;
+  color: #64748b;
+  display: block;
+  letter-spacing: 0.05em;
+`;
+
+const MetaFieldValue = styled.span`
+  font-size: 11px;
+  font-weight: 600;
+  font-family: monospace;
+  color: #cbd5e1;
+`;
+
+const ActiveChipElement = styled.div`
+  width: 20px;
+  height: 15px;
+  background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+  border-radius: 3px;
+  opacity: 0.85;
+`;
+
+const VaultAccountCard = styled.div`
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px; /* Locked at strict layout limit rule */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 130px;
+`;
+
+const VaultIconShell = styled.div`
+  width: 28px;
+  height: 28px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg { color: #16a34a; }
+`;
+
+const VaultDataBlock = styled.div`
+  margin: 4px 0;
+`;
+
+const SecondaryBalanceDisplay = styled.h3`
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.02em;
+`;
+
+const TransferVaultBtn = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #475569;
+  text-decoration: none;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+  }
+`;
+
+const SectionHeadingLabel = styled.h3`
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  margin: 10px 0 0 0; /* Strict adherence to the 10px top spacing margin anchor */
+`;
+
+const ServiceTileGridStructure = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px; /* Locked at strict layout limit rule */
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const ServiceInteractiveCard = styled(Link)`
+  display: flex;
+  align-items: flex-start;
+  gap: 10px; /* Locked at strict layout limit rule */
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px; /* Locked at strict layout limit rule */
+  text-decoration: none;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+
+  .launch-icon {
+    color: #94a3b8;
+    transition: color 0.15s ease;
+  }
+
+  &:hover {
+    border-color: #bfdbfe;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    
+    .launch-icon {
+      color: #2563eb;
+    }
+  }
+`;
+
+const ActionIconBoundary = styled.div`
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: ${props => props.themeColor}12; /* Adding 12 applies a subtle alpha opacity opacity layer */
+  border: 1px solid ${props => props.themeColor}33;
+  svg { color: ${props => props.themeColor}; }
+`;
+
+const ServiceCardTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+
+  p {
+    font-size: 11px;
+    line-height: 1.4;
+    color: #64748b;
+    margin: 0;
+  }
+`;
+
+const ServiceCardTitleGroup = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+
+  h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+  }
+`;
