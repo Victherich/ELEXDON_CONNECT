@@ -19,6 +19,17 @@ import NINModificationManagement from './components/NINModificationManagement';
 import AirtimeRechargeManagement from './components/AirtimeRechargeManagement';
 import DataRechargeSelector from './components/DataRechargeSelector';
 import DataPurchasePage from './components/DataPurchasePage';
+import ScumlRegistrationPage from './components/ScumlRegistrationPage';
+import AnnualReturnsSelectPage from './components/AnnualReturnsSelectPage';
+import BusinessNameAnnualReturnsForm from './components/BusinessNameAnnualReturnsForm';
+import CompanyAnnualReturnsForm from './components/CompanyAnnualReturnsForm';
+import TinRetrievalForm from './components/TinRetrievalForm';
+import ElectricityForm from './components/ElectricityForm';
+import CacRegistrationPortal from './components/CacRegistrationPortal';
+import TransactionHistory from './components/TransactionHistory';
+import FundWalletPage from './components/FundWalletPage';
+import UserProfilePage from './components/UserProfilePage';
+import AdminUserManagement from './components/AdminUserManagement';
 
 function App() {
   return (
@@ -45,6 +56,17 @@ function App() {
             <Route path='service/airtimerecharge' element={<AirtimeRechargeManagement/>}/>
             <Route path='service/datarecharge' element={<DataRechargeSelector/>}/>
             <Route path='service/datarecharge/:serviceID' element={<DataPurchasePage/>}/>
+            <Route path='service/scumlregistration' element={<ScumlRegistrationPage/>}/>
+            <Route path='service/annualreturns' element={<AnnualReturnsSelectPage/>}/>
+            <Route path='service/annualreturns/businessname' element={<BusinessNameAnnualReturnsForm/>}/>
+             <Route path='service/annualreturns/company' element={<CompanyAnnualReturnsForm/>}/>
+             <Route path='service/tinretrieval' element={<TinRetrievalForm/>}/>
+             <Route path='service/electricityrecharge' element={<ElectricityForm/>}/>
+             <Route path='service/cacregistration' element={<CacRegistrationPortal/>}/>
+             <Route path='transactions' element={<TransactionHistory/>}/>
+             <Route path='fundwallet' element={<FundWalletPage/>}/>
+             <Route path='profile' element={<UserProfilePage/>}/>
+             <Route path='allusers' element={<AdminUserManagement/>}/>
           </Route>
         </Route>
   </Routes>

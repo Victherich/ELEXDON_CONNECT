@@ -28,9 +28,9 @@ const UserDashboardLayout = () => {
 
   const userNavItems = [
     { path: "/userdashboard/overview", label: "Dashboard", icon: <FaGrip size={14} /> },
-    { path: "/userdashboard/payments", label: "My Profile", icon: <FaUser size={14} /> },
-    { path: "/userdashboard/statements", label: "Top-up History", icon: <FaFileInvoiceDollar size={14} /> },
-    { path: "/userdashboard/profile", label: "Service History", icon: <FaUserGear size={14} /> },
+    { path: "/userdashboard/profile", label: "My Profile", icon: <FaUser size={14} /> },
+    // { path: "/userdashboard/statements", label: "Top-up History", icon: <FaFileInvoiceDollar size={14} /> },
+    { path: "/userdashboard/transactions", label: "Transaction History", icon: <FaUserGear size={14} /> },
   ];
 
   return (
@@ -285,10 +285,12 @@ const SessionTerminationBtn = styled.button`
 `;
 
 const PortalStageWorkingArea = styled.main`
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 10px; /* Locked at strict layout limit rule */
+  // background: #ffffff;
+  // border: 1px solid #e2e8f0;
+  // border-radius: 10px;
+  // padding: 10px; /* Locked at strict layout limit rule */
   min-height: 75vh;
   box-sizing: border-box;
+  width:100%;
+  overflow-x:auto;
 `;

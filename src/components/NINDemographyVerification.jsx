@@ -39,44 +39,163 @@ const NINDemographyVerification = () => {
     }));
   };
 
-  const handleVerificationPipeline = (e) => {
+  // const handleVerificationPipeline = (e) => {
+  //   e.preventDefault();
+
+  //   // 1. Structural Field Entry Requirements Check
+  //   if (!slipType) {
+  //     Swal.fire({ icon: 'error', title: 'Choose Slip Type', text: 'Please select a slip type format to continue.', confirmButtonColor: '#2563eb' });
+  //     return;
+  //   }
+
+  //   if (!formData.firstname.trim() || !formData.lastname.trim()) {
+  //     Swal.fire({ icon: 'error', title: 'Missing Identity Parameters', text: 'Please input both first name and surname fields.', confirmButtonColor: '#2563eb' });
+  //     return;
+  //   }
+
+  //   if (!formData.gender) {
+  //     Swal.fire({ icon: 'error', title: 'Select Gender', text: 'Please identify the subject gender attribute profile.', confirmButtonColor: '#2563eb' });
+  //     return;
+  //   }
+
+  //   if (!formData.dob) {
+  //     Swal.fire({ icon: 'error', title: 'Missing Date of Birth', text: 'Please specify the exact date of birth as recorded on records.', confirmButtonColor: '#2563eb' });
+  //     return;
+  //   }
+
+  //   if (!confirmedConsent) {
+  //     Swal.fire({ icon: 'warning', title: 'Consent Required', text: 'Please confirm that you have explicit permission from the owner of this profile.', confirmButtonColor: '#2563eb' });
+  //     return;
+  //   }
+
+  //   if (!user || user.balance < serviceFee) {
+  //     Swal.fire({ icon: 'error', title: 'Insufficient Balance', text: 'Your wallet balance is too low to cover the cost of this check.', confirmButtonColor: '#dc2626' });
+  //     return;
+  //   }
+
+  //   // 2. Clear Prompt Warnings Prior to Wallet Reductions
+  //   Swal.fire({
+  //     title: 'Confirm Payment',
+  //     text: `We will deduct ₦${serviceFee.toFixed(2)} from your wallet to execute this Demographic identity search. Do you want to continue?`,
+  //     icon: 'question',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#2563eb',
+  //     cancelButtonColor: '#64748b',
+  //     confirmButtonText: 'Yes, Verify Now'
+  //   }).then(async (result) => {
+  //     if (result.isConfirmed) {
+  //       setLoading(true);
+  //       setReturnedResult(null);
+
+  //       try {
+  //         const response = await fetch(`${api_url}/verify_nin_demography.php`, {
+  //           method: 'POST',
+  //           headers: { 'Content-Type': 'application/json' },
+  //           body: JSON.stringify({
+  //             firstname: formData.firstname,
+  //             lastname: formData.lastname,
+  //             gender: formData.gender,
+  //             dob: formData.dob,
+  //             consent: confirmedConsent,
+  //             userId: user.id,
+  //             slipType: slipType
+  //           })
+  //         });
+
+  //         const data = await response.json();
+
+  //         if (response.ok && data.success) {
+  //           setReturnedResult(data.data); 
+  //           Swal.fire({ icon: 'success', title: 'Successful', text: 'Demographic identity details mapped successfully.', confirmButtonColor: '#2563eb' });
+            
+  //           // Sync global wallet profile metrics balances
+  //           fetchUserProfileById();
+
+  //           // Clear configuration parameters fields safely
+  //           setFormData({ firstname: '', lastname: '', gender: '', dob: '' });
+  //           setConfirmedConsent(false);
+  //           setSlipType('');
+  //         } else {
+  //           Swal.fire({ icon: 'error', title: 'Search Failed', text: data.error || 'NIMC directory verification node could not match these criteria details.', confirmButtonColor: '#dc2626' });
+  //         }
+  //       } catch (error) {
+  //         Swal.fire({ icon: 'error', title: 'Network Error', text: 'Could not connect to the server. Please check your internet connection.', confirmButtonColor: '#dc2626' });
+  //       } finally {
+  //         setLoading(false);
+  //       }
+  //     }
+  //   });
+  // };
+
+
+const handleVerificationPipeline = (e) => {
     e.preventDefault();
 
-    // 1. Structural Field Entry Requirements Check
+    // 1. Check if the form fields are filled correctly
     if (!slipType) {
-      Swal.fire({ icon: 'error', title: 'Choose Slip Type', text: 'Please select a slip type format to continue.', confirmButtonColor: '#2563eb' });
+      Swal.fire({ 
+        icon: 'error', 
+        title: 'Missing Selection', 
+        text: 'Please select a slip type to continue.', 
+        confirmButtonColor: '#2563eb' 
+      });
       return;
     }
 
     if (!formData.firstname.trim() || !formData.lastname.trim()) {
-      Swal.fire({ icon: 'error', title: 'Missing Identity Parameters', text: 'Please input both first name and surname fields.', confirmButtonColor: '#2563eb' });
+      Swal.fire({ 
+        icon: 'error', 
+        title: 'Missing Names', 
+        text: 'Please enter both the first name and last name.', 
+        confirmButtonColor: '#2563eb' 
+      });
       return;
     }
 
     if (!formData.gender) {
-      Swal.fire({ icon: 'error', title: 'Select Gender', text: 'Please identify the subject gender attribute profile.', confirmButtonColor: '#2563eb' });
+      Swal.fire({ 
+        icon: 'error', 
+        title: 'Select Gender', 
+        text: 'Please select a gender.', 
+        confirmButtonColor: '#2563eb' 
+      });
       return;
     }
 
     if (!formData.dob) {
-      Swal.fire({ icon: 'error', title: 'Missing Date of Birth', text: 'Please specify the exact date of birth as recorded on records.', confirmButtonColor: '#2563eb' });
+      Swal.fire({ 
+        icon: 'error', 
+        title: 'Missing Date of Birth', 
+        text: 'Please select the correct date of birth.', 
+        confirmButtonColor: '#2563eb' 
+      });
       return;
     }
 
     if (!confirmedConsent) {
-      Swal.fire({ icon: 'warning', title: 'Consent Required', text: 'Please confirm that you have explicit permission from the owner of this profile.', confirmButtonColor: '#2563eb' });
+      Swal.fire({ 
+        icon: 'warning', 
+        title: 'Consent Required', 
+        text: 'Please check the box to confirm you have permission to search this person\'s details.', 
+        confirmButtonColor: '#2563eb' 
+      });
       return;
     }
 
-    if (!user || user.balance < serviceFee) {
-      Swal.fire({ icon: 'error', title: 'Insufficient Balance', text: 'Your wallet balance is too low to cover the cost of this check.', confirmButtonColor: '#dc2626' });
-      return;
-    }
+    // if (!user || user.balance < serviceFee) {
+    //   Swal.fire({ 
+    //     icon: 'error', 
+    //     title: 'Insufficient Balance', 
+    //     text: 'Your wallet balance is too low to pay for this search.', 
+    //     confirmButtonColor: '#dc2626' 
+    //   });
+    //   return;
+    // }
 
-    // 2. Clear Prompt Warnings Prior to Wallet Reductions
+    // 2. Show a payment confirmation box before charging the user
     Swal.fire({
       title: 'Confirm Payment',
-      text: `We will deduct ₦${serviceFee.toFixed(2)} from your wallet to execute this Demographic identity search. Do you want to continue?`,
+      text: `You will be charged ₦${serviceFee.toFixed(2)} from your wallet to run this search. Do you want to proceed?`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#2563eb',
@@ -88,6 +207,7 @@ const NINDemographyVerification = () => {
         setReturnedResult(null);
 
         try {
+          // Send request to your backend file
           const response = await fetch(`${api_url}/verify_nin_demography.php`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -105,27 +225,44 @@ const NINDemographyVerification = () => {
           const data = await response.json();
 
           if (response.ok && data.success) {
+            // Save results, show success message, and reset form inputs
             setReturnedResult(data.data); 
-            Swal.fire({ icon: 'success', title: 'Successful', text: 'Demographic identity details mapped successfully.', confirmButtonColor: '#2563eb' });
+            Swal.fire({ 
+              icon: 'success', 
+              title: 'Verification Successful', 
+              text: 'NIN details found successfully.', 
+              confirmButtonColor: '#2563eb' 
+            });
             
-            // Sync global wallet profile metrics balances
-            fetchUserProfileById();
+            fetchUserProfileById(); // Refresh user wallet balance text on screen
 
-            // Clear configuration parameters fields safely
+            // Clear the form fields safely
             setFormData({ firstname: '', lastname: '', gender: '', dob: '' });
             setConfirmedConsent(false);
             setSlipType('');
           } else {
-            Swal.fire({ icon: 'error', title: 'Search Failed', text: data.error || 'NIMC directory verification node could not match these criteria details.', confirmButtonColor: '#dc2626' });
+            Swal.fire({ 
+              icon: 'error', 
+              title: 'Verification Failed', 
+              text: data.error || 'Could not find details matching these parameters.', 
+              confirmButtonColor: '#dc2626' 
+            });
           }
         } catch (error) {
-          Swal.fire({ icon: 'error', title: 'Network Error', text: 'Could not connect to the server. Please check your internet connection.', confirmButtonColor: '#dc2626' });
+          Swal.fire({ 
+            icon: 'error', 
+            title: 'Connection Error', 
+            text: 'Could not connect to the server. Please check your internet connection.', 
+            confirmButtonColor: '#dc2626' 
+          });
         } finally {
           setLoading(false);
         }
       }
     });
   };
+
+
 
   return (
     <ViewShellFrame>

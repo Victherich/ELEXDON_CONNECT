@@ -1,13 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { 
-  FaGlobeAfrica, 
-  FaTwitter, 
-  FaLinkedinIn, 
-  FaGithub, 
-  FaPaperPlane, 
-  FaShieldAlt 
-} from "react-icons/fa";
+import React from 'react';
+import { FaPaperPlane, FaShieldAlt, FaTwitter, FaLinkedinIn, FaGithub } from 'react-icons/fa';
+import styled from 'styled-components';
 import logo from '../Images/logo.png'
 
 const Footer = () => {
@@ -20,18 +13,18 @@ const Footer = () => {
         {/* BRAND & NEWSLETTER SUB-GRID */}
         <BrandBlock>
           <FooterLogo href="/">
-            {/* <FaGlobeAfrica size={18} /> */}
-            <img src={logo} alt="logo" style={{width:"40px"}}/>
+            <img src={logo} alt="logo" style={{ width: "40px" }} />
             ELEXDON<span>CONNECT</span>
           </FooterLogo>
           <BrandDesc>
-            Engineered utility integrations, digital registry synchronization pipelines, and instantaneous borderless financial infrastructure.
+            Your quick, reliable platform for identity verification, business registrations, utility payments, and instant mobile top-ups.
           </BrandDesc>
           <NewsletterForm onSubmit={(e) => e.preventDefault()}>
             <NewsletterInput 
               type="email" 
-              placeholder="System Dev Newsletter Updates" 
+              placeholder="Subscribe for updates" 
               required 
+              // Changed placeholder text to be clear and simple
             />
             <SubmitIconBtn type="submit" aria-label="Subscribe">
               <FaPaperPlane size={12} />
@@ -41,42 +34,42 @@ const Footer = () => {
 
         {/* CORE PLATFORM UTILITY LINKS */}
         <LinkColumn>
-          <ColumnTitle>Infrastructure Modules</ColumnTitle>
-          <ColumnLink href="#services">Identity Framework</ColumnLink>
-          <ColumnLink href="#services">Utility Processing</ColumnLink>
-          <ColumnLink href="#services">Corporate Registries</ColumnLink>
-          <ColumnLink href="#services">Financial Rails</ColumnLink>
+          <ColumnTitle>Our Services</ColumnTitle>
+          <ColumnLink href="#services">NIN & Identity Slips</ColumnLink>
+          <ColumnLink href="#services">CAC & SCUML Setup</ColumnLink>
+          <ColumnLink href="#services">BVN & Tax (TIN)</ColumnLink>
+          <ColumnLink href="#services">Electricity & Airtime</ColumnLink>
         </LinkColumn>
 
         {/* ECOSYSTEM / BRAND REPLICATED LINKS */}
         <LinkColumn>
-          <ColumnTitle>Ecosystem Core</ColumnTitle>
-          <ColumnLink href="#motivation">Platform Mission</ColumnLink>
-          <ColumnLink href="#why-us">System Performance</ColumnLink>
-          <ColumnLink href="#faqs">Knowledge Base</ColumnLink>
-          <ColumnLink href="/">Status Monitors</ColumnLink>
+          <ColumnTitle>Company</ColumnTitle>
+          <ColumnLink href="#motivation">About Us</ColumnLink>
+          <ColumnLink href="#why-us">Why Choose Us</ColumnLink>
+          <ColumnLink href="#faqs">FAQs & Support</ColumnLink>
+          <ColumnLink href="/">Contact Us</ColumnLink>
         </LinkColumn>
 
-        {/* COMPLIANCE & ESCROW CHANNELS */}
+        {/* COMPLIANCE & LEGAL LINKS */}
         <LinkColumn>
-          <ColumnTitle>Compliance Links</ColumnTitle>
-          <ColumnLink href="/">Privacy Architecture</ColumnLink>
-          <ColumnLink href="/">Terms of Clearance</ColumnLink>
-          <ColumnLink href="/">SLA Agreements</ColumnLink>
-          <ColumnLink href="/">Security Audits</ColumnLink>
+          <ColumnTitle>Legal</ColumnTitle>
+          <ColumnLink href="/">Privacy Policy</ColumnLink>
+          <ColumnLink href="/">Terms of Service</ColumnLink>
+          <ColumnLink href="/">Refund Policy</ColumnLink>
+          <ColumnLink href="/">Security Info</ColumnLink>
         </LinkColumn>
 
       </FooterContainer>
 
-      {/* METRIC WRAPPER BASELINE FOOTER CLOSURE */}
+      {/* FOOTER BASELINE CLOSURE */}
       <FooterBaselineGrid>
         <CopyrightText>
-          &copy; {currentYear} Elexdon Connect Pipeline Node. Structured securely across the Federation.
+          &copy; {currentYear} Elexdon Connect. All rights reserved.
         </CopyrightText>
         
         <SocialAndSecurityGroup>
           <SecurityBadge>
-            <FaShieldAlt size={11} /> 256-Bit Encrypted
+            <FaShieldAlt size={11} /> Secure Payments
           </SecurityBadge>
           <SocialLinkStack>
             <SocialIcon href="https://twitter.com" target="_blank" rel="noreferrer"><FaTwitter size={12} /></SocialIcon>

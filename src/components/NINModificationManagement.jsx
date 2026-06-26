@@ -739,10 +739,10 @@ const NINModificationManagement = () => {
       return;
     }
 
-    if (!user || user.balance < currentFee) {
-      Swal.fire({ icon: 'error', title: 'Insufficient Ledger Balance', text: 'Please add money to your account to request this service.', confirmButtonColor: '#dc2626' });
-      return;
-    }
+    // if (!user || user.balance < currentFee) {
+    //   Swal.fire({ icon: 'error', title: 'Insufficient Ledger Balance', text: 'Please add money to your account to request this service.', confirmButtonColor: '#dc2626' });
+    //   return;
+    // }
 
     Swal.fire({
       title: 'Confirm Processing Payment',

@@ -26,89 +26,203 @@ const BVNVerification = () => {
 
   const serviceFee = priceMap[slipType] || 0.00;
 
-  const handleVerificationPipeline = (e) => {
-    e.preventDefault();
+  // const handleVerificationPipeline = (e) => {
+  //   e.preventDefault();
 
-    // 1. Inputs Verification Checks
-    if (!slipType) {
-      Swal.fire({ icon: 'error', title: 'Choose Slip Type', text: 'Please select a slip type format to continue.', confirmButtonColor: '#2563eb' });
-      return;
-    }
+  //   // 1. Inputs Verification Checks
+  //   if (!slipType) {
+  //     Swal.fire({ icon: 'error', title: 'Choose Slip Type', text: 'Please select a slip type format to continue.', confirmButtonColor: '#2563eb' });
+  //     return;
+  //   }
 
-    if (bvnNumber.length !== 11 || !/^\d+$/.test(bvnNumber)) {
-      Swal.fire({ icon: 'error', title: 'Wrong BVN Format', text: 'The Bank Verification Number must be exactly 11 digits.', confirmButtonColor: '#2563eb' });
-      return;
-    }
+  //   if (bvnNumber.length !== 11 || !/^\d+$/.test(bvnNumber)) {
+  //     Swal.fire({ icon: 'error', title: 'Wrong BVN Format', text: 'The Bank Verification Number must be exactly 11 digits.', confirmButtonColor: '#2563eb' });
+  //     return;
+  //   }
 
-    if (!confirmedConsent) {
-      Swal.fire({ icon: 'warning', title: 'Consent Required', text: 'Please confirm that you have permission from the owner of this BVN.', confirmButtonColor: '#2563eb' });
-      return;
-    }
+  //   if (!confirmedConsent) {
+  //     Swal.fire({ icon: 'warning', title: 'Consent Required', text: 'Please confirm that you have permission from the owner of this BVN.', confirmButtonColor: '#2563eb' });
+  //     return;
+  //   }
 
-    if (!user || user.balance < serviceFee) {
-      Swal.fire({ icon: 'error', title: 'Insufficient Balance', text: 'Your wallet balance is too low to cover the cost of this check.', confirmButtonColor: '#dc2626' });
-      return;
-    }
+  //   if (!user || user.balance < serviceFee) {
+  //     Swal.fire({ icon: 'error', title: 'Insufficient Balance', text: 'Your wallet balance is too low to cover the cost of this check.', confirmButtonColor: '#dc2626' });
+  //     return;
+  //   }
 
-    // 2. Alert Box Confirmation Prior to Deduction Actions
-    Swal.fire({
-      title: 'Confirm Payment',
-      text: `We will deduct ₦${serviceFee.toFixed(2)} from your wallet to verify this BVN. Do you want to continue?`,
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#2563eb',
-      cancelButtonColor: '#64748b',
-      confirmButtonText: 'Yes, Verify Now'
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        setLoading(true);
-        setReturnedResult(null);
+  //   // 2. Alert Box Confirmation Prior to Deduction Actions
+  //   Swal.fire({
+  //     title: 'Confirm Payment',
+  //     text: `We will deduct ₦${serviceFee.toFixed(2)} from your wallet to verify this BVN. Do you want to continue?`,
+  //     icon: 'question',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#2563eb',
+  //     cancelButtonColor: '#64748b',
+  //     confirmButtonText: 'Yes, Verify Now'
+  //   }).then(async (result) => {
+  //     if (result.isConfirmed) {
+  //       setLoading(true);
+  //       setReturnedResult(null);
 
-        try {
-          const response = await fetch(`${api_url}/verify_bvn.php`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              bvn: bvnNumber,
-              consent: confirmedConsent,
-              userId: user.id,
-              cost: serviceFee
-            })
-          });
+  //       try {
+  //         const response = await fetch(`${api_url}/verify_bvn.php`, {
+  //           method: 'POST',
+  //           headers: { 'Content-Type': 'application/json' },
+  //           body: JSON.stringify({
+  //             bvn: bvnNumber,
+  //             consent: confirmedConsent,
+  //             userId: user.id,
+  //             cost: serviceFee
+  //           })
+  //         });
 
-          const data = await response.json();
+  //         const data = await response.json();
 
-          if (response.ok && data.success) {
-            setReturnedResult(data.profile); 
-            Swal.fire({ icon: 'success', title: 'Successful', text: 'BVN details retrieved successfully.', confirmButtonColor: '#2563eb' });
+  //         if (response.ok && data.success) {
+  //           setReturnedResult(data.profile); 
+  //           Swal.fire({ icon: 'success', title: 'Successful', text: 'BVN details retrieved successfully.', confirmButtonColor: '#2563eb' });
             
-            // Instantly sync the global application balance tracker state
+  //           // Instantly sync the global application balance tracker state
          
-              fetchUserProfileById();
+  //             fetchUserProfileById();
             
 
-            // Reset operational form field conditions safely
-            setBvnNumber('');
-            setConfirmedConsent(false);
-            setSlipType('');
-          } else {
-            Swal.fire({ icon: 'error', title: 'Verification Failed', text: data.error || 'Could not verify this BVN. Please check the number and try again.', confirmButtonColor: '#dc2626' });
-          }
-        } catch (error) {
-          Swal.fire({ icon: 'error', title: 'Network Error', text: 'Could not connect to the server. Please check your internet connection.', confirmButtonColor: '#dc2626' });
-        } finally {
-          setLoading(false);
-        }
-      }
-    });
-  };
+  //           // Reset operational form field conditions safely
+  //           setBvnNumber('');
+  //           setConfirmedConsent(false);
+  //           setSlipType('');
+  //         } else {
+  //           Swal.fire({ icon: 'error', title: 'Verification Failed', text: data.error || 'Could not verify this BVN. Please check the number and try again.', confirmButtonColor: '#dc2626' });
+  //         }
+  //       } catch (error) {
+  //         Swal.fire({ icon: 'error', title: 'Network Error', text: 'Could not connect to the server. Please check your internet connection.', confirmButtonColor: '#dc2626' });
+  //       } finally {
+  //         setLoading(false);
+  //       }
+  //     }
+  //   });
+  // };
 
+  
+  
+  const handleVerificationPipeline = (e) => {
+  e.preventDefault();
+
+  // 1. Check if the form fields are filled correctly
+  if (!slipType) {
+    Swal.fire({ 
+      icon: 'error', 
+      title: 'Missing Selection', 
+      text: 'Please select a slip type to continue.', 
+      confirmButtonColor: '#2563eb' 
+    });
+    return;
+  }
+
+  if (bvnNumber.length !== 11 || !/^\d+$/.test(bvnNumber)) {
+    Swal.fire({ 
+      icon: 'error', 
+      title: 'Invalid BVN', 
+      text: 'The Bank Verification Number must be exactly 11 digits.', 
+      confirmButtonColor: '#2563eb' 
+    });
+    return;
+  }
+
+  if (!confirmedConsent) {
+    Swal.fire({ 
+      icon: 'warning', 
+      title: 'Consent Required', 
+      text: 'Please check the box to confirm you have permission to verify this BVN.', 
+      confirmButtonColor: '#2563eb' 
+    });
+    return;
+  }
+
+  // if (!user || user.balance < serviceFee) {
+  //   Swal.fire({ 
+  //     icon: 'error', 
+  //     title: 'Insufficient Balance', 
+  //     text: 'Your wallet balance is too low to pay for this search.', 
+  //     confirmButtonColor: '#dc2626' 
+  //   });
+  //   return;
+  // }
+
+  // 2. Show a payment confirmation box before charging the user
+  Swal.fire({
+    title: 'Confirm Payment',
+    text: `You will be charged ₦${serviceFee.toFixed(2)} from your wallet to verify this BVN. Do you want to proceed?`,
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonColor: '#2563eb',
+    cancelButtonColor: '#64748b',
+    confirmButtonText: 'Yes, Verify Now'
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      setLoading(true);
+      setReturnedResult(null);
+
+      try {
+        // Send request to your backend file
+        const response = await fetch(`${api_url}/verify_bvn.php`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            bvn: bvnNumber,
+            consent: confirmedConsent,
+            userId: user.id,
+            cost: serviceFee
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          // Save results, show success message, and refresh balance
+          setReturnedResult(data.profile); 
+          Swal.fire({ 
+            icon: 'success', 
+            title: 'Verification Successful', 
+            text: 'BVN details retrieved successfully.', 
+            confirmButtonColor: '#2563eb' 
+          });
+          
+          fetchUserProfileById(); // Refresh user wallet balance text on screen
+          
+          // Clear form fields
+          setBvnNumber('');
+          setConfirmedConsent(false);
+          setSlipType('');
+        } else {
+          Swal.fire({ 
+            icon: 'error', 
+            title: 'Verification Failed', 
+            text: data.error || 'Could not verify this BVN. Please check the number and try again.', 
+            confirmButtonColor: '#dc2626' 
+          });
+        }
+      } catch (error) {
+        Swal.fire({ 
+          icon: 'error', 
+          title: 'Connection Error', 
+          text: 'Could not connect to the server. Please check your internet connection.', 
+          confirmButtonColor: '#dc2626' 
+        });
+      } finally {
+        setLoading(false);
+      }
+    }
+  });
+};
+  
+  
   return (
     <ViewShellFrame>
       <HeaderLabelBoundary>
         <IconBoxWrapper><FaAddressCard size={14} /></IconBoxWrapper>
         <div>
-          <ViewMainTitle>BVN Verification</ViewMainTitle>
+          <ViewMainTitle>BVN Verification </ViewMainTitle>
           <ViewSubTitle>Choose your preferred slip format and verify BVN details</ViewSubTitle>
         </div>
       </HeaderLabelBoundary>

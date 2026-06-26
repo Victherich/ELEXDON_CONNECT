@@ -181,46 +181,154 @@ const {api_url,user,fetchUserProfileById}=useContext(Context)
 
 
 
+// const handleVerificationSubmit = (e) => {
+//   e.preventDefault();
+
+//   // 1. Structural Form Sanitization Checks
+//   if (!slipType) {
+//     Swal.fire({ icon: 'error', title: 'Selection Missing', text: 'Please select a slip type context configuration.', confirmButtonColor: '#2563eb' });
+//     return;
+//   }
+
+//   if (phoneNumber.length !== 11 || !/^\d+$/.test(phoneNumber)) {
+//     Swal.fire({ icon: 'error', title: 'Invalid Formatting', text: 'Phone number data entry must be exactly 11 digits without text or country codes.', confirmButtonColor: '#2563eb' });
+//     return;
+//   }
+
+//   if (!consentChecked) {
+//     Swal.fire({ icon: 'warning', title: 'Consent Declaration Required', text: 'You must check the legal compliance verification box to confirm customer authorization.', confirmButtonColor: '#2563eb' });
+//     return;
+//   }
+
+// //   // 2. Financial Pipeline Availability Evaluation
+// //   if (userWallet.balance < serviceFee) {
+// //     Swal.fire({ icon: 'error', title: 'Insufficient Wallet Balance', text: 'Your wallet balance is inadequate to execute this identification fetch protocol.', confirmButtonColor: '#dc2626' });
+// //     return;
+// //   }
+
+//   // 3. Execution Pipeline Confirmation Dialog
+//   Swal.fire({
+//     title: 'Authorize Verification?',
+//     text: `Confirm deduction of ₦${serviceFee}.00 for processing ${phoneNumber}?`,
+//     icon: 'question',
+//     showCancelButton: true,
+//     confirmButtonColor: '#2563eb',
+//     cancelButtonColor: '#64748b',
+//     confirmButtonText: 'Execute Fetch',
+//   }).then(async (result) => { 
+//     if (result.isConfirmed) {
+//       setLoading(true);
+      
+//       try {
+//         // Pointing cleanly toward your secure localized cPanel back-end proxy
+//         const response = await fetch(`${api_url}/verify_nin_phone.php`, {
+//           method: 'POST',
+//           headers: {
+//             'Content-Type': 'application/json'
+//           },
+//           body: JSON.stringify({
+//             phone: phoneNumber,
+//             consent: consentChecked,
+//             userId: user.id,
+//             cost: serviceFee
+//           })
+//         });
+
+//         const data = await response.json();
+
+//         if (response.ok && data.success) {
+//           // Sync Redux UI State here by triggering balance mutations
+//           // example: dispatch(deductUserBalance(serviceFee));
+
+//           Swal.fire({
+//             icon: 'success',
+//             title: 'Verification Successful',
+//             text: 'System successfully parsed NIN records associated with this mobile device node.',
+//             confirmButtonColor: '#2563eb'
+//           });
+
+//           fetchUserProfileById();
+          
+//           // Reset operational form input fields safely
+//           setPhoneNumber('');
+//           setConsentChecked(false);
+//           setSlipType('');
+//         } else {
+//           // Handles server operational rejections passed from PHP handler script
+//           Swal.fire({
+//             icon: 'error',
+//             title: 'Fetch Gateway Refusal',
+//             text: data.error || 'The server rejected the transaction criteria.',
+//             confirmButtonColor: '#dc2626'
+//           });
+//           console.log(data)
+//         }
+//       } catch (error) {
+//         // Handles total structural pipeline failures (offline connection, server downtime)
+//         Swal.fire({
+//           icon: 'error',
+//           title: 'Pipeline Interruption',
+//           text: 'Unable to build a secure network stream to your cPanel server instance.',
+//           confirmButtonColor: '#dc2626'
+//         });
+//       } finally {
+//         setLoading(false);
+//       }
+//     }
+//   });
+// };
+
 const handleVerificationSubmit = (e) => {
   e.preventDefault();
 
-  // 1. Structural Form Sanitization Checks
+  // 1. Check if the form fields are filled correctly
   if (!slipType) {
-    Swal.fire({ icon: 'error', title: 'Selection Missing', text: 'Please select a slip type context configuration.', confirmButtonColor: '#2563eb' });
+    Swal.fire({ 
+      icon: 'error', 
+      title: 'Missing Selection', 
+      text: 'Please select a slip type to continue.', 
+      confirmButtonColor: '#2563eb' 
+    });
     return;
   }
 
   if (phoneNumber.length !== 11 || !/^\d+$/.test(phoneNumber)) {
-    Swal.fire({ icon: 'error', title: 'Invalid Formatting', text: 'Phone number data entry must be exactly 11 digits without text or country codes.', confirmButtonColor: '#2563eb' });
+    Swal.fire({ 
+      icon: 'error', 
+      title: 'Invalid Phone Number', 
+      text: 'The phone number must be exactly 11 digits.', 
+      confirmButtonColor: '#2563eb' 
+    });
     return;
   }
 
   if (!consentChecked) {
-    Swal.fire({ icon: 'warning', title: 'Consent Declaration Required', text: 'You must check the legal compliance verification box to confirm customer authorization.', confirmButtonColor: '#2563eb' });
+    Swal.fire({ 
+      icon: 'warning', 
+      title: 'Consent Required', 
+      text: 'Please check the box to confirm you have permission to look up this number.', 
+      confirmButtonColor: '#2563eb' 
+    });
     return;
   }
 
-//   // 2. Financial Pipeline Availability Evaluation
-//   if (userWallet.balance < serviceFee) {
-//     Swal.fire({ icon: 'error', title: 'Insufficient Wallet Balance', text: 'Your wallet balance is inadequate to execute this identification fetch protocol.', confirmButtonColor: '#dc2626' });
-//     return;
-//   }
 
-  // 3. Execution Pipeline Confirmation Dialog
+
+  // 3. Show a payment confirmation box before charging the user
   Swal.fire({
-    title: 'Authorize Verification?',
-    text: `Confirm deduction of ₦${serviceFee}.00 for processing ${phoneNumber}?`,
+    title: 'Confirm Payment',
+    text: `You will be charged ₦${serviceFee.toFixed(2)} from your wallet to look up this phone number. Do you want to proceed?`,
     icon: 'question',
     showCancelButton: true,
     confirmButtonColor: '#2563eb',
     cancelButtonColor: '#64748b',
-    confirmButtonText: 'Execute Fetch',
+    confirmButtonText: 'Yes, Verify Now',
   }).then(async (result) => { 
     if (result.isConfirmed) {
       setLoading(true);
       
       try {
-        // Pointing cleanly toward your secure localized cPanel back-end proxy
+        // Send request to your backend file
         const response = await fetch(`${api_url}/verify_nin_phone.php`, {
           method: 'POST',
           headers: {
@@ -237,38 +345,33 @@ const handleVerificationSubmit = (e) => {
         const data = await response.json();
 
         if (response.ok && data.success) {
-          // Sync Redux UI State here by triggering balance mutations
-          // example: dispatch(deductUserBalance(serviceFee));
-
           Swal.fire({
             icon: 'success',
             title: 'Verification Successful',
-            text: 'System successfully parsed NIN records associated with this mobile device node.',
+            text: 'NIN details retrieved successfully.',
             confirmButtonColor: '#2563eb'
           });
 
-          fetchUserProfileById();
+          fetchUserProfileById(); // Refresh user wallet balance text on screen
           
-          // Reset operational form input fields safely
+          // Clear form fields
           setPhoneNumber('');
           setConsentChecked(false);
           setSlipType('');
         } else {
-          // Handles server operational rejections passed from PHP handler script
           Swal.fire({
             icon: 'error',
-            title: 'Fetch Gateway Refusal',
-            text: data.error || 'The server rejected the transaction criteria.',
+            title: 'Verification Failed',
+            text: data.error || 'Could not find details for this phone number.',
             confirmButtonColor: '#dc2626'
           });
-          console.log(data)
+          console.log(data);
         }
       } catch (error) {
-        // Handles total structural pipeline failures (offline connection, server downtime)
         Swal.fire({
           icon: 'error',
-          title: 'Pipeline Interruption',
-          text: 'Unable to build a secure network stream to your cPanel server instance.',
+          title: 'Connection Error',
+          text: 'Could not connect to the server. Please check your internet connection.',
           confirmButtonColor: '#dc2626'
         });
       } finally {
@@ -277,6 +380,8 @@ const handleVerificationSubmit = (e) => {
     }
   });
 };
+
+
 
 return (
     <ModuleWorkspaceFrame>

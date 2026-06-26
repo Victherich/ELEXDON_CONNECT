@@ -319,10 +319,10 @@ const BVNPhoneVerification = () => {
       return;
     }
 
-    if (!user || user.balance < serviceFee) {
-      Swal.fire({ icon: 'error', title: 'Insufficient Balance', text: 'Your wallet balance is too low to cover the cost of this check.', confirmButtonColor: '#dc2626' });
-      return;
-    }
+    // if (!user || user.balance < serviceFee) {
+    //   Swal.fire({ icon: 'error', title: 'Insufficient Balance', text: 'Your wallet balance is too low to cover the cost of this check.', confirmButtonColor: '#dc2626' });
+    //   return;
+    // }
 
     // 2. Alert Box Confirmation Prior to Deduction Actions
     Swal.fire({
@@ -380,7 +380,7 @@ const BVNPhoneVerification = () => {
       <HeaderLabelBoundary>
         <IconBoxWrapper><FaAddressCard size={14} /></IconBoxWrapper>
         <div>
-          <ViewMainTitle>BVN Phone Search</ViewMainTitle>
+          <ViewMainTitle>BVN Phone Search </ViewMainTitle>
           <ViewSubTitle>Lookup complete BVN registry profiles utilizing verified phone parameters</ViewSubTitle>
         </div>
       </HeaderLabelBoundary>

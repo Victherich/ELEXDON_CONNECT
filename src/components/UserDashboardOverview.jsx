@@ -11,7 +11,8 @@ import {
   FaWallet,
   FaShieldHalved,
   FaArrowRightArrowLeft,
-
+FaClockRotateLeft,  // Added
+  FaCirclePlus,
   
   FaShield, FaPenToSquare, FaCalendarCheck, FaAddressCard, 
   FaMobileScreenButton, FaUsersViewfinder, FaMapLocationDot,
@@ -27,27 +28,75 @@ const UserDashboardOverview = () => {
     balance: 45280.50,
     savings: 12400.00
   };
-const {user}=useContext(Context);
+const {user,api_url}=useContext(Context);
   // Quick Action Matrix map matching dashboard sub-view paths
+
+
+const [totalSpent, setTotalSpent] = React.useState(0);
+
+React.useEffect(() => {
+  const fetchTotalSpent = async () => {
+    try {
+      const response = await fetch(`${api_url}/get_total_spent.php?userId=${user?.id || 0}`);
+      const data = await response.json();
+      if (data.success) {
+        setTotalSpent(parseFloat(data.total_spent) || 0);
+      }
+    } catch (error) {
+      console.error("Error retrieving spending metrics:", error);
+    }
+  };
+
+  if (user?.id) {
+    fetchTotalSpent();
+  }
+}, [user]);
+
+
+
+
+const adminActions =[
+{ 
+      path: "/userdashboard/allusers", 
+      title: "Manage All Users", 
+      badge: "All Users", 
+      badgeColor: "#7c3aed",
+      icon: <FaUserGear size={14} />, 
+      color: "#dc2626" 
+    },
+    { 
+      path: "/userdashboard/alltransactions", 
+      title: "Manage All Transactions", 
+      badge: "Manage all transactions", 
+      badgeColor: "#7c3aed",
+      icon: <FaFileInvoiceDollar size={14} />, 
+      color: "#dc2626" 
+    },
+
+]
+
+
+
+
 const serviceActions = [
     { 
-      path: "/userdashboard/scuml", 
+      path: "/userdashboard/service/scumlregistration", 
       title: "SCUML Registration", 
       badge: "NEW", 
       badgeColor: "#7c3aed",
       icon: <FaShield size={14} />, 
       color: "#dc2626" 
     },
+    // { 
+    //   path: "/userdashboard/cac-modification", 
+    //   title: "CAC Modification", 
+    //   badge: "9 new services", 
+    //   badgeColor: "#7c3aed",
+    //   icon: <FaPenToSquare size={14} />, 
+    //   color: "#dc2626" 
+    // },
     { 
-      path: "/userdashboard/cac-modification", 
-      title: "CAC Modification", 
-      badge: "9 new services", 
-      badgeColor: "#7c3aed",
-      icon: <FaPenToSquare size={14} />, 
-      color: "#dc2626" 
-    },
-    { 
-      path: "/userdashboard/cac-annual", 
+      path: "/userdashboard/service/annualreturns", 
       title: "CAC Annual Return", 
       badge: "NEW", 
       badgeColor: "#7c3aed",
@@ -81,7 +130,7 @@ const serviceActions = [
       color: "#dc2626" 
     },
     { 
-      path: "/userdashboard/tin-registration", 
+      path: "/userdashboard/service/tinretrieval", 
       title: "TIN Registration / Retrieval", 
       icon: <FaMapLocationDot size={14} />, 
       color: "#6366f1" 
@@ -99,7 +148,7 @@ const serviceActions = [
       color: "#059669" 
     },
     { 
-      path: "/userdashboard/cac-registration", 
+      path: "/userdashboard/service/cacregistration", 
       title: "CAC Registration", 
       icon: <FaBuildingShield size={14} />, 
       color: "#dc2626" 
@@ -120,7 +169,7 @@ const serviceActions = [
   color: "#7c3aed" // Royal purple shell
 },
 { 
-  path: "/userdashboard/electricity", 
+  path: "/userdashboard/service/electricityrecharge", 
   title: "Electricity Bill Payment", 
   badge: "24/7 Auto", 
   badgeColor: "#ea580c", // Warning amber active notice
@@ -134,8 +183,8 @@ const serviceActions = [
       {/* SECTION 1: CUSTOMER RECOGNITION BLOCK */}
       <WelcomeHeaderBlock>
         <div>
-          <WelcomeGreeting>Welcome Back,</WelcomeGreeting>
-          <ClientAccountName>{userInfo.name}</ClientAccountName>
+          <WelcomeGreeting>Welcome Back </WelcomeGreeting>
+          <ClientAccountName>{user?.role==='admin'?"ADMIN:":""} {user?.name}</ClientAccountName>
         </div>
         <SecuredTag>
           <FaShieldHalved size={12} />
@@ -159,30 +208,68 @@ const serviceActions = [
           </CardBalanceGroup>
           <CardFooterMetrics>
             <div>
-              <MetaFieldLabel>AMOUNT SPENT</MetaFieldLabel>
-              <MetaFieldValue>•••• {userInfo.accountNumber?.slice(-4) || "4321"}</MetaFieldValue>
-            </div>
+  <MetaFieldLabel>AMOUNT SPENT</MetaFieldLabel>
+  <MetaFieldValue>
+    NGN {totalSpent.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+  </MetaFieldValue>
+</div>
             <ActiveChipElement />
           </CardFooterMetrics>
         </PremiumVirtualCard>
 
         {/* COMPANION LIQUID SAVINGS ACCOUNT BLOCK */}
-        <VaultAccountCard>
-          <VaultIconShell>
-            <FaPiggyBank size={18} />
-          </VaultIconShell>
-          <VaultDataBlock>
-            <BalanceLabelText>Secure Vault Reserves</BalanceLabelText>
-            <SecondaryBalanceDisplay>
-              ${userInfo.savings?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-            </SecondaryBalanceDisplay>
-          </VaultDataBlock>
-          <TransferVaultBtn to="/userdashboard/payments">
-            <span>Manage Ledger</span>
-            <FaArrowRightArrowLeft size={12} />
-          </TransferVaultBtn>
-        </VaultAccountCard>
+      {/* REPLACED VAULT WITH QUICK ACTIONS CARD */}
+<QuickActionsCard>
+  <ActionPanelTitle>Wallet & Service Actions</ActionPanelTitle>
+  <ActionLinksGroup>
+    
+    <ActionRowLink to="/userdashboard/transactions">
+      <IconLabelItem>
+        <FaClockRotateLeft size={13} color="#2563eb" />
+        <span>Transaction History</span>
+      </IconLabelItem>
+      <FaArrowUpRightFromSquare size={10} color="#94a3b8" />
+    </ActionRowLink>
+
+    {/* <ActionRowLink to="/userdashboard/fundwallethistory">
+      <IconLabelItem>
+        <FaFileInvoiceDollar size={13} color="#059669" />
+        <span>Wallet Top-up History</span>
+      </IconLabelItem>
+      <FaArrowUpRightFromSquare size={10} color="#94a3b8" />
+    </ActionRowLink> */}
+
+   <ActionRowLink to="/userdashboard/fundwallet" $isPrimary>
+  <IconLabelItem>
+    <FaCirclePlus size={14} color="#ffffff" />
+    <span style={{ fontWeight: '700', color: '#ffffff' }}>Fund Wallet</span>
+  </IconLabelItem>
+  <FaArrowUpRightFromSquare size={10} color="rgba(255, 255, 255, 0.8)" />
+</ActionRowLink>
+
+  </ActionLinksGroup>
+</QuickActionsCard>
       </FinancesDisplayGrid>
+
+       {/* SECTION 3: INTERACTIVE PLATFORM SERVICE HUB */}
+      {user?.role==='admin'&&<SectionHeadingLabel>ADMIN ACTIONS</SectionHeadingLabel>}
+      
+      {user?.role==='admin'&&<ServiceTileGridStructure>
+        {adminActions.map((service, index) => (
+          <ServiceInteractiveCard key={index} to={service.path}>
+            <ActionIconBoundary themeColor={service.color}>
+              {service.icon}
+            </ActionIconBoundary>
+            <ServiceCardTextContainer>
+              <ServiceCardTitleGroup>
+                <h4>{service.title}</h4>
+                <FaArrowUpRightFromSquare size={10} className="launch-icon" />
+              </ServiceCardTitleGroup>
+              <p>{service.desc}</p>
+            </ServiceCardTextContainer>
+          </ServiceInteractiveCard>
+        ))}
+      </ServiceTileGridStructure>}
 
       {/* SECTION 3: INTERACTIVE PLATFORM SERVICE HUB */}
       <SectionHeadingLabel>ALL SERVICES</SectionHeadingLabel>
@@ -503,5 +590,79 @@ const ServiceCardTitleGroup = styled.div`
     font-weight: 700;
     color: #0f172a;
     margin: 0;
+  }
+`;
+
+
+const QuickActionsCard = styled.div`
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 130px;
+  box-sizing: border-box;
+`;
+
+const ActionPanelTitle = styled.span`
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  display: block;
+  margin-bottom: 4px;
+`;
+
+const ActionLinksGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  justify-content: center;
+`;
+
+const ActionRowLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 6px;
+  padding: 8px 10px;
+  text-decoration: none;
+  transition: all 0.15s ease-in-out;
+
+  /* Conditional check for the Fund Wallet button highlight */
+  ${props => props.$isPrimary ? `
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    border: 1px solid #1e40af;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+
+    &:hover {
+      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+      transform: translateY(-0.5px);
+      box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
+    }
+  ` : `
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+
+    &:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+  `}
+`;
+
+const IconLabelItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  span {
+    font-size: 12px;
+    font-weight: 600;
+    color: #334155;
   }
 `;

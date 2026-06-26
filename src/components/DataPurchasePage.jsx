@@ -193,14 +193,14 @@ const PageStructure = styled.div`
   align-items: center;
   justify-content: center;
   background: #f4f6f9;
-  padding: 20px;
+  padding: 5px;
   box-sizing: border-box;
   font-family: system-ui, sans-serif;
 `;
 
 const FormCard = styled.div`
   background: #fff;
-  padding: 32px;
+  padding: 10px;
   border-radius: 14px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.06);
   width: 100%;

@@ -98,20 +98,20 @@ const UserSignup = () => {
     <SignupContainer>
       <SplitWrapper>
         {/* LEFT MARKETING SIDE */}
-        <MarketingPanel>
-          <Fade triggerOnce>
-            <Logo href="/">
-              <FaGlobeAfrica size={22} /> ELEXDON<span>CONNECT</span>
-            </Logo>
-            <h2>One Identity. Infinite Access.</h2>
-            <p>Access high-throughput utility clearings, corporate identity registries, and immediate borderless value pipelines on Nigeria's most reliable stack.</p>
-            <FeatureList>
-              <FeatureItem><FaCheckCircle size={14} color="#10b981"/> Encrypted Core Profile Nodes</FeatureItem>
-              <FeatureItem><FaCheckCircle size={14} color="#10b981"/> Immediate Ecosystem Enrollment</FeatureItem>
-              <FeatureItem><FaCheckCircle size={14} color="#10b981"/> Tier-1 Architecture Access</FeatureItem>
-            </FeatureList>
-          </Fade>
-        </MarketingPanel>
+      <MarketingPanel>
+  <Fade triggerOnce>
+    <Logo href="/">
+      <FaGlobeAfrica size={22} /> ELEXDON<span>CONNECT</span>
+    </Logo>
+    <h2>One Account. Every Service You Need.</h2>
+    <p>Create an account today to print slips, register your business, pay utilities, and manage all your digital tasks on Nigeria's most reliable platform.</p>
+    <FeatureList>
+      <FeatureItem><FaCheckCircle size={14} color="#10b981"/> Fully Protected Personal Data</FeatureItem>
+      <FeatureItem><FaCheckCircle size={14} color="#10b981"/> Instant Access to All Services</FeatureItem>
+      <FeatureItem><FaCheckCircle size={14} color="#10b981"/> Fast & Reliable Transaction Speeds</FeatureItem>
+    </FeatureList>
+  </Fade>
+</MarketingPanel>
 
         {/* RIGHT SIGNUP FORM SIDE */}
         <FormPanel>
@@ -221,6 +221,7 @@ const SignupContainer = styled.div`
   padding: 10px; /* Locked at rigid constraint */
   box-sizing: border-box;
   font-family: system-ui, -apple-system, sans-serif;
+  padding-top:50px;
 `;
 
 const SplitWrapper = styled.div`

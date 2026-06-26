@@ -29,41 +29,126 @@ const priceMap = {
 // Calculate service fee on the fly based on current dropdown selection state
 const serviceFee = priceMap[slipType] || 0.00;
 
-  const handleVerificationPipeline = (e) => {
+  // const handleVerificationPipeline = (e) => {
+  //   e.preventDefault();
+
+  //   // 1. Client-Side Input Formatting Checks
+  //   if (!slipType) {
+  //     Swal.fire({ icon: 'error', title: 'Step 1 Incomplete', text: 'Please select a production slip template layout form.', confirmButtonColor: '#2563eb' });
+  //     return;
+  //   }
+
+  //   if (ninNumber.length !== 11 || !/^\d+$/.test(ninNumber)) {
+  //     Swal.fire({ icon: 'error', title: 'Step 2 Formatting Defect', text: 'The National Identity Number must be exactly 11 numeric digits.', confirmButtonColor: '#2563eb' });
+  //     return;
+  //   }
+
+  //   if (!confirmedConsent) {
+  //     Swal.fire({ icon: 'warning', title: 'Step 3 Consent Mandatory', text: 'You must check the confirmation flag to authorize NIMC demographic record pulls.', confirmButtonColor: '#2563eb' });
+  //     return;
+  //   }
+
+  //   // 2. Double-Check Intercept Layer Before Database Debits Trigger
+  //   Swal.fire({
+  //     title: 'Deduct Node Credit?',
+  //     text: `Confirm utility cost breakdown processing of ₦${serviceFee.toFixed(2)} for tracking query node execution?`,
+  //     icon: 'question',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#2563eb',
+  //     cancelButtonColor: '#64748b',
+  //     confirmButtonText: 'Verify NIN Now'
+  //   }).then(async (result) => {
+  //     if (result.isConfirmed) {
+  //       setLoading(true);
+  //       setReturnedResult(null);
+
+  //       try {
+  //         // Fire transaction into your secure cPanel PHP environment file location
+  //         const response = await fetch(`${api_url}/verify_nin_direct.php`, {
+  //           method: 'POST',
+  //           headers: { 'Content-Type': 'application/json' },
+  //           body: JSON.stringify({
+  //             nin: ninNumber,
+  //             consent: confirmedConsent,
+  //             userId: user.id,
+  //             cost: serviceFee
+  //           })
+  //         });
+
+  //         const data = await response.json();
+
+  //         if (response.ok && data.success) {
+  //           setReturnedResult(data.profile); // Embed the "data" sub-object into local storage state
+  //           Swal.fire({ icon: 'success', title: 'Clearance Granted', text: 'NIMC Registry parsed data correctly.', confirmButtonColor: '#2563eb' });
+  //           fetchUserProfileById();
+  //           // Clear inputs for processing security
+  //           setNinNumber('');
+  //           setConfirmedConsent(false);
+  //           setSlipType('');
+  //         } else {
+  //           Swal.fire({ icon: 'error', title: 'Registry Rejection', text: data.error || 'The system was unable to pull documentation records.', confirmButtonColor: '#dc2626' });
+  //         }
+  //       } catch (error) {
+  //         Swal.fire({ icon: 'error', title: ' Interruption', text: 'Unable to build a secure stream channel connection back to your hosting server database.', confirmButtonColor: '#dc2626' });
+  //       } finally {
+  //         setLoading(false);
+  //       }
+  //     }
+  //   });
+  // };
+
+
+
+const handleVerificationPipeline = (e) => {
     e.preventDefault();
 
-    // 1. Client-Side Input Formatting Checks
+    // 1. Check if the user filled the form correctly
     if (!slipType) {
-      Swal.fire({ icon: 'error', title: 'Step 1 Incomplete', text: 'Please select a production slip template layout form.', confirmButtonColor: '#2563eb' });
+      Swal.fire({ 
+        icon: 'error', 
+        title: 'Missing Selection', 
+        text: 'Please select the slip type you want to print.', 
+        confirmButtonColor: '#2563eb' 
+      });
       return;
     }
 
     if (ninNumber.length !== 11 || !/^\d+$/.test(ninNumber)) {
-      Swal.fire({ icon: 'error', title: 'Step 2 Formatting Defect', text: 'The National Identity Number must be exactly 11 numeric digits.', confirmButtonColor: '#2563eb' });
+      Swal.fire({ 
+        icon: 'error', 
+        title: 'Invalid NIN', 
+        text: 'The National Identity Number must be exactly 11 digits.', 
+        confirmButtonColor: '#2563eb' 
+      });
       return;
     }
 
     if (!confirmedConsent) {
-      Swal.fire({ icon: 'warning', title: 'Step 3 Consent Mandatory', text: 'You must check the confirmation flag to authorize NIMC demographic record pulls.', confirmButtonColor: '#2563eb' });
+      Swal.fire({ 
+        icon: 'warning', 
+        title: 'Consent Required', 
+        text: 'You must check the box to authorize this search.', 
+        confirmButtonColor: '#2563eb' 
+      });
       return;
     }
 
-    // 2. Double-Check Intercept Layer Before Database Debits Trigger
+    // 2. Pop up a clear payment confirmation before making the request
     Swal.fire({
-      title: 'Deduct Node Credit?',
-      text: `Confirm utility cost breakdown processing of ₦${serviceFee.toFixed(2)} for tracking query node execution?`,
+      title: 'Confirm Payment',
+      text: `You will be charged ₦${serviceFee.toFixed(2)} for this NIN verification from your wallet balance. Do you want to proceed?`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#2563eb',
       cancelButtonColor: '#64748b',
-      confirmButtonText: 'Verify NIN Now'
+      confirmButtonText: 'Yes, Verify Now'
     }).then(async (result) => {
       if (result.isConfirmed) {
         setLoading(true);
         setReturnedResult(null);
 
         try {
-          // Fire transaction into your secure cPanel PHP environment file location
+          // Send request to your backend file
           const response = await fetch(`${api_url}/verify_nin_direct.php`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -78,24 +163,43 @@ const serviceFee = priceMap[slipType] || 0.00;
           const data = await response.json();
 
           if (response.ok && data.success) {
-            setReturnedResult(data.profile); // Embed the "data" sub-object into local storage state
-            Swal.fire({ icon: 'success', title: 'Clearance Granted', text: 'NIMC Registry parsed data correctly.', confirmButtonColor: '#2563eb' });
-            fetchUserProfileById();
-            // Clear inputs for processing security
+            // Save search results, show success alert, and reset form inputs
+            setReturnedResult(data.profile); 
+            Swal.fire({ 
+              icon: 'success', 
+              title: 'Verification Successful', 
+              text: 'NIN details retrieved successfully.', 
+              confirmButtonColor: '#2563eb' 
+            });
+            
+            fetchUserProfileById(); // Refresh user wallet balance text on screen
+            
+            // Clear the form fields
             setNinNumber('');
             setConfirmedConsent(false);
             setSlipType('');
           } else {
-            Swal.fire({ icon: 'error', title: 'Registry Rejection', text: data.error || 'The system was unable to pull documentation records.', confirmButtonColor: '#dc2626' });
+            Swal.fire({ 
+              icon: 'error', 
+              title: 'Verification Failed', 
+              text: data.error || 'Could not find details for this NIN.', 
+              confirmButtonColor: '#dc2626' 
+            });
           }
         } catch (error) {
-          Swal.fire({ icon: 'error', title: ' Interruption', text: 'Unable to build a secure stream channel connection back to your hosting server database.', confirmButtonColor: '#dc2626' });
+          Swal.fire({ 
+            icon: 'error', 
+            title: 'Connection Error', 
+            text: 'Could not connect to the server. Please check your internet connection.', 
+            confirmButtonColor: '#dc2626' 
+          });
         } finally {
           setLoading(false);
         }
       }
     });
   };
+
 
   return (
     <ViewShellFrame>

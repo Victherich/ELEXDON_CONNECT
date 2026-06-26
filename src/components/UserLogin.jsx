@@ -78,18 +78,18 @@ const navigate =useNavigate()
     <LoginContainer>
       <SplitWrapper>
         {/* LEFT BRAND SIDE PANEL */}
-        <MarketingPanel>
-          <Fade triggerOnce>
-            <Logo href="/">
-              <FaGlobeAfrica size={22} /> ELEXDON<span>CONNECT</span>
-            </Logo>
-            <h2>Welcome Back to the Console Node</h2>
-            <p>Re-authenticate secure environment pipelines to coordinate utility management, document logs, and identity clearings instantly.</p>
-            <SecurityBadgeGroup>
-              <FaShieldAlt size={12} /> <span>End-to-End Encrypted Tunnel</span>
-            </SecurityBadgeGroup>
-          </Fade>
-        </MarketingPanel>
+       <MarketingPanel>
+  <Fade triggerOnce>
+    <Logo href="/">
+      <FaGlobeAfrica size={22} /> ELEXDON<span>CONNECT</span>
+    </Logo>
+    <h2>Welcome Back to Your Account</h2>
+    <p>Sign in to manage your bills, process CAC registrations, print identity slips, and check your transactions instantly.</p>
+    <SecurityBadgeGroup>
+      <FaShieldAlt size={12} /> <span>100% Secure Login Session</span>
+    </SecurityBadgeGroup>
+  </Fade>
+</MarketingPanel>
 
         {/* RIGHT INPUT AUTHENTICATION BOX */}
         <FormPanel>

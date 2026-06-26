@@ -24,12 +24,14 @@ const Header = () => {
         </BrandLogo>
 
         {/* DESKTOP NAV LINKS */}
-       {location.pathname==='/'&& <DesktopNavLinks>
-          <MenuLink href="#services">Services</MenuLink>
-          <MenuLink href="#motivation">Our Mission</MenuLink>
-          <MenuLink href="#why-us">Infrastructure</MenuLink>
-          <MenuLink href="#faqs">Support</MenuLink>
-        </DesktopNavLinks>}
+        
+       <DesktopNavLinks>
+        <MenuLink href="#home" onClick={()=>navigate('/')}>Home</MenuLink>
+          {location.pathname==='/'&& <MenuLink href="#services">Services</MenuLink>}
+          {location.pathname==='/'&& <MenuLink href="#motivation">Our Mission</MenuLink>}
+          {location.pathname==='/'&& <MenuLink href="#why-us">Infrastructure</MenuLink>}
+          {location.pathname==='/'&& <MenuLink href="#faqs">Support</MenuLink>}
+        </DesktopNavLinks>
 
         {/* DESKTOP ACTION BUTTONS */}
         <DesktopActionGroup>
@@ -59,16 +61,16 @@ const Header = () => {
         </MobileMenuLink> 
      { location.pathname==='/'&&  <>
         <MobileMenuLink href="#services" onClick={() => setIsOpen(false)}>
-          Services Directory
+          Services
         </MobileMenuLink>
         <MobileMenuLink href="#motivation" onClick={() => setIsOpen(false)}>
-          Ecosystem Purpose
+          Our Mission
         </MobileMenuLink>
         <MobileMenuLink href="#why-us" onClick={() => setIsOpen(false)}>
-          Performance Edge
+          Infrastructure
         </MobileMenuLink>
         <MobileMenuLink href="#faqs" onClick={() => setIsOpen(false)}>
-          Technical FAQs
+          Support
         </MobileMenuLink>  
         </>}
        

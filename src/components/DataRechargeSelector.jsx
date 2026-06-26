@@ -96,7 +96,7 @@ const PageContainer = styled.div`
   align-items: center;
   justify-content: center;
   background: #f4f6f9;
-  padding: 24px;
+  padding: 10px;
   font-family: system-ui, -apple-system, sans-serif;
 `;
 
