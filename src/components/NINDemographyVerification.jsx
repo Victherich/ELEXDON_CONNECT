@@ -269,7 +269,7 @@ const handleVerificationPipeline = (e) => {
       <HeaderLabelBoundary>
         <IconBoxWrapper><FaAddressCard size={14} /></IconBoxWrapper>
         <div>
-          <ViewMainTitle>NIN Demography Search</ViewMainTitle>
+          <ViewMainTitle>NIN Demography Search </ViewMainTitle>
           <ViewSubTitle>Lookup identification parameters using official first names, surnames, and dates of birth</ViewSubTitle>
         </div>
       </HeaderLabelBoundary>

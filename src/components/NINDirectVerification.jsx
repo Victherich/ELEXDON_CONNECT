@@ -161,7 +161,7 @@ const handleVerificationPipeline = (e) => {
           });
 
           const data = await response.json();
-
+console.log(data)
           if (response.ok && data.success) {
             // Save search results, show success alert, and reset form inputs
             setReturnedResult(data.profile); 

@@ -245,7 +245,7 @@ const TinRetrievalForm = () => {
     <FormContainer>
       <BackButton onClick={() => navigate('/userdashboard/overview')}>← Back to Services Portal</BackButton>
       
-      <FormTitle>TIN Registration/Retrieval</FormTitle>
+      <FormTitle>TIN Registration/Retrieval2</FormTitle>
       <FormSubtitle>Register or Retrieve your Tax Identification Number</FormSubtitle>
 
       {/* <InfoBox>
