@@ -404,7 +404,7 @@ const navigate = useNavigate();
           <Fade triggerOnce>
             <Badge color="#1e40af" bg="#eff6ff">Fast, Reliable Digital Services</Badge>
             <Title>
-              ELEXDON <span>CONNECT</span>
+              ELEXDON PAY <span> CONNECT</span>
             </Title>
             <Description>
             Elexdon Connect--One Platform. Fast and Reliable Endless Digital Services.
@@ -581,7 +581,7 @@ const navigate = useNavigate();
         </CTAGallery>
         <CTAContent>
           <Fade triggerOnce>
-            <h2>Ready to use Elexdon Connect?</h2>
+            <h2>Ready to use Elexdon Pay Connect?</h2>
             <p>Set up your account dashboard in under 60 seconds and handle your bills or identity documentation right away.</p>
             <PrimaryBtn style={{ background: "#ffffff", color: "#2563eb", alignSelf: "center", boxShadow: "0 4px 6px -1px rgba(0,0,0,0.05)" }}
             onClick={()=>navigate('/userdashboard/overview')}

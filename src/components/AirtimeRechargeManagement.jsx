@@ -48,10 +48,7 @@ const AirtimeRechargeManagement = () => {
       return;
     }
 
-    // if (!user || user.balance < numericAmount) {
-    //   Swal.fire({ icon: 'error', title: 'Insufficient Account Balance', text: 'Your wallet ledger balance asset profile lacks structural financing for this allocation.', confirmButtonColor: '#dc2626' });
-    //   return;
-    // }
+    
 
     Swal.fire({
       title: 'Confirm Airtime Purchase',

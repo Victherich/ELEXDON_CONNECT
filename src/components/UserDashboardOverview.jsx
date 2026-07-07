@@ -1,7 +1,9 @@
 import React , {useContext} from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { userLogout } from '../Features/Slice';
 import { 
   FaCreditCard, 
   FaFileInvoiceDollar, 
@@ -16,11 +18,14 @@ FaClockRotateLeft,  // Added
   
   FaShield, FaPenToSquare, FaCalendarCheck, FaAddressCard, 
   FaMobileScreenButton, FaUsersViewfinder, FaMapLocationDot,
-  FaUserCheck, FaPhoneVolume, FaBuildingShield, FaCode
+  FaUserCheck, FaPhoneVolume, FaBuildingShield, FaCode,
+  FaFileCircleCheck,
+  FaArrowRightFromBracket
 } from 'react-icons/fa6';
 import { Context } from './Context';
 
 const UserDashboardOverview = () => {
+  const dispatch = useDispatch();
   // Pull data safely from the Redux state, matching your fallback structural configuration
   const userInfo = useSelector((state) => state.userInfo) || { 
     name: "Alex Elexdon Node", 
@@ -115,12 +120,12 @@ const serviceActions = [
       icon: <FaCreditCard size={14} />, 
       color: "#059669" 
     },
-    { 
-      path: "/userdashboard/service/ninphoneverification", 
-      title: "Retrieve NIN With Phone", 
-      icon: <FaMobileScreenButton size={14} />, 
-      color: "#6366f1" 
-    },
+    // { 
+    //   path: "/userdashboard/service/ninphoneverification", 
+    //   title: "Retrieve NIN With Phone", 
+    //   icon: <FaMobileScreenButton size={14} />, 
+    //   color: "#6366f1" 
+    // },
     { 
       path: "/userdashboard/service/nindemographyverification", 
       title: "NIN Retrieval with Demography", 
@@ -141,12 +146,12 @@ const serviceActions = [
       icon: <FaUserCheck size={14} />, 
       color: "#6366f1" 
     },
-    { 
-      path: "/userdashboard/service/bvnphoneprint", 
-      title: "BVN Retrieval with Phone", 
-      icon: <FaPhoneVolume size={14} />, 
-      color: "#059669" 
-    },
+    // { 
+    //   path: "/userdashboard/service/bvnphoneprint", 
+    //   title: "BVN Retrieval with Phone", 
+    //   icon: <FaPhoneVolume size={14} />, 
+    //   color: "#059669" 
+    // },
     { 
       path: "/userdashboard/service/cacregistration", 
       title: "CAC Registration", 
@@ -175,7 +180,31 @@ const serviceActions = [
   badgeColor: "#ea580c", // Warning amber active notice
   icon: <FaCode size={14} />, // Feel free to swap out with an energy icon if preferred
   color: "#059669" // Stable deep green shell
-}
+},
+// { 
+//   path: "/userdashboard/service/examinationpins", 
+//   title: "EXAMINATION PINS", 
+//   badge: "24/7 Auto", 
+//   badgeColor: "#ea580c", // Warning amber active notice
+//   icon: <FaFileCircleCheck size={14} />, // Feel free to swap out with an energy icon if preferred
+//   color: "#059669" // Stable deep green shell
+// },
+{ 
+  path: "/userdashboard/service/waecservices", 
+  title: "WAEC Services", 
+  badge: "24/7 Auto", 
+  badgeColor: "#ea580c", // Warning amber active notice
+  icon: <FaFileCircleCheck size={14} />, // Feel free to swap out with an energy icon if preferred
+  color: "#059669" // Stable deep green shell
+},
+// { 
+//   path: "/userdashboard/service/jambservices", 
+//   title: "JAMB Services", 
+//   badge: "24/7 Auto", 
+//   badgeColor: "#ea580c", // Warning amber active notice
+//   icon: <FaFileCircleCheck size={14} />, // Feel free to swap out with an energy icon if preferred
+//   color: "#059669" // Stable deep green shell
+// }
   ];
 
   return (
@@ -197,7 +226,7 @@ const serviceActions = [
         {/* PREMIUM VISUAL DEBIT CARD HOUSING ELEMENT */}
         <PremiumVirtualCard>
           <CardHeaderRow>
-            <BankCardBrand>ELEXDON<span>CONNECT</span></BankCardBrand>
+            <BankCardBrand>ELEXDON PAY <span>CONNECT</span></BankCardBrand>
             <FaWallet size={18} />
           </CardHeaderRow>
           <CardBalanceGroup>
@@ -246,6 +275,33 @@ const serviceActions = [
   </IconLabelItem>
   <FaArrowUpRightFromSquare size={10} color="rgba(255, 255, 255, 0.8)" />
 </ActionRowLink>
+
+   <SessionTerminationBtn 
+  onClick={() => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Are you sure you want to logout?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2563eb', // Matches your Elexdon Blue primary button
+      cancelButtonColor: '#64748b',  // Clean neutral slate cancel button
+      confirmButtonText: 'Yes, Disconnect',
+      cancelButtonText: 'Cancel',
+      background: '#ffffff',         // Fits your crisp light theme specification
+      color: '#0f172a',
+      customClass: {
+        popup: 'swal2-rigid-max-10'  // Custom hook for UI alignment if needed
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(userLogout());
+      }
+    });
+  }}
+>
+  <FaArrowRightFromBracket size={14} />
+  <span>Logout</span>
+</SessionTerminationBtn>
 
   </ActionLinksGroup>
 </QuickActionsCard>
@@ -664,5 +720,28 @@ const IconLabelItem = styled.div`
     font-size: 12px;
     font-weight: 600;
     color: #334155;
+  }
+`;
+
+const SessionTerminationBtn = styled.button`
+  width: 100%;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 10px; /* Locked at strict layout limit rule */
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    background: #fef2f2;
+    border-color: #fca5a5;
+    color: #991b1b;
   }
 `;

@@ -30,6 +30,10 @@ import TransactionHistory from './components/TransactionHistory';
 import FundWalletPage from './components/FundWalletPage';
 import UserProfilePage from './components/UserProfilePage';
 import AdminUserManagement from './components/AdminUserManagement';
+import ExamPinManagement from './components/ExamPinManagement';
+import WaecManagement from './components/WaecManagement';
+import JambManagement from './components/JambManagement';
+import AdminTransactionHistory from './components/AdminTransactionHistory';
 
 function App() {
   return (
@@ -63,10 +67,14 @@ function App() {
              <Route path='service/tinretrieval' element={<TinRetrievalForm/>}/>
              <Route path='service/electricityrecharge' element={<ElectricityForm/>}/>
              <Route path='service/cacregistration' element={<CacRegistrationPortal/>}/>
+             <Route path='service/examinationpins' element={<ExamPinManagement/>}/>
+<Route path='service/waecservices' element={<WaecManagement/>}/>
+<Route path='service/jambservices' element={<JambManagement/>}/>
              <Route path='transactions' element={<TransactionHistory/>}/>
              <Route path='fundwallet' element={<FundWalletPage/>}/>
              <Route path='profile' element={<UserProfilePage/>}/>
              <Route path='allusers' element={<AdminUserManagement/>}/>
+             <Route path='alltransactions' element={<AdminTransactionHistory/>}/>
           </Route>
         </Route>
   </Routes>

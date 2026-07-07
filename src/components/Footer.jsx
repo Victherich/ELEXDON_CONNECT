@@ -14,7 +14,7 @@ const Footer = () => {
         <BrandBlock>
           <FooterLogo href="/">
             <img src={logo} alt="logo" style={{ width: "40px" }} />
-            ELEXDON<span>CONNECT</span>
+            ELEXDON PAY <span>CONNECT</span>
           </FooterLogo>
           <BrandDesc>
             Your quick, reliable platform for identity verification, business registrations, utility payments, and instant mobile top-ups.
@@ -64,7 +64,7 @@ const Footer = () => {
       {/* FOOTER BASELINE CLOSURE */}
       <FooterBaselineGrid>
         <CopyrightText>
-          &copy; {currentYear} Elexdon Connect. All rights reserved.
+          &copy; {currentYear} Elexdon Pay Connect. All rights reserved.
         </CopyrightText>
         
         <SocialAndSecurityGroup>

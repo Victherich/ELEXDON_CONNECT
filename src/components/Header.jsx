@@ -20,7 +20,7 @@ const Header = () => {
         <BrandLogo href="/">
           {/* <FaGlobeAfrica size={20} /> */}
           <img src={logo} alt="logo" style={{width:"30px"}}/>
-          ELEXDON<span>CONNECT</span>
+          ELEXDON PAY<span>CONNECT</span>
         </BrandLogo>
 
         {/* DESKTOP NAV LINKS */}

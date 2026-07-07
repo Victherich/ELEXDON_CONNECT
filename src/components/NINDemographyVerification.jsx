@@ -1,3 +1,366 @@
+// import React, { useContext, useState } from 'react';
+// import styled from 'styled-components';
+// import { 
+//   FaAddressCard, FaShieldHalved, FaCircleCheck, FaWallet, 
+//   FaFingerprint, FaClock, FaPassport, FaUserCheck 
+// } from 'react-icons/fa6';
+// import Swal from 'sweetalert2';
+// import { Context } from './Context';
+
+// const NINDemographyVerification = () => {
+//   // Local Form Parameters State
+//   const [slipType, setSlipType] = useState('');
+//   const [formData, setFormData] = useState({
+//     firstname: '',
+//     lastname: '',
+//     gender: '',
+//     dob: ''
+//   });
+//   const [confirmedConsent, setConfirmedConsent] = useState(false);
+//   const [loading, setLoading] = useState(false);
+//   const [returnedResult, setReturnedResult] = useState(null);
+
+//   // App Global Context Config Metrics & Methods
+//   const { api_url, user, fetchUserProfileById } = useContext(Context);
+
+//   // Dynamic pricing for demographic output rules matrix
+// const priceMap = {
+//   nin_regular: 350.00,
+//   nin_standard: 500.00,
+//   nin_premium: 800.00
+// };
+
+//   const serviceFee = priceMap[slipType] || 0.00;
+
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData(prev => ({
+//       ...prev,
+//       [name]: value
+//     }));
+//   };
+
+
+
+// const handleVerificationPipeline = (e) => {
+//     e.preventDefault();
+
+//     // 1. Check if the form fields are filled correctly
+//     if (!slipType) {
+//       Swal.fire({ 
+//         icon: 'error', 
+//         title: 'Missing Selection', 
+//         text: 'Please select a slip type to continue.', 
+//         confirmButtonColor: '#2563eb' 
+//       });
+//       return;
+//     }
+
+//     if (!formData.firstname.trim() || !formData.lastname.trim()) {
+//       Swal.fire({ 
+//         icon: 'error', 
+//         title: 'Missing Names', 
+//         text: 'Please enter both the first name and last name.', 
+//         confirmButtonColor: '#2563eb' 
+//       });
+//       return;
+//     }
+
+//     if (!formData.gender) {
+//       Swal.fire({ 
+//         icon: 'error', 
+//         title: 'Select Gender', 
+//         text: 'Please select a gender.', 
+//         confirmButtonColor: '#2563eb' 
+//       });
+//       return;
+//     }
+
+//     if (!formData.dob) {
+//       Swal.fire({ 
+//         icon: 'error', 
+//         title: 'Missing Date of Birth', 
+//         text: 'Please select the correct date of birth.', 
+//         confirmButtonColor: '#2563eb' 
+//       });
+//       return;
+//     }
+
+//     if (!confirmedConsent) {
+//       Swal.fire({ 
+//         icon: 'warning', 
+//         title: 'Consent Required', 
+//         text: 'Please check the box to confirm you have permission to search this person\'s details.', 
+//         confirmButtonColor: '#2563eb' 
+//       });
+//       return;
+//     }
+
+//     // if (!user || user.balance < serviceFee) {
+//     //   Swal.fire({ 
+//     //     icon: 'error', 
+//     //     title: 'Insufficient Balance', 
+//     //     text: 'Your wallet balance is too low to pay for this search.', 
+//     //     confirmButtonColor: '#dc2626' 
+//     //   });
+//     //   return;
+//     // }
+
+//     // 2. Show a payment confirmation box before charging the user
+//     Swal.fire({
+//       title: 'Confirm Payment',
+//       text: `You will be charged ₦${serviceFee.toFixed(2)} from your wallet to run this search. Do you want to proceed?`,
+//       icon: 'question',
+//       showCancelButton: true,
+//       confirmButtonColor: '#2563eb',
+//       cancelButtonColor: '#64748b',
+//       confirmButtonText: 'Yes, Verify Now'
+//     }).then(async (result) => {
+//       if (result.isConfirmed) {
+//         setLoading(true);
+//         setReturnedResult(null);
+
+//         try {
+//           // Send request to your backend file
+//           const response = await fetch(`${api_url}/verify_nin_demography.php`, {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify({
+//               firstname: formData.firstname,
+//               lastname: formData.lastname,
+//               gender: formData.gender,
+//               dob: formData.dob,
+//               consent: confirmedConsent,
+//               userId: user.id,
+//               slip: slipType
+//             })
+//           });
+
+//           const data = await response.json();
+
+//           if (response.ok && data.success) {
+//             // Save results, show success message, and reset form inputs
+//             setReturnedResult(data.data); 
+//             Swal.fire({ 
+//               icon: 'success', 
+//               title: 'Verification Successful', 
+//               text: 'NIN details found successfully.', 
+//               confirmButtonColor: '#2563eb' 
+//             });
+            
+//             fetchUserProfileById(); // Refresh user wallet balance text on screen
+
+//             // Clear the form fields safely
+//             setFormData({ firstname: '', lastname: '', gender: '', dob: '' });
+//             setConfirmedConsent(false);
+//             setSlipType('');
+//           } else {
+//             Swal.fire({ 
+//               icon: 'error', 
+//               title: 'Verification Failed', 
+//               text: data.error || 'Could not find details matching these parameters.', 
+//               confirmButtonColor: '#dc2626' 
+//             });
+//           }
+//         } catch (error) {
+//           Swal.fire({ 
+//             icon: 'error', 
+//             title: 'Connection Error', 
+//             text: 'Could not connect to the server. Please check your internet connection.', 
+//             confirmButtonColor: '#dc2626' 
+//           });
+//         } finally {
+//           setLoading(false);
+//         }
+//       }
+//     });
+//   };
+
+
+
+//   return (
+//     <ViewShellFrame>
+//       <HeaderLabelBoundary>
+//         <IconBoxWrapper><FaAddressCard size={14} /></IconBoxWrapper>
+//         <div>
+//           <ViewMainTitle>NIN Demography Search </ViewMainTitle>
+//           <ViewSubTitle>Lookup identification parameters using official first names, surnames, and dates of birth</ViewSubTitle>
+//         </div>
+//       </HeaderLabelBoundary>
+
+//       <SplitLowerLayoutGrid>
+//         <ProcessingCoreCard onSubmit={handleVerificationPipeline}>
+          
+//           {/* STEP 1 SECTION */}
+//           <InputGroupBlock>
+//             <StepIndicatorRow>
+//               <StepIndexBadge>01</StepIndexBadge>
+//               <FieldInputLabel>Select Slip Output Type</FieldInputLabel>
+//               {slipType && <CheckVerifiedTag><FaCircleCheck size={10} /> <span>Selected</span></CheckVerifiedTag>}
+//             </StepIndicatorRow>
+//             <FormSelectorDropdown value={slipType} onChange={(e) => setSlipType(e.target.value)}>
+//               <option value="">-- Choose between traditional slip format or modern ID card design --</option>
+//               <option value="slip">NIN Demographic Slip - ₦350.00</option>
+//               <option value="card">NIN Demographic Smart Card Layout - ₦500.00</option>
+//             </FormSelectorDropdown>
+//             <DynamicCostFootnote>Cost: ₦{serviceFee.toFixed(2)}</DynamicCostFootnote>
+//           </InputGroupBlock>
+
+//           {/* STEP 2 SECTION */}
+//           <InputGroupBlock>
+//             <StepIndicatorRow>
+//               <StepIndexBadge>02</StepIndexBadge>
+//               <FieldInputLabel>Demographic Profile Details</FieldInputLabel>
+//             </StepIndicatorRow>
+            
+//             <DemographicGridInputsBlock>
+//               <div>
+//                 <MicroInlineFieldLabelText>First Name (As written on ID)</MicroInlineFieldLabelText>
+//                 <FieldInputNode 
+//                   type="text" 
+//                   name="firstname" 
+//                   placeholder="e.g. JOHN" 
+//                   value={formData.firstname} 
+//                   onChange={handleInputChange} 
+//                 />
+//               </div>
+//               <div>
+//                 <MicroInlineFieldLabelText>Last Name / Surname</MicroInlineFieldLabelText>
+//                 <FieldInputNode 
+//                   type="text" 
+//                   name="lastname" 
+//                   placeholder="e.g. ADEBAYO" 
+//                   value={formData.lastname} 
+//                   onChange={handleInputChange} 
+//                 />
+//               </div>
+//               <div>
+//                 <MicroInlineFieldLabelText>Gender Attribute</MicroInlineFieldLabelText>
+//                 <FormSelectorDropdown name="gender" value={formData.gender} onChange={handleInputChange}>
+//                   <option value="">-- Select --</option>
+//                   <option value="male">Male</option>
+//                   <option value="female">Female</option>
+//                 </FormSelectorDropdown>
+//               </div>
+//               <div>
+//                 <MicroInlineFieldLabelText>Date of Birth</MicroInlineFieldLabelText>
+//                 <FieldInputNode 
+//                   type="date" 
+//                   name="dob" 
+//                   value={formData.dob} 
+//                   onChange={handleInputChange} 
+//                 />
+//               </div>
+//             </DemographicGridInputsBlock>
+
+//             <PrivacyNoticeBox>
+//               Privacy Notice: Verification parameter details process encrypted. System core drops parameters from database volatile memory nodes straight after resolution.
+//             </PrivacyNoticeBox>
+//           </InputGroupBlock>
+
+//           {/* STEP 3 SECTION */}
+//           <InputGroupBlock>
+//             <StepIndicatorRow>
+//               <StepIndexBadge>03</StepIndexBadge>
+//               <FieldInputLabel>Confirmation Consent</FieldInputLabel>
+//               {confirmedConsent && <CheckVerifiedTag variant="success"><FaCircleCheck size={10} /> <span>Confirmed</span></CheckVerifiedTag>}
+//             </StepIndicatorRow>
+//             <CheckboxSelectionNode>
+//               <input 
+//                 type="checkbox" 
+//                 id="consentConfirmationDirect" 
+//                 checked={confirmedConsent}
+//                 onChange={(e) => setConfirmedConsent(e.target.checked)}
+//               />
+//               <label htmlFor="consentConfirmationDirect">
+//                 I confirm that I have obtained explicit, clear consent from the legal identity owner to perform this lookup check.
+//               </label>
+//             </CheckboxSelectionNode>
+//           </InputGroupBlock>
+
+//           <ExecutionTriggerBtn type="submit" disabled={loading}>
+//             {loading ? "Searching directories, please wait..." : "Execute Demography Search"}
+//           </ExecutionTriggerBtn>
+
+//           <SecurityAttributeRowUnderButton>
+//             <div><FaFingerprint size={10} /> <span>Secure Encryption</span></div>
+//             <div><FaClock size={10} /> <span>Instant Output</span></div>
+//             <div><FaUserCheck size={10} /> <span>Compliant Process</span></div>
+//           </SecurityAttributeRowUnderButton>
+
+//         </ProcessingCoreCard>
+
+//         <RightContextMetaTilePanel>
+//           <WalletSummaryWidgetCard>
+//             <div className="label-cluster">
+//               <FaWallet size={12} />
+//               <span>Balance Available</span>
+//             </div>
+//             <h3>₦{user?.balance?.toLocaleString(undefined, {minimumFractionDigits: 2})}</h3>
+//           </WalletSummaryWidgetCard>
+
+//           {returnedResult ? (
+//             <ProfileIDCertificateDisplayCard>
+//               <CertificateHeaderRow>
+//                 <FaPassport size={14} />
+//                 <span>VERIFIED NATIONAL NIN DEMOGRAPHY RECORD</span>
+//               </CertificateHeaderRow>
+              
+//               <ProfileInnerGridAligner>
+//                 {returnedResult.photo && (
+//                   <ProfilePhotoAvatarBox 
+//                     src={returnedResult.photo.startsWith('data:') ? returnedResult.photo : `data:image/jpeg;base64,${returnedResult.photo}`} 
+//                     alt="NIMC Avatar" 
+//                   />
+//                 )}
+//                 <ProfileSummaryFieldGroupData>
+//                   <div>
+//                     <label>SURNAME (LAST NAME)</label>
+//                     <p>{returnedResult.lastname || returnedResult.lastName || 'N/A'}</p>
+//                   </div>
+//                   <div>
+//                     <label>FIRST NAME</label>
+//                     <p>{returnedResult.firstname || returnedResult.firstName || 'N/A'}</p>
+//                   </div>
+//                   {(returnedResult.middlename || returnedResult.middleName) && (
+//                     <div>
+//                       <label>MIDDLE NAME</label>
+//                       <p>{returnedResult.middlename || returnedResult.middleName}</p>
+//                     </div>
+//                   )}
+//                 </ProfileSummaryFieldGroupData>
+//               </ProfileInnerGridAligner>
+
+//               <HorizontalDashedRuleLine />
+
+//               <ExtendedTextMetadataGridRowDetails>
+//                 <div><label>GENDER</label><p>{returnedResult.gender || 'N/A'}</p></div>
+//                 <div><label>DATE OF BIRTH</label><p>{returnedResult.dob || returnedResult.birthdate || 'N/A'}</p></div>
+//                 <div><label>NATIONAL IDENTITY NUMBER (NIN)</label><p style={{color: '#2563eb'}}>{returnedResult.nin || 'N/A'}</p></div>
+//                 <div><label>MOBILE PARAMETER</label><p>{returnedResult.phone || 'N/A'}</p></div>
+//               </ExtendedTextMetadataGridRowDetails>
+
+//               <AddressMetadataBoxWrapperBlock>
+//                 <label>RESIDENTIAL LOCATION DATA</label>
+//                 <p>{returnedResult.address || 'No verifiable physical address information returned from database grids.'}</p>
+//               </AddressMetadataBoxWrapperBlock>
+//             </ProfileIDCertificateDisplayCard>
+//           ) : (
+//             <EmptyStateNoticeFramePlaceholder>
+//               <FaShieldHalved size={24} />
+//               <h4>Preview Area</h4>
+//               <p>Preview will appear here when you select a slip type, complete the demographic criteria layout, and run verification.</p>
+//             </EmptyStateNoticeFramePlaceholder>
+//           )}
+//         </RightContextMetaTilePanel>
+//       </SplitLowerLayoutGrid>
+//     </ViewShellFrame>
+//   );
+// };
+
+// export default NINDemographyVerification;
+
+
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { 
@@ -23,11 +386,14 @@ const NINDemographyVerification = () => {
   // App Global Context Config Metrics & Methods
   const { api_url, user, fetchUserProfileById } = useContext(Context);
 
-  // Dynamic pricing for demographic output rules matrix
-  const priceMap = {
-    slip: 350.00,
-    card: 500.00
-  };
+  const userWallet = user?.balance ? parseFloat(user.balance) : 0;
+
+  // Dynamic pricing matching backend expectations
+const priceMap = {
+  nin_regular: 350.00,
+  nin_standard: 500.00,
+  nin_premium: 800.00
+};
 
   const serviceFee = priceMap[slipType] || 0.00;
 
@@ -39,99 +405,10 @@ const NINDemographyVerification = () => {
     }));
   };
 
-  // const handleVerificationPipeline = (e) => {
-  //   e.preventDefault();
-
-  //   // 1. Structural Field Entry Requirements Check
-  //   if (!slipType) {
-  //     Swal.fire({ icon: 'error', title: 'Choose Slip Type', text: 'Please select a slip type format to continue.', confirmButtonColor: '#2563eb' });
-  //     return;
-  //   }
-
-  //   if (!formData.firstname.trim() || !formData.lastname.trim()) {
-  //     Swal.fire({ icon: 'error', title: 'Missing Identity Parameters', text: 'Please input both first name and surname fields.', confirmButtonColor: '#2563eb' });
-  //     return;
-  //   }
-
-  //   if (!formData.gender) {
-  //     Swal.fire({ icon: 'error', title: 'Select Gender', text: 'Please identify the subject gender attribute profile.', confirmButtonColor: '#2563eb' });
-  //     return;
-  //   }
-
-  //   if (!formData.dob) {
-  //     Swal.fire({ icon: 'error', title: 'Missing Date of Birth', text: 'Please specify the exact date of birth as recorded on records.', confirmButtonColor: '#2563eb' });
-  //     return;
-  //   }
-
-  //   if (!confirmedConsent) {
-  //     Swal.fire({ icon: 'warning', title: 'Consent Required', text: 'Please confirm that you have explicit permission from the owner of this profile.', confirmButtonColor: '#2563eb' });
-  //     return;
-  //   }
-
-  //   if (!user || user.balance < serviceFee) {
-  //     Swal.fire({ icon: 'error', title: 'Insufficient Balance', text: 'Your wallet balance is too low to cover the cost of this check.', confirmButtonColor: '#dc2626' });
-  //     return;
-  //   }
-
-  //   // 2. Clear Prompt Warnings Prior to Wallet Reductions
-  //   Swal.fire({
-  //     title: 'Confirm Payment',
-  //     text: `We will deduct ₦${serviceFee.toFixed(2)} from your wallet to execute this Demographic identity search. Do you want to continue?`,
-  //     icon: 'question',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#2563eb',
-  //     cancelButtonColor: '#64748b',
-  //     confirmButtonText: 'Yes, Verify Now'
-  //   }).then(async (result) => {
-  //     if (result.isConfirmed) {
-  //       setLoading(true);
-  //       setReturnedResult(null);
-
-  //       try {
-  //         const response = await fetch(`${api_url}/verify_nin_demography.php`, {
-  //           method: 'POST',
-  //           headers: { 'Content-Type': 'application/json' },
-  //           body: JSON.stringify({
-  //             firstname: formData.firstname,
-  //             lastname: formData.lastname,
-  //             gender: formData.gender,
-  //             dob: formData.dob,
-  //             consent: confirmedConsent,
-  //             userId: user.id,
-  //             slipType: slipType
-  //           })
-  //         });
-
-  //         const data = await response.json();
-
-  //         if (response.ok && data.success) {
-  //           setReturnedResult(data.data); 
-  //           Swal.fire({ icon: 'success', title: 'Successful', text: 'Demographic identity details mapped successfully.', confirmButtonColor: '#2563eb' });
-            
-  //           // Sync global wallet profile metrics balances
-  //           fetchUserProfileById();
-
-  //           // Clear configuration parameters fields safely
-  //           setFormData({ firstname: '', lastname: '', gender: '', dob: '' });
-  //           setConfirmedConsent(false);
-  //           setSlipType('');
-  //         } else {
-  //           Swal.fire({ icon: 'error', title: 'Search Failed', text: data.error || 'NIMC directory verification node could not match these criteria details.', confirmButtonColor: '#dc2626' });
-  //         }
-  //       } catch (error) {
-  //         Swal.fire({ icon: 'error', title: 'Network Error', text: 'Could not connect to the server. Please check your internet connection.', confirmButtonColor: '#dc2626' });
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     }
-  //   });
-  // };
-
-
-const handleVerificationPipeline = (e) => {
+  const handleVerificationPipeline = (e) => {
     e.preventDefault();
 
-    // 1. Check if the form fields are filled correctly
+    // 1. Core Field Validations
     if (!slipType) {
       Swal.fire({ 
         icon: 'error', 
@@ -176,23 +453,24 @@ const handleVerificationPipeline = (e) => {
       Swal.fire({ 
         icon: 'warning', 
         title: 'Consent Required', 
-        text: 'Please check the box to confirm you have permission to search this person\'s details.', 
+        text: "Please check the box to confirm you have permission to search this person's details.", 
         confirmButtonColor: '#2563eb' 
       });
       return;
     }
 
-    // if (!user || user.balance < serviceFee) {
-    //   Swal.fire({ 
-    //     icon: 'error', 
-    //     title: 'Insufficient Balance', 
-    //     text: 'Your wallet balance is too low to pay for this search.', 
-    //     confirmButtonColor: '#dc2626' 
-    //   });
-    //   return;
-    // }
+    // 2. Client-Side Wallet Balance Validation
+    if (userWallet < serviceFee) {
+      Swal.fire({ 
+        icon: 'error', 
+        title: 'Insufficient Balance', 
+        text: `Your wallet balance (₦${userWallet.toLocaleString(undefined, {minimumFractionDigits: 2})}) is too low to run this search.`, 
+        confirmButtonColor: '#dc2626' 
+      });
+      return;
+    }
 
-    // 2. Show a payment confirmation box before charging the user
+    // 3. Payment Confirmation Box
     Swal.fire({
       title: 'Confirm Payment',
       text: `You will be charged ₦${serviceFee.toFixed(2)} from your wallet to run this search. Do you want to proceed?`,
@@ -207,7 +485,7 @@ const handleVerificationPipeline = (e) => {
         setReturnedResult(null);
 
         try {
-          // Send request to your backend file
+          // Send request payload structure down to the backend endpoint pipeline
           const response = await fetch(`${api_url}/verify_nin_demography.php`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -217,26 +495,28 @@ const handleVerificationPipeline = (e) => {
               gender: formData.gender,
               dob: formData.dob,
               consent: confirmedConsent,
-              userId: user.id,
-              slipType: slipType
+              userId: user?.id,
+              cost: serviceFee, // Directly feeds into the backend cost variable cleanly
+              slip: slipType
             })
           });
 
           const data = await response.json();
 
           if (response.ok && data.success) {
-            // Save results, show success message, and reset form inputs
+            // Save results on preview area card components
             setReturnedResult(data.data); 
+            
             Swal.fire({ 
               icon: 'success', 
               title: 'Verification Successful', 
-              text: 'NIN details found successfully.', 
+              text: 'Go to your TRANSACTION HISTORY and DOWNLOAD your slip.', 
               confirmButtonColor: '#2563eb' 
             });
             
-            fetchUserProfileById(); // Refresh user wallet balance text on screen
+            fetchUserProfileById(); // Refresh global wallet balance numbers
 
-            // Clear the form fields safely
+            // Clear the form state fields safely
             setFormData({ firstname: '', lastname: '', gender: '', dob: '' });
             setConfirmedConsent(false);
             setSlipType('');
@@ -262,14 +542,12 @@ const handleVerificationPipeline = (e) => {
     });
   };
 
-
-
   return (
     <ViewShellFrame>
       <HeaderLabelBoundary>
         <IconBoxWrapper><FaAddressCard size={14} /></IconBoxWrapper>
         <div>
-          <ViewMainTitle>NIN Demography Search </ViewMainTitle>
+          <ViewMainTitle>NIN Demography Search</ViewMainTitle>
           <ViewSubTitle>Lookup identification parameters using official first names, surnames, and dates of birth</ViewSubTitle>
         </div>
       </HeaderLabelBoundary>
@@ -286,8 +564,9 @@ const handleVerificationPipeline = (e) => {
             </StepIndicatorRow>
             <FormSelectorDropdown value={slipType} onChange={(e) => setSlipType(e.target.value)}>
               <option value="">-- Choose between traditional slip format or modern ID card design --</option>
-              <option value="slip">NIN Demographic Slip - ₦350.00</option>
-              <option value="card">NIN Demographic Smart Card Layout - ₦500.00</option>
+              <option value="nin_regular">NIN Regular clip - ₦350.00</option>
+              <option value="nin_standard">NIN Standard slip - ₦500.00</option>
+              <option value="nin_premium">NIN Premium card - ₦800.00</option>
             </FormSelectorDropdown>
             <DynamicCostFootnote>Cost: ₦{serviceFee.toFixed(2)}</DynamicCostFootnote>
           </InputGroupBlock>
@@ -382,10 +661,10 @@ const handleVerificationPipeline = (e) => {
               <FaWallet size={12} />
               <span>Balance Available</span>
             </div>
-            <h3>₦{user?.balance?.toLocaleString(undefined, {minimumFractionDigits: 2})}</h3>
+            <h3>₦{user?.balance ? parseFloat(user.balance).toLocaleString(undefined, {minimumFractionDigits: 2}) : "0.00"}</h3>
           </WalletSummaryWidgetCard>
 
-          {returnedResult ? (
+          {/* {returnedResult ? (
             <ProfileIDCertificateDisplayCard>
               <CertificateHeaderRow>
                 <FaPassport size={14} />
@@ -437,7 +716,7 @@ const handleVerificationPipeline = (e) => {
               <h4>Preview Area</h4>
               <p>Preview will appear here when you select a slip type, complete the demographic criteria layout, and run verification.</p>
             </EmptyStateNoticeFramePlaceholder>
-          )}
+          )} */}
         </RightContextMetaTilePanel>
       </SplitLowerLayoutGrid>
     </ViewShellFrame>

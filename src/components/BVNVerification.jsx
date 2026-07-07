@@ -26,84 +26,7 @@ const BVNVerification = () => {
 
   const serviceFee = priceMap[slipType] || 0.00;
 
-  // const handleVerificationPipeline = (e) => {
-  //   e.preventDefault();
 
-  //   // 1. Inputs Verification Checks
-  //   if (!slipType) {
-  //     Swal.fire({ icon: 'error', title: 'Choose Slip Type', text: 'Please select a slip type format to continue.', confirmButtonColor: '#2563eb' });
-  //     return;
-  //   }
-
-  //   if (bvnNumber.length !== 11 || !/^\d+$/.test(bvnNumber)) {
-  //     Swal.fire({ icon: 'error', title: 'Wrong BVN Format', text: 'The Bank Verification Number must be exactly 11 digits.', confirmButtonColor: '#2563eb' });
-  //     return;
-  //   }
-
-  //   if (!confirmedConsent) {
-  //     Swal.fire({ icon: 'warning', title: 'Consent Required', text: 'Please confirm that you have permission from the owner of this BVN.', confirmButtonColor: '#2563eb' });
-  //     return;
-  //   }
-
-  //   if (!user || user.balance < serviceFee) {
-  //     Swal.fire({ icon: 'error', title: 'Insufficient Balance', text: 'Your wallet balance is too low to cover the cost of this check.', confirmButtonColor: '#dc2626' });
-  //     return;
-  //   }
-
-  //   // 2. Alert Box Confirmation Prior to Deduction Actions
-  //   Swal.fire({
-  //     title: 'Confirm Payment',
-  //     text: `We will deduct ₦${serviceFee.toFixed(2)} from your wallet to verify this BVN. Do you want to continue?`,
-  //     icon: 'question',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#2563eb',
-  //     cancelButtonColor: '#64748b',
-  //     confirmButtonText: 'Yes, Verify Now'
-  //   }).then(async (result) => {
-  //     if (result.isConfirmed) {
-  //       setLoading(true);
-  //       setReturnedResult(null);
-
-  //       try {
-  //         const response = await fetch(`${api_url}/verify_bvn.php`, {
-  //           method: 'POST',
-  //           headers: { 'Content-Type': 'application/json' },
-  //           body: JSON.stringify({
-  //             bvn: bvnNumber,
-  //             consent: confirmedConsent,
-  //             userId: user.id,
-  //             cost: serviceFee
-  //           })
-  //         });
-
-  //         const data = await response.json();
-
-  //         if (response.ok && data.success) {
-  //           setReturnedResult(data.profile); 
-  //           Swal.fire({ icon: 'success', title: 'Successful', text: 'BVN details retrieved successfully.', confirmButtonColor: '#2563eb' });
-            
-  //           // Instantly sync the global application balance tracker state
-         
-  //             fetchUserProfileById();
-            
-
-  //           // Reset operational form field conditions safely
-  //           setBvnNumber('');
-  //           setConfirmedConsent(false);
-  //           setSlipType('');
-  //         } else {
-  //           Swal.fire({ icon: 'error', title: 'Verification Failed', text: data.error || 'Could not verify this BVN. Please check the number and try again.', confirmButtonColor: '#dc2626' });
-  //         }
-  //       } catch (error) {
-  //         Swal.fire({ icon: 'error', title: 'Network Error', text: 'Could not connect to the server. Please check your internet connection.', confirmButtonColor: '#dc2626' });
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     }
-  //   });
-  // };
-
-  
   
   const handleVerificationPipeline = (e) => {
   e.preventDefault();
@@ -172,7 +95,8 @@ const BVNVerification = () => {
             bvn: bvnNumber,
             consent: confirmedConsent,
             userId: user.id,
-            cost: serviceFee
+            cost: serviceFee,
+            slip:slipType
           })
         });
 
@@ -305,7 +229,7 @@ const BVNVerification = () => {
             <h3>₦{user?.balance?.toLocaleString(undefined, {minimumFractionDigits: 2})}</h3>
           </WalletSummaryWidgetCard>
 
-          {returnedResult ? (
+          {/* {returnedResult ? (
             <ProfileIDCertificateDisplayCard>
               <CertificateHeaderRow>
                 <FaPassport size={14} />
@@ -357,7 +281,7 @@ const BVNVerification = () => {
               <h4>Preview Area</h4>
               <p>Preview will appear here when you select a slip type, complete the form, and run verification.</p>
             </EmptyStateNoticeFramePlaceholder>
-          )}
+          )} */}
         </RightContextMetaTilePanel>
       </SplitLowerLayoutGrid>
     </ViewShellFrame>

@@ -1,226 +1,84 @@
-import React, { useContext, useState } from 'react';
-import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { FaMobileScreenButton, FaCircleInfo, FaShield, FaWallet } from 'react-icons/fa6';
-import Swal from 'sweetalert2';
-import { Context } from './Context';
+// import React, { useContext, useState } from 'react';
+// import styled from 'styled-components';
+// import { useSelector } from 'react-redux';
+// import { FaMobileScreenButton, FaCircleInfo, FaShield, FaWallet } from 'react-icons/fa6';
+// import Swal from 'sweetalert2';
+// import { Context } from './Context';
 
-const NINPhoneVerification = () => {
-  // Pull balance from Redux to check funding constraints before processing 
+// const NINPhoneVerification = () => {
+//   // Pull balance from Redux to check funding constraints before processing 
  
-const {api_url,user,fetchUserProfileById}=useContext(Context)
-  // Component Form State Parameters
-  const [slipType, setSlipType] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [consentChecked, setConsentChecked] = useState(false);
-  const [loading, setLoading] = useState(false);
+// const {api_url,user,fetchUserProfileById}=useContext(Context)
+//   // Component Form State Parameters
+//   const [slipType, setSlipType] = useState('');
+//   const [phoneNumber, setPhoneNumber] = useState('');
+//   const [consentChecked, setConsentChecked] = useState(false);
+//   const [loading, setLoading] = useState(false);
 
- const userWallet = user?.balance
+//  const userWallet = user?.balance
 
-  // Dynamic Base Rate Logic Engine
-  const getServiceFee = () => {
-    if (slipType === 'regular') return 380;
-    if (slipType === 'standard') return 450;
-    if (slipType === 'premium') return 500;
-    return 0;
-  };
-
-  const serviceFee = getServiceFee();
-
-//   const handleVerificationSubmit = (e) => {
-//     e.preventDefault();
-
-//     // 1. Structural Form Sanitization Checks
-//     if (!slipType) {
-//       Swal.fire({ icon: 'error', title: 'Selection Missing', text: 'Please select a slip type context configuration.', confirmButtonColor: '#2563eb' });
-//       return;
-//     }
-
-//     if (phoneNumber.length !== 11 || !/^\d+$/.test(phoneNumber)) {
-//       Swal.fire({ icon: 'error', title: 'Invalid Formatting', text: 'Phone number data entry must be exactly 11 digits without text or country codes.', confirmButtonColor: '#2563eb' });
-//       return;
-//     }
-
-//     if (!consentChecked) {
-//       Swal.fire({ icon: 'warning', title: 'Consent Declaration Required', text: 'You must check the legal compliance verification box to confirm customer authorization.', confirmButtonColor: '#2563eb' });
-//       return;
-//     }
-
-//     // 2. Financial Pipeline Availability Evaluation
-//     if (userWallet.balance < serviceFee) {
-//       Swal.fire({ icon: 'error', title: 'Insufficient Wallet Balance', text: 'Your wallet balance is inadequate to execute this identification fetch protocol.', confirmButtonColor: '#dc2626' });
-//       return;
-//     }
-
-//     // 3. Execution Pipeline Initiation Intercept
-//     Swal.fire({
-//       title: 'Authorize Verification?',
-//       text: `Confirm deduction of ₦${serviceFee}.00 for processing ${phoneNumber}?`,
-//       icon: 'question',
-//       showCancelButton: true,
-//       confirmButtonColor: '#2563eb',
-//       cancelButtonColor: '#64748b',
-//       confirmButtonText: 'Execute Fetch',
-//     }).then((result) => {
-//       if (result.isConfirmed) {
-//         setLoading(true);
-        
-//         // Simulating backend NIMC directory lookups
-//         setTimeout(() => {
-//           setLoading(false);
-//           Swal.fire({
-//             icon: 'success',
-//             title: 'Verification Dispatched',
-//             text: 'System successfully parsed records. Check your logs or registry directory for download links.',
-//             confirmButtonColor: '#2563eb'
-//           });
-//           // Reset parameters safely
-//           setPhoneNumber('');
-//           setConsentChecked(false);
-//         }, 2200);
-//       }
-//     });
+//   // Dynamic Base Rate Logic Engine
+//   const getServiceFee = () => {
+//     if (slipType === 'nin_regular') return 380;
+//     if (slipType === 'nin_standard') return 450;
+//     if (slipType === 'nin_premium') return 500;
+//     return 0;
 //   };
 
+//   const serviceFee = getServiceFee();
 
 
 // const handleVerificationSubmit = (e) => {
 //   e.preventDefault();
 
-//   // 1. Structural Form Sanitization Checks
+//   // 1. Check if the form fields are filled correctly
 //   if (!slipType) {
-//     Swal.fire({ icon: 'error', title: 'Selection Missing', text: 'Please select a slip type context configuration.', confirmButtonColor: '#2563eb' });
+//     Swal.fire({ 
+//       icon: 'error', 
+//       title: 'Missing Selection', 
+//       text: 'Please select a slip type to continue.', 
+//       confirmButtonColor: '#2563eb' 
+//     });
 //     return;
 //   }
 
 //   if (phoneNumber.length !== 11 || !/^\d+$/.test(phoneNumber)) {
-//     Swal.fire({ icon: 'error', title: 'Invalid Formatting', text: 'Phone number data entry must be exactly 11 digits without text or country codes.', confirmButtonColor: '#2563eb' });
+//     Swal.fire({ 
+//       icon: 'error', 
+//       title: 'Invalid Phone Number', 
+//       text: 'The phone number must be exactly 11 digits.', 
+//       confirmButtonColor: '#2563eb' 
+//     });
 //     return;
 //   }
 
 //   if (!consentChecked) {
-//     Swal.fire({ icon: 'warning', title: 'Consent Declaration Required', text: 'You must check the legal compliance verification box to confirm customer authorization.', confirmButtonColor: '#2563eb' });
+//     Swal.fire({ 
+//       icon: 'warning', 
+//       title: 'Consent Required', 
+//       text: 'Please check the box to confirm you have permission to look up this number.', 
+//       confirmButtonColor: '#2563eb' 
+//     });
 //     return;
 //   }
 
-//   // 2. Financial Pipeline Availability Evaluation
-//   if (userWallet.balance < serviceFee) {
-//     Swal.fire({ icon: 'error', title: 'Insufficient Wallet Balance', text: 'Your wallet balance is inadequate to execute this identification fetch protocol.', confirmButtonColor: '#dc2626' });
-//     return;
-//   }
 
-//   // 3. Execution Pipeline Confirmation Dialog
+
+//   // 3. Show a payment confirmation box before charging the user
 //   Swal.fire({
-//     title: 'Authorize Verification?',
-//     text: `Confirm deduction of ₦${serviceFee}.00 for processing ${phoneNumber}?`,
+//     title: 'Confirm Payment',
+//     text: `You will be charged ₦${serviceFee.toFixed(2)} from your wallet to look up this phone number. Do you want to proceed?`,
 //     icon: 'question',
 //     showCancelButton: true,
 //     confirmButtonColor: '#2563eb',
 //     cancelButtonColor: '#64748b',
-//     confirmButtonText: 'Execute Fetch',
-//   }).then(async (result) => { // Marked as async to await network responses
-//     if (result.isConfirmed) {
-//       setLoading(true);
-      
-//       try {
-//         const response = await fetch('https://checkmyninbvn.com.ng/api/nin-phone', {
-//           method: 'POST',
-//           headers: {
-//             'Content-Type': 'application/json',
-//             // Pulls securely from your React project environment files (.env)
-//             'x-api-key':'ninbvn_1bf2d72ed1e60f77de654cc2'
-//           },
-//           body: JSON.stringify({
-//             phone: phoneNumber,
-//             consent: consentChecked
-//           })
-//         });
-
-//         const data = await response.json();
-
-//         if (response.ok) {
-//           // TODO: dispatch an action here (e.g., dispatch(deductBalance(serviceFee))) 
-//           // to sync Redux UI with the actual wallet deduction state.
-
-//           Swal.fire({
-//             icon: 'success',
-//             title: 'Verification Successful',
-//             text: 'System successfully parsed NIN records associated with this mobile device node.',
-//             confirmButtonColor: '#2563eb'
-//           });
-          
-//           // Reset operational form input fields safely
-//           setPhoneNumber('');
-//           setConsentChecked(false);
-//           setSlipType('');
-//         } else {
-//           // Handles server operational rejections (e.g., Invalid key, parsing errors)
-//           Swal.fire({
-//             icon: 'error',
-//             title: 'Fetch Gateway Refusal',
-//             text: data.message || 'The server rejected the transaction criteria. Please check details and try again.',
-//             confirmButtonColor: '#dc2626'
-//           });
-//         }
-//       } catch (error) {
-//         // Handles total structural pipeline dropouts (e.g., offline connection, server downtime)
-//         Swal.fire({
-//           icon: 'error',
-//           title: 'Pipeline Interruption',
-//           text: 'Unable to build a secure network stream to the validation nodes. Please try again later.',
-//           confirmButtonColor: '#dc2626'
-//         });
-//       } finally {
-//         setLoading(false);
-//       }
-//     }
-//   });
-// };
-
-
-
-
-
-// const handleVerificationSubmit = (e) => {
-//   e.preventDefault();
-
-//   // 1. Structural Form Sanitization Checks
-//   if (!slipType) {
-//     Swal.fire({ icon: 'error', title: 'Selection Missing', text: 'Please select a slip type context configuration.', confirmButtonColor: '#2563eb' });
-//     return;
-//   }
-
-//   if (phoneNumber.length !== 11 || !/^\d+$/.test(phoneNumber)) {
-//     Swal.fire({ icon: 'error', title: 'Invalid Formatting', text: 'Phone number data entry must be exactly 11 digits without text or country codes.', confirmButtonColor: '#2563eb' });
-//     return;
-//   }
-
-//   if (!consentChecked) {
-//     Swal.fire({ icon: 'warning', title: 'Consent Declaration Required', text: 'You must check the legal compliance verification box to confirm customer authorization.', confirmButtonColor: '#2563eb' });
-//     return;
-//   }
-
-// //   // 2. Financial Pipeline Availability Evaluation
-// //   if (userWallet.balance < serviceFee) {
-// //     Swal.fire({ icon: 'error', title: 'Insufficient Wallet Balance', text: 'Your wallet balance is inadequate to execute this identification fetch protocol.', confirmButtonColor: '#dc2626' });
-// //     return;
-// //   }
-
-//   // 3. Execution Pipeline Confirmation Dialog
-//   Swal.fire({
-//     title: 'Authorize Verification?',
-//     text: `Confirm deduction of ₦${serviceFee}.00 for processing ${phoneNumber}?`,
-//     icon: 'question',
-//     showCancelButton: true,
-//     confirmButtonColor: '#2563eb',
-//     cancelButtonColor: '#64748b',
-//     confirmButtonText: 'Execute Fetch',
+//     confirmButtonText: 'Yes, Verify Now',
 //   }).then(async (result) => { 
 //     if (result.isConfirmed) {
 //       setLoading(true);
       
 //       try {
-//         // Pointing cleanly toward your secure localized cPanel back-end proxy
+//         // Send request to your backend file
 //         const response = await fetch(`${api_url}/verify_nin_phone.php`, {
 //           method: 'POST',
 //           headers: {
@@ -230,45 +88,42 @@ const {api_url,user,fetchUserProfileById}=useContext(Context)
 //             phone: phoneNumber,
 //             consent: consentChecked,
 //             userId: user.id,
-//             cost: serviceFee
+//             cost: serviceFee,
+//             slip:slipType
 //           })
 //         });
 
 //         const data = await response.json();
 
 //         if (response.ok && data.success) {
-//           // Sync Redux UI State here by triggering balance mutations
-//           // example: dispatch(deductUserBalance(serviceFee));
-
 //           Swal.fire({
 //             icon: 'success',
 //             title: 'Verification Successful',
-//             text: 'System successfully parsed NIN records associated with this mobile device node.',
-//             confirmButtonColor: '#2563eb'
+//             text: 'Go to your TRANSACTION HISTORY and DOWNLOAD your slip.',
+//             confirmButtonColor: '#2563eb',
+//             allowOutsideClick:false
 //           });
 
-//           fetchUserProfileById();
+//           fetchUserProfileById(); // Refresh user wallet balance text on screen
           
-//           // Reset operational form input fields safely
+//           // Clear form fields
 //           setPhoneNumber('');
 //           setConsentChecked(false);
 //           setSlipType('');
 //         } else {
-//           // Handles server operational rejections passed from PHP handler script
 //           Swal.fire({
 //             icon: 'error',
-//             title: 'Fetch Gateway Refusal',
-//             text: data.error || 'The server rejected the transaction criteria.',
+//             title: 'Verification Failed',
+//             text: data.error || 'Could not find details for this phone number.',
 //             confirmButtonColor: '#dc2626'
 //           });
-//           console.log(data)
+//           console.log(data);
 //         }
 //       } catch (error) {
-//         // Handles total structural pipeline failures (offline connection, server downtime)
 //         Swal.fire({
 //           icon: 'error',
-//           title: 'Pipeline Interruption',
-//           text: 'Unable to build a secure network stream to your cPanel server instance.',
+//           title: 'Connection Error',
+//           text: 'Could not connect to the server. Please check your internet connection.',
 //           confirmButtonColor: '#dc2626'
 //         });
 //       } finally {
@@ -278,112 +133,263 @@ const {api_url,user,fetchUserProfileById}=useContext(Context)
 //   });
 // };
 
-const handleVerificationSubmit = (e) => {
-  e.preventDefault();
-
-  // 1. Check if the form fields are filled correctly
-  if (!slipType) {
-    Swal.fire({ 
-      icon: 'error', 
-      title: 'Missing Selection', 
-      text: 'Please select a slip type to continue.', 
-      confirmButtonColor: '#2563eb' 
-    });
-    return;
-  }
-
-  if (phoneNumber.length !== 11 || !/^\d+$/.test(phoneNumber)) {
-    Swal.fire({ 
-      icon: 'error', 
-      title: 'Invalid Phone Number', 
-      text: 'The phone number must be exactly 11 digits.', 
-      confirmButtonColor: '#2563eb' 
-    });
-    return;
-  }
-
-  if (!consentChecked) {
-    Swal.fire({ 
-      icon: 'warning', 
-      title: 'Consent Required', 
-      text: 'Please check the box to confirm you have permission to look up this number.', 
-      confirmButtonColor: '#2563eb' 
-    });
-    return;
-  }
 
 
-
-  // 3. Show a payment confirmation box before charging the user
-  Swal.fire({
-    title: 'Confirm Payment',
-    text: `You will be charged ₦${serviceFee.toFixed(2)} from your wallet to look up this phone number. Do you want to proceed?`,
-    icon: 'question',
-    showCancelButton: true,
-    confirmButtonColor: '#2563eb',
-    cancelButtonColor: '#64748b',
-    confirmButtonText: 'Yes, Verify Now',
-  }).then(async (result) => { 
-    if (result.isConfirmed) {
-      setLoading(true);
+// return (
+//     <ModuleWorkspaceFrame>
       
-      try {
-        // Send request to your backend file
-        const response = await fetch(`${api_url}/verify_nin_phone.php`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            phone: phoneNumber,
-            consent: consentChecked,
-            userId: user.id,
-            cost: serviceFee
-          })
-        });
+//       {/* SECTION HEADER PANEL */}
+//       <HeaderLabelBoundary>
+//         <IconBoxWrapper>
+//           <FaMobileScreenButton size={14} />
+//         </IconBoxWrapper>
+//         <div>
+//           <ViewMainTitle>NIN Phone Verification</ViewMainTitle>
+//           <ViewSubTitle>Resolve corporate identity credentials using localized SIM records</ViewSubTitle>
+//         </div>
+//       </HeaderLabelBoundary>
 
-        const data = await response.json();
+//       <DualSplitGridPipeline>
+        
+//         {/* INPUT SUBMISSION FIELD ARTIFACTS */}
+//         <ProcessingCoreCard onSubmit={handleVerificationSubmit}>
+          
+//           <InputGroupBlock>
+//             <FieldInputLabel>Select Slip Type</FieldInputLabel>
+//             <FieldHelperAnnotation>Choose the type of NIN slip you need for your verification</FieldHelperAnnotation>
+//             <FormSelectorDropdown 
+//               value={slipType} 
+//               onChange={(e) => setSlipType(e.target.value)}
+//             >
+//               <option value="">-- Select a slip type --</option>
+//               <option value="nin_regular">Regular Slip - ₦380.00</option>
+//               <option value="nin_standard">Standard Slip - ₦450.00</option>
+//               <option value="nin_premium">Premium Slip - ₦500.00</option>
+//             </FormSelectorDropdown>
+//           </InputGroupBlock>
 
-        if (response.ok && data.success) {
-          Swal.fire({
-            icon: 'success',
-            title: 'Verification Successful',
-            text: 'NIN details retrieved successfully.',
-            confirmButtonColor: '#2563eb'
+//           <InputGroupBlock>
+//             <FieldInputLabel>Enter Phone Number</FieldInputLabel>
+//             <FieldInputNode 
+//               type="text" 
+//               maxLength={11}
+//               placeholder="08030000000" 
+//               value={phoneNumber}
+//               onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ''))} 
+//             />
+            
+//             {/* COMPLIANCE INFORMATION STACK */}
+//             <AlertNotificationBox status="info">
+//               <FaCircleInfo size={14} />
+//               <p>Enter the phone number that was used to register the NIN. The number should be 11 digits without the country code (+234).</p>
+//             </AlertNotificationBox>
+
+//             <AlertNotificationBox status="danger">
+//               <FaCircleInfo size={14} />
+//               <p>Enter a correct Phone number linked to the NIN. You will not be refunded if the number is not linked after carrying out the transaction.</p>
+//             </AlertNotificationBox>
+//           </InputGroupBlock>
+
+//           {/* PRIVACY ACKNOWLEDGEMENT SELECTION BOUNDARY */}
+//           <CheckboxSelectionNode>
+//             <input 
+//               type="checkbox" 
+//               id="consentAgreementCheckbox"
+//               checked={consentChecked}
+//               onChange={(e) => setConsentChecked(e.target.checked)}
+//             />
+//             <label htmlFor="consentAgreementCheckbox">
+//               I have obtained proper consent from the phone number owner for this verification, and I am sure the number is linked to NIN
+//             </label>
+//           </CheckboxSelectionNode>
+
+//           <ExecutionTriggerBtn type="submit" disabled={loading}>
+//             {loading ? "Running Registry Lookup..." : `Process Request (₦${serviceFee}.00)`}
+//           </ExecutionTriggerBtn>
+
+//         </ProcessingCoreCard>
+
+//         {/* METRIC INFRASTRUCTURE BALANCE DISPLAY TILE */}
+//         <FinancialSideSummaryCard>
+//           <SummaryWidgetHeading>Transaction Summary</SummaryWidgetHeading>
+          
+//           <SummaryDataRow>
+//             <span>Target Protocol:</span>
+//             <strong>NIN Data Recovery</strong>
+//           </SummaryDataRow>
+          
+//           <SummaryDataRow>
+//             <span>Service Fee Charge:</span>
+//             <span className="charge-amount">₦{serviceFee?.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+//           </SummaryDataRow>
+
+//           <HorizontalSectionRule />
+
+//           <WalletStandingBalanceBlock>
+//             <div className="label-group">
+//               <FaWallet size={12} />
+//               <span>Available Wallet Balance</span>
+//             </div>
+//             <h3>₦{user?.balance.toLocaleString(undefined, {minimumFractionDigits: 2})}</h3>
+//           </WalletStandingBalanceBlock>
+
+//           <SecureFootnoteLine>
+//             <FaShield size={11} />
+//             <span>Encrypted Ledger Validation Route</span>
+//           </SecureFootnoteLine>
+//         </FinancialSideSummaryCard>
+
+//       </DualSplitGridPipeline>
+
+//     </ModuleWorkspaceFrame>
+//   );
+// };
+
+// export default NINPhoneVerification;
+
+import React, { useContext, useState } from 'react';
+import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { FaMobileScreenButton, FaCircleInfo, FaShield, FaWallet } from 'react-icons/fa6';
+import Swal from 'sweetalert2';
+import { Context } from './Context';
+
+const NINPhoneVerification = () => {
+  const { api_url, user, fetchUserProfileById } = useContext(Context);
+  
+  // Component Form State Parameters
+  const [slipType, setSlipType] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [consentChecked, setConsentChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const userWallet = user?.balance ? parseFloat(user.balance) : 0;
+
+  // Dynamic Base Rate Logic Engine
+  const getServiceFee = () => {
+    if (slipType === 'nin_regular') return 380;
+    if (slipType === 'nin_standard') return 450;
+    if (slipType === 'nin_premium') return 500;
+    return 0;
+  };
+
+  const serviceFee = getServiceFee();
+
+  const handleVerificationSubmit = (e) => {
+    e.preventDefault();
+
+    // 1. Structural Field Validations
+    if (!slipType) {
+      Swal.fire({ 
+        icon: 'error', 
+        title: 'Missing Selection', 
+        text: 'Please select a slip type to continue.', 
+        confirmButtonColor: '#2563eb' 
+      });
+      return;
+    }
+
+    if (phoneNumber.length !== 11 || !/^\d+$/.test(phoneNumber)) {
+      Swal.fire({ 
+        icon: 'error', 
+        title: 'Invalid Phone Number', 
+        text: 'The phone number must be exactly 11 digits.', 
+        confirmButtonColor: '#2563eb' 
+      });
+      return;
+    }
+
+    if (!consentChecked) {
+      Swal.fire({ 
+        icon: 'warning', 
+        title: 'Consent Required', 
+        text: 'Please check the box to confirm you have permission to look up this number.', 
+        confirmButtonColor: '#2563eb' 
+      });
+      return;
+    }
+
+    // 2. FIXED: Client-Side Balance Check (Stops execution immediately if funding is low)
+    if (userWallet < serviceFee) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Insufficient Balance',
+        text: `Your wallet balance (₦${userWallet.toLocaleString(undefined, {minimumFractionDigits: 2})}) is too low for this slip format. Please fund your account to continue.`,
+        confirmButtonColor: '#dc2626'
+      });
+      return;
+    }
+
+    // 3. Prompt Transaction Confirmation Modal
+    Swal.fire({
+      title: 'Confirm Payment',
+      text: `You will be charged ₦${serviceFee.toFixed(2)} from your wallet to look up this phone number. Do you want to proceed?`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#2563eb',
+      cancelButtonColor: '#64748b',
+      confirmButtonText: 'Yes, Verify Now',
+    }).then(async (result) => { 
+      if (result.isConfirmed) {
+        setLoading(true);
+        
+        try {
+          // Send payload mapping directly onto the backend controller pipeline
+          const response = await fetch(`${api_url}/verify_nin_phone.php`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              phone: phoneNumber,
+              consent: consentChecked,
+              userId: user?.id,
+              cost: serviceFee,
+              slip: slipType
+            })
           });
 
-          fetchUserProfileById(); // Refresh user wallet balance text on screen
-          
-          // Clear form fields
-          setPhoneNumber('');
-          setConsentChecked(false);
-          setSlipType('');
-        } else {
+          const data = await response.json();
+
+          if (response.ok && data.success) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Verification Successful',
+              text: 'Go to your TRANSACTION HISTORY and DOWNLOAD your slip.',
+              confirmButtonColor: '#2563eb',
+              allowOutsideClick: false
+            });
+
+            fetchUserProfileById(); // Refresh user wallet balance text component on screen
+            
+            // Clear form inputs cleanly
+            setPhoneNumber('');
+            setConsentChecked(false);
+            setSlipType('');
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Verification Failed',
+              text: data.error || 'Could not find details for this phone number.',
+              confirmButtonColor: '#dc2626'
+            });
+            console.log(data);
+          }
+        } catch (error) {
           Swal.fire({
             icon: 'error',
-            title: 'Verification Failed',
-            text: data.error || 'Could not find details for this phone number.',
+            title: 'Connection Error',
+            text: 'Could not connect to the server. Please check your internet connection.',
             confirmButtonColor: '#dc2626'
           });
-          console.log(data);
+        } finally {
+          setLoading(false);
         }
-      } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Connection Error',
-          text: 'Could not connect to the server. Please check your internet connection.',
-          confirmButtonColor: '#dc2626'
-        });
-      } finally {
-        setLoading(false);
       }
-    }
-  });
-};
+    });
+  };
 
-
-
-return (
+  return (
     <ModuleWorkspaceFrame>
       
       {/* SECTION HEADER PANEL */}
@@ -410,9 +416,9 @@ return (
               onChange={(e) => setSlipType(e.target.value)}
             >
               <option value="">-- Select a slip type --</option>
-              <option value="regular">Regular Slip - ₦380.00</option>
-              <option value="standard">Standard Slip - ₦450.00</option>
-              <option value="premium">Premium Slip - ₦500.00</option>
+              <option value="nin_regular">Regular Slip - ₦380.00</option>
+              <option value="nin_standard">Standard Slip - ₦450.00</option>
+              <option value="nin_premium">Premium Slip - ₦500.00</option>
             </FormSelectorDropdown>
           </InputGroupBlock>
 
@@ -478,7 +484,7 @@ return (
               <FaWallet size={12} />
               <span>Available Wallet Balance</span>
             </div>
-            <h3>₦{user?.balance.toLocaleString(undefined, {minimumFractionDigits: 2})}</h3>
+            <h3>₦{user?.balance ? parseFloat(user.balance).toLocaleString(undefined, {minimumFractionDigits: 2}) : "0.00"}</h3>
           </WalletStandingBalanceBlock>
 
           <SecureFootnoteLine>

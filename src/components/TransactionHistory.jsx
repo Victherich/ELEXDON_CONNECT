@@ -87,10 +87,14 @@ const TransactionHistory = () => {
                 <tr>
                   <th>Reference</th>
                   <th>Service Module</th>
+                  <th>Slip</th>
                   <th>Recipient/Target</th>
                   <th>Amount</th>
+                  <th>Initial Balance</th>
+                  <th>Final Balance</th>
                   <th>Status</th>
                   <th>Date Requested</th>
+                 <th>Response</th>
                 </tr>
               </thead>
               <tbody>
@@ -103,14 +107,21 @@ const TransactionHistory = () => {
                         <span>{tx.service}</span>
                       </ServiceInlineGroup>
                     </td>
+                    <td>
+                      {tx.slip? tx.slip:"N/A"}
+                    </td>
+                    
                     <td>{tx.recipient || '—'}</td>
                     <td className="amount-cell">₦{parseFloat(tx.amount).toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
+                    <td>₦{parseFloat(tx.initial_balance).toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
+                    <td>₦{parseFloat(tx.final_balance).toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
                     <td>
                       <StatusIndicatorBadge $status={tx.status}>
                         {tx.status}
                       </StatusIndicatorBadge>
                     </td>
                     <td className="date-cell">{tx.created_at}</td>
+                    <td>{tx.response}</td>
                   </tr>
                 ))}
               </tbody>

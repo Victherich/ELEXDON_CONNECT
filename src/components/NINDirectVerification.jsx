@@ -21,9 +21,9 @@ const NINDirectVerification = () => {
   const {api_url,user,fetchUserProfileById}=useContext(Context);
 
 const priceMap = {
-  regular: 350.00,
-  standard: 500.00,
-  premium: 800.00
+  nin_regular: 350.00,
+  nin_standard: 500.00,
+  nin_premium: 800.00
 };
 
 // Calculate service fee on the fly based on current dropdown selection state
@@ -156,7 +156,8 @@ const handleVerificationPipeline = (e) => {
               nin: ninNumber,
               consent: confirmedConsent,
               userId: user.id,
-              cost: serviceFee
+              cost: serviceFee,
+              slip:slipType,
             })
           });
 
@@ -168,8 +169,9 @@ console.log(data)
             Swal.fire({ 
               icon: 'success', 
               title: 'Verification Successful', 
-              text: 'NIN details retrieved successfully.', 
-              confirmButtonColor: '#2563eb' 
+              text: 'Go to your TRANSACTION HISTORY and DOWNLOAD your slip.', 
+              confirmButtonColor: '#2563eb', 
+              allowOutsideClick:false
             });
             
             fetchUserProfileById(); // Refresh user wallet balance text on screen
@@ -207,7 +209,7 @@ console.log(data)
       <HeaderLabelBoundary>
         <IconBoxWrapper><FaAddressCard size={14} /></IconBoxWrapper>
         <div>
-          <ViewMainTitle>NIN Verification</ViewMainTitle>
+          <ViewMainTitle>NIN Verification </ViewMainTitle>
           <ViewSubTitle>Verify any National Identity Number instantly</ViewSubTitle>
         </div>
       </HeaderLabelBoundary>
@@ -225,9 +227,9 @@ console.log(data)
             </StepIndicatorRow>
             <FormSelectorDropdown value={slipType} onChange={(e) => setSlipType(e.target.value)}>
               <option value="">-- Select --</option>
-              <option value="regular">Regular</option>
-              <option value="standard">Standard</option>
-              <option value="premium">Premium</option>
+              <option value="nin_regular">Regular</option>
+              <option value="nin_standard">Standard</option>
+              <option value="nin_premium">Premium</option>
             </FormSelectorDropdown>
             <DynamicCostFootnote>Service Fee: ₦{serviceFee.toFixed(2)}</DynamicCostFootnote>
           </InputGroupBlock>
@@ -295,7 +297,7 @@ console.log(data)
           </WalletSummaryWidgetCard>
 
           {/* DYNAMIC METADATA DISCLOSURE PANEL GROUPS */}
-          {returnedResult ? (
+          {/* {returnedResult ? (
             <ProfileIDCertificateDisplayCard>
               <CertificateHeaderRow>
                 <FaPassport size={14} />
@@ -347,7 +349,7 @@ console.log(data)
               <h4>Identity Cache Standby</h4>
               <p>Populate execution steps 1 through 3 completely and invoke validation routines to render the live identity profile registry parameters here.</p>
             </EmptyStateNoticeFramePlaceholder>
-          )}
+          )} */}
         </RightContextMetaTilePanel>
       </SplitLowerLayoutGrid>
     </ViewShellFrame>
