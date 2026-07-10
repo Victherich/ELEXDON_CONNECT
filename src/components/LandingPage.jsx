@@ -29,304 +29,50 @@ import p1 from '../Images/p1.jpeg'
 import p2 from '../Images/p2.jpeg'
 import p3 from '../Images/p3.jpeg'
 import p4 from '../Images/p4.jpeg'
-import p5 from '../Images/p5.jpeg'
+// import p5 from '../Images/p5.jpeg'
+import p9 from '../Images/p9.jpeg'
+import p10 from '../Images/p10.jpeg'
 import { useNavigate } from "react-router-dom";
+import LogoTicker from "./LogoTicker";
+import cs1 from '../Images/pp1.png'; import cs2 from '../Images/pp2.png';
+import cs3 from '../Images/pp3.png'; import cs4 from '../Images/pp4.png';
+import cs5 from '../Images/pp5.png'; import cs6 from '../Images/pp6.png';
+import cs7 from '../Images/pp7a.png'; import cs8 from '../Images/pp7.png';
+import cs9 from '../Images/p9.jpeg'; import cs10 from '../Images/p10.png';
+import cs11 from '../Images/pp10.png'; import cs12 from '../Images/pp11.png';
+import cs13 from '../Images/pp13.png'; import cs14 from '../Images/pp14.png';
+import cs15 from '../Images/cs15.png'; import cs16 from '../Images/cs16.png';
+import cs17 from '../Images/cs17.png'; import cs18 from '../Images/cs18.png';
+import cs19 from '../Images/cs19.png'; import cs20 from '../Images/cs20.png';
+import cs21 from '../Images/cs21.png'; import cs22 from '../Images/cs22.png';
+import cs23 from '../Images/cs23.png'; import cs24 from '../Images/cs24.png';
+import BrandPartnership from "./BrandPartnership";
+import featureimage2 from '../Images/featureimage2.jpeg'
 
-// const LandingPage = () => {
-//   const [menuOpen, setMenuOpen] = useState(false);
-
-//   const services = [
-//     { icon: <FaBolt />, title: "Electricity Bills", desc: "Pay AEDC, IKEDC, EKEDC, IBEDC, PHED instantly." },
-//     { icon: <FaIdCard />, title: "NIN Services", desc: "NIN verification, retrieval, updates and official validations." },
-//     { icon: <FaUniversity />, title: "BVN Services", desc: "Secure BVN validation, deep linking and verification." },
-//     { icon: <FaPassport />, title: "Government Registrations", desc: "Sleek CAC, Immigration, Tax and corporate compliance frameworks." },
-//     { icon: <FaMobileAlt />, title: "Airtime & Data", desc: "Instant automated top-up algorithms for all major global networks." },
-//     { icon: <FaFileAlt />, title: "Exam Services", desc: "WAEC, NECO, JAMB scratch card generation & instant result checkers." },
-//     { icon: <FaShieldAlt />, title: "Insurance Cover", desc: "Instant high-yield vehicle and personal insurance protocols." },
-//     { icon: <FaGlobeAfrica />, title: "International Portals", desc: "Borderless payment processing pipelines for global digital products." }
-//   ];
-
-//   const testimonials = [
-//     { name: "Amara Chidi", role: "Business Owner", comment: "Elexdon Connect resolved our complex corporate registration issues in minutes instead of weeks. Absolute game changer!" },
-//     { name: "Tunde Bakare", role: "Freelance Engineer", comment: "The API integrations and continuous utility payment streams are incredibly stable. Highly recommended." }
-//   ];
-
-//   const faqs = [
-//     { q: "How secure is the Elexdon Connect gateway?", a: "We utilize multi-layer banking grade encryption protocols paired with decentralized authentication schemes." },
-//     { q: "What is the average transaction turnaround time?", a: "Over 94% of our digital payment validation loops process immediately within 3-5 seconds." }
-//   ];
-
-//   return (
-//     <Wrapper>
-//       {/* PREMIUM LIGHT HEADER */}
-//       <Header>
-//         <NavContainer>
-//           <Logo>
-//             ELEXDON<span>.</span>
-//           </Logo>
-
-//           {/* Desktop Links */}
-//           <NavLinks>
-//             <NavLink href="#services">Services</NavLink>
-//             <NavLink href="#motivation">Our Core</NavLink>
-//             <NavLink href="#why-us">Why Us</NavLink>
-//             <NavLink href="#faqs">FAQs</NavLink>
-//           </NavLinks>
-
-//           <HeaderActionGroup>
-//             <SecondaryBtn style={{ padding: "8px 10px" }}>Sign In</SecondaryBtn>
-//             <PrimaryBtn style={{ padding: "8px 10px" }}>Launch App</PrimaryBtn>
-//           </HeaderActionGroup>
-
-//           {/* Mobile Menu Icon Toggle */}
-//           <MenuButton onClick={() => setMenuOpen(!menuOpen)}>
-//             {menuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
-//           </MenuButton>
-//         </NavContainer>
-
-//         {/* Sliding Mobile Drawer Overlay */}
-//         <MobileMenu isOpen={menuOpen}>
-//           <MobileNavLink href="#services" onClick={() => setMenuOpen(false)}>Services</MobileNavLink>
-//           <MobileNavLink href="#motivation" onClick={() => setMenuOpen(false)}>Our Core</MobileNavLink>
-//           <MobileNavLink href="#why-us" onClick={() => setMenuOpen(false)}>Why Us</MobileNavLink>
-//           <MobileNavLink href="#faqs" onClick={() => setMenuOpen(false)}>FAQs</MobileNavLink>
-//           <MobileMenuButtons>
-//             <SecondaryBtn style={{ width: "100%" }}>Sign In</SecondaryBtn>
-//             <PrimaryBtn style={{ width: "100%", justifyContent: "center" }}>Launch App</PrimaryBtn>
-//           </MobileMenuButtons>
-//         </MobileMenu>
-//       </Header>
-
-//       {/* 1. HERO SECTION */}
-//       <HeroSection>
-//         <HeroContent>
-//           <Fade triggerOnce>
-//             <Badge color="#1e40af" bg="#eff6ff">Nigeria's Elite Digital Infrastructure Hub</Badge>
-//             <Title>
-//               ELEXDON <span>CONNECT</span>
-//             </Title>
-//             <Description>
-//               One modern, hyperscale trusted ecosystem handling utilities, complex government records, identity verification systems, and seamless cross-border value distributions instantly.
-//             </Description>
-//             <ButtonGroup>
-//               <PrimaryBtn>
-//                 Launch App Now <FaArrowRight />
-//               </PrimaryBtn>
-//               <SecondaryBtn>Explore Services Blueprint</SecondaryBtn>
-//             </ButtonGroup>
-//             <StatsGrid>
-//               <StatCard><h3>50+</h3><p>Enterprise Services</p></StatCard>
-//               <StatCard><h3>99.9%</h3><p>Platform Uptime</p></StatCard>
-//               <StatCard><h3>&lt; 3s</h3><p>Execution Speeds</p></StatCard>
-//             </StatsGrid>
-//           </Fade>
-//         </HeroContent>
-//         <HeroGallery>
-//           <Zoom triggerOnce>
-//             <GridImg src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=600&q=80" alt="Secure Fintech Interface" />
-//             <GridImg src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=600&q=80" alt="Tech Infrastructure Workspace" />
-//             <GridImg src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="Cybersecurity Matrix" />
-//             <GridImg src={p1} alt="Encrypted Network Node" />
-//           </Zoom>
-//         </HeroGallery>
-//       </HeroSection>
-
-//       {/* 2. THE MOTIVATION SECTION */}
-//       <MotivationSection id="motivation">
-//         <SectionHeader>
-//           <Badge color="#b45309" bg="#fef3c7"><FaHeart /> Our Absolute Core Motivation</Badge>
-//           <h2>Bridging the Digital Chasm for Every Citizen</h2>
-//         </SectionHeader>
-//         <MotivationContentGrid>
-//           <Slide direction="left" triggerOnce>
-//             <TextCard>
-//               <IconBox color="#dc2626" bg="#fee2e2"><FaLightbulb /></IconBox>
-//               <h3>Why We Engineered This Platform</h3>
-//               <p>Bureaucracy shouldn't stifle innovation. Our core conviction is that accessing foundational infrastructure like identity updates, enterprise registries, and basic daily utilities should be transparent, lightning fast, and absolutely secure from anywhere on the planet.</p>
-//             </TextCard>
-//           </Slide>
-//           <Slide direction="right" triggerOnce>
-//             <MotivationImageGrid>
-//               <ImageWrapper>
-//                 <InlineImg src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=600&q=80" alt="Modern Innovation" />
-//               </ImageWrapper>
-//               <ImageWrapper>
-//                 <InlineImg src={p2} alt="Collaborative Development" />
-//               </ImageWrapper>
-//             </MotivationImageGrid>
-//           </Slide>
-//         </MotivationContentGrid>
-//       </MotivationSection>
-
-//       {/* 3. CORE SERVICES GRID */}
-//       <Section id="services">
-//         <Fade triggerOnce>
-//           <SectionHeader>
-//             <Badge color="#047857" bg="#d1fae5">Next-Gen Core Utilities</Badge>
-//             <h2>Popular Ecosystem Integrations</h2>
-//             <p>A unified environment for digital identity authentication, enterprise assets, updates and instant bills.</p>
-//           </SectionHeader>
-//         </Fade>
-//         <ServicesGrid>
-//           {services.map((service, index) => (
-//             <Slide direction="up" triggerOnce key={index}>
-//               <ServiceCard>
-//                 <IconWrap>{service.icon}</IconWrap>
-//                 <h3>{service.title}</h3>
-//                 <p>{service.desc}</p>
-//               </ServiceCard>
-//             </Slide>
-//           ))}
-//         </ServicesGrid>
-//       </Section>
-
-//       {/* 4. REINVENTED ARCHITECTURE SHOWCASE */}
-//       <FeatureSection>
-//         <FeatureGallery>
-//           <InlineImg src={p3} alt="DevOps Control Center" />
-//           <InlineImg src={p4} alt="Server Operations Cluster" />
-//         </FeatureGallery>
-//         <FeatureContent>
-//           <Fade triggerOnce>
-//             <Badge color="#6d28d9" bg="#ede9fe">Systemic Capabilities</Badge>
-//             <h2>One Hyper-Localized API Pipeline. Universal Solutions.</h2>
-//             <FeatureItemsList>
-//               {[
-//                 "NIN High-Throughput Verification Loops",
-//                 "BVN Dynamic Cross-Matching Systems",
-//                 "Realtime CAC Registrar Incorporations",
-//                 "Automated Multi-State Electricity Grid Clearances",
-//                 "Instant WAEC/NECO Secure Scratch Key Generation",
-//                 "Adaptive Tier-1 Network Mobile Top-Ups",
-//                 "Encrypted Personal & Asset Insurance Coverage"
-//               ].map((item) => (
-//                 <FeatureItem key={item}>
-//                   <FaCheckCircle color="#10b981" style={{ flexShrink: 0 }} />
-//                   <span>{item}</span>
-//                 </FeatureItem>
-//               ))}
-//             </FeatureItemsList>
-//           </Fade>
-//         </FeatureContent>
-//       </FeatureSection>
-
-//       {/* 5. WHY CHOOSE ELEXDON */}
-//       <Section id="why-us">
-//         <SectionHeader>
-//           <Badge color="#be185d" bg="#fce7f3">The Operational Edge</Badge>
-//           <h2>Engineered to Outperform</h2>
-//         </SectionHeader>
-//         <WhyGrid>
-//           <WhyCard>
-//             <IconBox color="#2563eb" bg="#eff6ff"><FaRocket /></IconBox>
-//             <h3>Zero Latency Processing</h3>
-//             <p>Our direct pipeline structures eliminate middle-tier handshakes, executing scripts instantly.</p>
-//           </WhyCard>
-//           <WhyCard>
-//             <IconBox color="#10b981" bg="#d1fae5"><FaLock /></IconBox>
-//             <h3>Bank-Grade Cryptography</h3>
-//             <p>Full database encryption layers shield sensitive government-linked identifier strings.</p>
-//           </WhyCard>
-//           <WhyCard>
-//             <IconBox color="#d97706" bg="#fef3c7"><FaGlobeAfrica /></IconBox>
-//             <h3>Absolute Availability</h3>
-//             <p>Engineered over automated failover clusters guaranteeing absolute up-time parameters.</p>
-//           </WhyCard>
-//         </WhyGrid>
-//       </Section>
-
-//       {/* 6. SOCIAL PROOF & TESTIMONIALS */}
-//       <Section>
-//         <SectionHeader>
-//           <Badge color="#0e7490" bg="#ecfeff">Social Proof Validation</Badge>
-//           <h2>Trusted Across the Federation</h2>
-//         </SectionHeader>
-//         <TestimonialGrid>
-//           {testimonials.map((t, idx) => (
-//             <TestimonialCard key={idx}>
-//               <FaQuoteLeft size={24} color="#cbd5e1" />
-//               <p>{t.comment}</p>
-//               <h4>— {t.name}, <span>{t.role}</span></h4>
-//             </TestimonialCard>
-//           ))}
-//         </TestimonialGrid>
-//       </Section>
-
-//       {/* 7. HIGH CONVERSION CONTEXT FAQS */}
-//       <Section id="faqs">
-//         <SectionHeader>
-//           <Badge color="#4b5563" bg="#f3f4f6">Knowledge Core</Badge>
-//           <h2>Frequently Asked Questions</h2>
-//         </SectionHeader>
-//         <FAQGrid>
-//           {faqs.map((f, idx) => (
-//             <FAQCard key={idx}>
-//               <FAQQuestion><FaQuestionCircle color="#4f46e5" /> <h4>{f.q}</h4></FAQQuestion>
-//               <p>{f.a}</p>
-//             </FAQCard>
-//           ))}
-//         </FAQGrid>
-//       </Section>
-
-//       {/* 8. CALL TO ACTION CONTAINER */}
-//       <CTA>
-//         <CTAGallery>
-//           <InlineImg src={p5} alt="Enterprise Solutions" />
-//           <InlineImg src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=400&q=80" alt="Analytical Insights" />
-//         </CTAGallery>
-//         <CTAContent>
-//           <Fade triggerOnce>
-//             <h2>Ready to Deploy Elexdon Connect?</h2>
-//             <p>Create your modern account dashboard environment within 60 seconds to execute payments seamlessly.</p>
-//             <PrimaryBtn style={{ background: "#ffffff", color: "#2563eb", alignSelf: "center", boxShadow: "0 4px 6px -1px rgba(0,0,0,0.05)" }}>
-//               Get Onboarded Instantly <FaArrowRight />
-//             </PrimaryBtn>
-//           </Fade>
-//         </CTAContent>
-//       </CTA>
-//     </Wrapper>
-//   );
-// };
-
-// import React, { useState } from 'react';
-// // Assuming your existing icon imports remain the same
-// import { 
-//   FaBolt, FaIdCard, FaUniversity, FaBuilding, FaMobileAlt, 
-//   FaArrowRight, FaTimes, FaBars, FaCheckCircle, FaRocket, 
-//   FaLock, FaGlobeAfrica, FaQuoteLeft, FaQuestionCircle, FaHeart, FaLightbulb 
-// } from 'react-icons/fa';
 
 const LandingPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 const navigate = useNavigate();
   // Cleaned services array mapping exactly to your actual offerings
-  const services = [
-    { 
-      icon: <FaIdCard />, 
-      title: "NIN Services", 
-      desc: "Print your NIN slip, validate your identity, or retrieve your NIN using your phone number or demography details." 
-    },
-    { 
-      icon: <FaBuilding />, 
-      title: "CAC & Business Setup", 
-      desc: "Handle new CAC registrations, file your CAC Annual Returns, or get your SCUML registration done smoothly." 
-    },
-    { 
-      icon: <FaUniversity />, 
-      title: "BVN & Tax (TIN)", 
-      desc: "Retrieve your BVN instantly via phone, or register and recover your Tax Identification Number (TIN)." 
-    },
-    { 
-      icon: <FaMobileAlt />, 
-      title: "Airtime & Data Top-up", 
-      desc: "Recharge your phone instantly or buy mobile data bundles for all major networks without hassle." 
-    },
-    { 
-      icon: <FaBolt />, 
-      title: "Electricity Bills", 
-      desc: "Pay your prepaid or postpaid electricity bills quickly for IKEDC, EKEDC, AEDC, IBEDC, PHED, and more." 
-    }
-  ];
+// You will need to import your images at the top of your LandingPage.js
+// e.g., import cs1 from '../Images/cs1.png'; ...
+
+const services = [
+  { img: cs1, title: "Print NIN Slip", desc: "Instantly print your official NIN slip." },
+  { img: cs2, title: "NIN Validation", desc: "Verify NIN details with high accuracy." },
+  // { img: cs3, title: "NIN Demography", desc: "Retrieve lost NIN using your personal data." },
+  { img: cs4, title: "CAC Registration", desc: "New business name or company registration." },
+  { img: cs5, title: "CAC Annual Return", desc: "Keep your business status compliant." },
+  { img: cs6, title: "SCUML Registration", desc: "Secure your SCUML certification easily." },
+  { img: cs7, title: "Print BVN Slip", desc: "Get your bank verification slip printed." },
+  { img: cs8, title: "TIN Registration", desc: "Set up or retrieve your Tax ID Number." },
+  { img: cs9, title: "Airtime Recharge", desc: "Instant top-up for all mobile networks." },
+  { img: cs10, title: "Mobile Data", desc: "Affordable data plans for all networks." },
+  { img: cs11, title: "Electricity Bill", desc: "Pay prepaid/postpaid utility bills." },
+  { img: cs12, title: "Cable TV Sub", desc: "Instant DSTV, GOtv, & Startimes sub." },
+  { img: cs13, title: "JAMB Services", desc: "Profile creation & result checking." },
+  { img: cs14, title: "WAEC Services", desc: "Result checker pins and verification." }
+];
 
   const testimonials = [
     { 
@@ -359,44 +105,7 @@ const navigate = useNavigate();
 
   return (
     <Wrapper>
-      {/* PREMIUM LIGHT HEADER */}
-      {/* <Header>
-        <NavContainer>
-          <Logo>
-            ELEXDON<span>.</span>
-          </Logo>
 
-         
-          <NavLinks>
-            <NavLink href="#services">Services</NavLink>
-            <NavLink href="#motivation">About Us</NavLink>
-            <NavLink href="#why-us">Why Us</NavLink>
-            <NavLink href="#faqs">FAQs</NavLink>
-          </NavLinks>
-
-          <HeaderActionGroup>
-            <SecondaryBtn style={{ padding: "8px 10px" }}>Sign In</SecondaryBtn>
-            <PrimaryBtn style={{ padding: "8px 10px" }}>Launch App</PrimaryBtn>
-          </HeaderActionGroup>
-
-        
-          <MenuButton onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
-          </MenuButton>
-        </NavContainer>
-
-       
-        <MobileMenu isOpen={menuOpen}>
-          <MobileNavLink href="#services" onClick={() => setMenuOpen(false)}>Services</MobileNavLink>
-          <MobileNavLink href="#motivation" onClick={() => setMenuOpen(false)}>About Us</MobileNavLink>
-          <MobileNavLink href="#why-us" onClick={() => setMenuOpen(false)}>Why Us</MobileNavLink>
-          <MobileNavLink href="#faqs" onClick={() => setMenuOpen(false)}>FAQs</MobileNavLink>
-          <MobileMenuButtons>
-            <SecondaryBtn style={{ width: "100%" }}>Sign In</SecondaryBtn>
-            <PrimaryBtn style={{ width: "100%", justifyContent: "center" }}>Launch App</PrimaryBtn>
-          </MobileMenuButtons>
-        </MobileMenu>
-      </Header> */}
 
       {/* 1. HERO SECTION */}
       <HeroSection id="home">
@@ -427,9 +136,7 @@ const navigate = useNavigate();
         </HeroContent>
         <HeroGallery>
           <Zoom triggerOnce>
-            <GridImg src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=600&q=80" alt="Secure Interface" />
-            <GridImg src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=600&q=80" alt="Easy Workspace" />
-            <GridImg src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="Secure Network" />
+           <GridImg src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=600&q=80" alt="Easy Workspace" />
             <GridImg src={p1} alt="Elexdon Services" />
           </Zoom>
         </HeroGallery>
@@ -446,13 +153,13 @@ const navigate = useNavigate();
             <TextCard>
               <IconBox color="#dc2626" bg="#fee2e2"><FaLightbulb /></IconBox>
               <h3>Why We Built This Platform</h3>
-              <p>You shouldn't have to face endless stress just to validate your identity, pay your household bills, or keep your corporate registrations active. We designed Elexdon Connect to put all these daily services in one fast, reliable, and user-friendly portal so you can get things done in minutes.</p>
+              <p>You shouldn't have to face endless stress just to recharge airtime and data, validate your identity, pay your household bills, or keep your corporate registrations active. We designed Elexdon Pay Connect to put all these daily services in one fast, reliable, and user-friendly portal so you can get things done in minutes.</p>
             </TextCard>
           </Slide>
           <Slide direction="right" triggerOnce>
             <MotivationImageGrid>
               <ImageWrapper>
-                <InlineImg src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=600&q=80" alt="Modern Setup" />
+                <InlineImg src={p10} />
               </ImageWrapper>
               <ImageWrapper>
                 <InlineImg src={p2} alt="User friendly service" />
@@ -462,33 +169,14 @@ const navigate = useNavigate();
         </MotivationContentGrid>
       </MotivationSection>
 
-      {/* 3. CORE SERVICES GRID */}
-      <Section id="services">
-        <Fade triggerOnce>
-          <SectionHeader>
-            <Badge color="#047857" bg="#d1fae5">Available Services</Badge>
-            <h2>What You Can Do Today</h2>
-            <p>Select any of our quick services below to get started immediately.</p>
-          </SectionHeader>
-        </Fade>
-        <ServicesGrid>
-          {services.map((service, index) => (
-            <Slide direction="up" triggerOnce key={index}>
-              <ServiceCard>
-                <IconWrap>{service.icon}</IconWrap>
-                <h3>{service.title}</h3>
-                <p>{service.desc}</p>
-              </ServiceCard>
-            </Slide>
-          ))}
-        </ServicesGrid>
-      </Section>
+      <LogoTicker/>
 
+   
       {/* 4. SERVICE BULLET LIST */}
       <FeatureSection>
         <FeatureGallery>
           <InlineImg src={p3} alt="Easy Dashboard" />
-          <InlineImg src={p4} alt="Quick Payments" />
+          <InlineImg src={featureimage2} alt="Quick Payments" style={{objectPosition:"top"}}/>
         </FeatureGallery>
         <FeatureContent>
           <Fade triggerOnce>
@@ -515,6 +203,27 @@ const navigate = useNavigate();
         </FeatureContent>
       </FeatureSection>
 
+         {/* 3. CORE SERVICES GRID */}
+      <Section id="services">
+        <Fade triggerOnce>
+          <SectionHeader>
+            <Badge color="#047857" bg="#d1fae5">Available Services</Badge>
+            <h2>Our Services</h2>
+            <h3>Pay all your bills at once, without leaving your home with Elexdon Pay Connect's comprehensive range of services.</h3>
+          </SectionHeader>
+        </Fade>
+  <ServicesGrid>
+  {services.map((s, index) => (
+    <ServiceCard key={index}>
+      <img src={s.img} alt={s.title} />
+      <h3>{s.title}</h3>
+      <p>{s.desc}</p>
+    </ServiceCard>
+  ))}
+</ServicesGrid>
+      </Section>
+
+
       {/* 5. WHY CHOOSE ELEXDON */}
       <Section id="why-us">
         <SectionHeader>
@@ -539,6 +248,8 @@ const navigate = useNavigate();
           </WhyCard>
         </WhyGrid>
       </Section>
+
+      <BrandPartnership/>
 
       {/* 6. SOCIAL PROOF & TESTIMONIALS */}
       <Section>
@@ -576,7 +287,7 @@ const navigate = useNavigate();
       {/* 8. CALL TO ACTION CONTAINER */}
       <CTA>
         <CTAGallery>
-          <InlineImg src={p5} alt="Our Application Interface" />
+          <InlineImg src={p9} alt="Our Application Interface" />
           <InlineImg src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=400&q=80" alt="Instant Payments" />
         </CTAGallery>
         <CTAContent>
@@ -787,7 +498,7 @@ const MobileMenuButtons = styled.div`
 
 /* HERO GRID LAYER */
 const HeroSection = styled.section`
-  min-height: 85vh;
+  min-height: 75vh;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
@@ -806,7 +517,7 @@ const HeroContent = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(2.5rem, 6vw, 3rem);
   font-weight: 900;
   margin: 0;
   line-height: 1.05;
@@ -902,7 +613,7 @@ const HeroGallery = styled.div`
 const GridImg = styled.img`
   width: 100%;
   height: 100%;
-  max-height: 240px;
+  max-height: 400px;
   object-fit: cover;
   border-radius: 8px;
   border: 1px solid #e2e8f0;
@@ -965,31 +676,31 @@ const InlineImg = styled.img`
 `;
 
 /* SERVICES STYLING */
-const ServicesGrid = styled.div`
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-`;
+// const ServicesGrid = styled.div`
+//   display: grid;
+//   gap: 10px;
+//   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+// `;
 
-const ServiceCard = styled.div`
-  background: #ffffff;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-  transition: transform 0.2s, box-shadow 0.2s;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+// const ServiceCard = styled.div`
+//   background: #ffffff;
+//   padding: 10px;
+//   border-radius: 8px;
+//   border: 1px solid #e2e8f0;
+//   transition: transform 0.2s, box-shadow 0.2s;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 6px;
+//   box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
-  }
+//   &:hover {
+//     transform: translateY(-2px);
+//     box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+//   }
 
-  h3 { margin: 0; font-size: 1rem; color: #0f172a; }
-  p { margin: 0; font-size: 16px; color: #475569; line-height: 1.4; }
-`;
+//   h3 { margin: 0; font-size: 1rem; color: #0f172a; }
+//   p { margin: 0; font-size: 16px; color: #475569; line-height: 1.4; }
+// `;
 
 const IconWrap = styled.div`
   font-size: 1.5rem;
@@ -1172,4 +883,42 @@ const CTAContent = styled.div`
 
   h2 { font-size: clamp(1.5rem, 3vw, 2.5rem); margin: 0; color: #ffffff; letter-spacing: -0.01em; }
   p { font-size: 1rem; margin: 0; color: #bfdbfe; }
+`;
+
+
+//
+
+const ServicesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  padding: 10px;
+
+  @media(max-width:428px){
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+`;
+
+const ServiceCard = styled.div`
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.2s;
+
+  &:hover { transform: translateY(-5px); border-color: #2563eb; }
+
+  img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    background: #f1f5f9;
+  }
+
+  h3 { margin: 0; font-size: 14px; color: #0f172a; }
+  p { margin: 0; font-size: 12px; color: #64748b; line-height: 1.3; }
 `;

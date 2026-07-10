@@ -124,8 +124,10 @@ useEffect(() => {
       console.log(data)
 
       if (response.ok && data.success) {
-        setVerifiedCandidateName(data.customer_name);
-        Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'Profile ID Verified', showConfirmButton: false, timer: 2000 });
+        setVerifiedCandidateName(
+    data.vtpass_response.content.Customer_Name
+);
+        Swal.fire({ toast: true, icon: 'success', title: 'Profile ID Verified', showConfirmButton: false, timer: 2000 });
       } else {
         Swal.fire({ icon: 'error', title: 'Verification Failed', text: data.error || 'The profile ID specified could not be resolved.', confirmButtonColor: '#dc2626' });
       }
@@ -351,6 +353,7 @@ useEffect(() => {
                       />
                       <VerifyPayloadInlineBtn type="button" onClick={handleVerifyProfileID} disabled={verifyingProfile || !selectedVariation}>
                         {verifyingProfile ? "..." : <FaUserCheck size={12}/>}
+                        Click to Verify
                       </VerifyPayloadInlineBtn>
                     </div>
                   </div>

@@ -34,6 +34,17 @@ import ExamPinManagement from './components/ExamPinManagement';
 import WaecManagement from './components/WaecManagement';
 import JambManagement from './components/JambManagement';
 import AdminTransactionHistory from './components/AdminTransactionHistory';
+import AboutUsPage from './components/AboutUsPage';
+import LogoTicker from './components/LogoTicker';
+import TermsPage from './components/TermsAndConditionsPage';
+import PrivacyPolicyPage from './components/PrivacyPolicy';
+import TermsOfUsePage from './components/TermsOfUse';
+import DownloadCTA from './components/DownloadCTA';
+import ContactUsPage from './components/ContactUsPage';
+
+import GotvSubscription from './components/GotvSubscription';
+
+import TvServiceSelector from './components/TvServiceSelector';
 
 function App() {
   return (
@@ -44,6 +55,12 @@ function App() {
     <Route path='/' element={<LandingPage/>}/>
     <Route path='/usersignup' element={<UserSignup/>}/>
     <Route path='/userlogin' element={<UserLogin/>}/>
+    <Route path='/about' element={<AboutUsPage/>}/>
+    <Route path='/termsofservice' element={<TermsPage/>}/>
+    <Route path='/privacypolicy' element={<PrivacyPolicyPage/>}/>
+    <Route path='/termsofuse' element={<TermsOfUsePage/>}/>
+    <Route path='/contact' element={<ContactUsPage/>}/>
+   
 
 
     <Route element={<PrivateUserDashboard />}>
@@ -75,9 +92,14 @@ function App() {
              <Route path='profile' element={<UserProfilePage/>}/>
              <Route path='allusers' element={<AdminUserManagement/>}/>
              <Route path='alltransactions' element={<AdminTransactionHistory/>}/>
+              <Route path='service/tvsubscriptions' element={<TvServiceSelector/>}/>
+              <Route path='service/gotv' element={<GotvSubscription/>}/>
+             
           </Route>
         </Route>
   </Routes>
+  <LogoTicker/>
+  <DownloadCTA/>
   <Footer/>
   </BrowserRouter>
   );

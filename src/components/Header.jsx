@@ -5,6 +5,7 @@ import logo from '../Images/logo.png'
 import { Context } from "./Context";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { FaAddressBook } from "react-icons/fa6";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,14 +24,14 @@ const Header = () => {
           ELEXDON PAY<span>CONNECT</span>
         </BrandLogo>
 
-        {/* DESKTOP NAV LINKS */}
-        
+        {/* DESKTOP NAV LINKS */}        
        <DesktopNavLinks>
         <MenuLink href="#home" onClick={()=>navigate('/')}>Home</MenuLink>
-          {location.pathname==='/'&& <MenuLink href="#services">Services</MenuLink>}
-          {location.pathname==='/'&& <MenuLink href="#motivation">Our Mission</MenuLink>}
-          {location.pathname==='/'&& <MenuLink href="#why-us">Infrastructure</MenuLink>}
-          {location.pathname==='/'&& <MenuLink href="#faqs">Support</MenuLink>}
+        <MenuLink onClick={()=>navigate('/about')}>About Us</MenuLink>
+          <MenuLink href="#services" onClick={()=>navigate('/')}>Services</MenuLink>
+        <MenuLink onClick={()=>navigate('/contact')}>Contact</MenuLink>
+          {/* {location.pathname==='/'&& <MenuLink href="#why-us">Infrastructure</MenuLink>} */}
+          {/* {location.pathname==='/'&& <MenuLink href="#faqs">Support</MenuLink>} */}
         </DesktopNavLinks>
 
         {/* DESKTOP ACTION BUTTONS */}
@@ -59,20 +60,23 @@ const Header = () => {
          <MobileMenuLink href="/" onClick={() => setIsOpen(false)}>
           <FaHome/> Home
         </MobileMenuLink> 
-     { location.pathname==='/'&&  <>
-        <MobileMenuLink href="#services" onClick={() => setIsOpen(false)}>
+        <MobileMenuLink href="/about" onClick={() => setIsOpen(false)}>
+          About Us
+        </MobileMenuLink> 
+     <>
+        <MobileMenuLink href="#services" onClick={() => {setIsOpen(false);navigate('/')}}>
           Services
         </MobileMenuLink>
-        <MobileMenuLink href="#motivation" onClick={() => setIsOpen(false)}>
+        {/* <MobileMenuLink href="#motivation" onClick={() => setIsOpen(false)}>
           Our Mission
-        </MobileMenuLink>
-        <MobileMenuLink href="#why-us" onClick={() => setIsOpen(false)}>
+        </MobileMenuLink> */}
+        {/* <MobileMenuLink href="#why-us" onClick={() => setIsOpen(false)}>
           Infrastructure
-        </MobileMenuLink>
-        <MobileMenuLink href="#faqs" onClick={() => setIsOpen(false)}>
-          Support
+        </MobileMenuLink> */}
+        <MobileMenuLink onClick={() => {setIsOpen(false);navigate('/contact')}}>
+          Contact
         </MobileMenuLink>  
-        </>}
+        </>
        
       
 
@@ -163,6 +167,7 @@ const MenuLink = styled.a`
   padding: 6px 10px; /* Strict padding guardrail */
   border-radius: 6px;
   transition: color 0.15s ease, background 0.15s ease;
+  cursor:pointer;
 
   &:hover {
     color: #0f172a;

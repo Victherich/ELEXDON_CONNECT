@@ -20,7 +20,8 @@ FaClockRotateLeft,  // Added
   FaMobileScreenButton, FaUsersViewfinder, FaMapLocationDot,
   FaUserCheck, FaPhoneVolume, FaBuildingShield, FaCode,
   FaFileCircleCheck,
-  FaArrowRightFromBracket
+  FaArrowRightFromBracket,
+  FaScreenpal
 } from 'react-icons/fa6';
 import { Context } from './Context';
 
@@ -197,12 +198,29 @@ const serviceActions = [
   icon: <FaFileCircleCheck size={14} />, // Feel free to swap out with an energy icon if preferred
   color: "#059669" // Stable deep green shell
 },
+
+{ 
+  path: "/userdashboard/service/jambservices", 
+  title: "JAMB Services", 
+  badge: "24/7 Auto", 
+  badgeColor: "#ea580c", // Warning amber active notice
+  icon: <FaFileCircleCheck size={14} />, // Feel free to swap out with an energy icon if preferred
+  color: "#059669" // Stable deep green shell
+},
+{ 
+  path: "/userdashboard/service/tvsubscriptions", 
+  title: "TV Subscriptions", 
+  // badge: "24/7 Auto", 
+  badgeColor: "#16a34a", // Warning amber active notice
+  icon: <FaScreenpal size={14} />, // Feel free to swap out with an energy icon if preferred
+  color: "#059669" // Stable deep green shell
+},
 // { 
-//   path: "/userdashboard/service/jambservices", 
-//   title: "JAMB Services", 
-//   badge: "24/7 Auto", 
-//   badgeColor: "#ea580c", // Warning amber active notice
-//   icon: <FaFileCircleCheck size={14} />, // Feel free to swap out with an energy icon if preferred
+//   path: "/userdashboard/service/gotv", 
+//   title: "Gotv", 
+//   // badge: "24/7 Auto", 
+//   badgeColor: "#16a34a", // Warning amber active notice
+//   icon: <FaScreenpal size={14} />, // Feel free to swap out with an energy icon if preferred
 //   color: "#059669" // Stable deep green shell
 // }
   ];
