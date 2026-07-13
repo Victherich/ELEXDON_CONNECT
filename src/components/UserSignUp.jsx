@@ -101,7 +101,7 @@ const UserSignup = () => {
       <MarketingPanel>
   <Fade triggerOnce>
     <Logo href="/">
-      <FaGlobeAfrica size={22} /> ELEXDON<span>CONNECT</span>
+      <FaGlobeAfrica size={22} /> ELEXDON PAY<span>CONNECT</span>
     </Logo>
     <h2>One Account. Every Service You Need.</h2>
     <p>Create an account today to print slips, register your business, pay utilities, and manage all your digital tasks on Nigeria's most reliable platform.</p>

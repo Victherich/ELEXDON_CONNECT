@@ -40,7 +40,7 @@ import cs5 from '../Images/pp5.png'; import cs6 from '../Images/pp6.png';
 import cs7 from '../Images/pp7a.png'; import cs8 from '../Images/pp7.png';
 import cs9 from '../Images/p9.jpeg'; import cs10 from '../Images/p10.png';
 import cs11 from '../Images/pp10.png'; import cs12 from '../Images/pp11.png';
-import cs13 from '../Images/pp13.png'; import cs14 from '../Images/pp14.png';
+import cs13 from '../Images/jamblogo.png'; import cs14 from '../Images/waeclogo.png';
 import cs15 from '../Images/cs15.png'; import cs16 from '../Images/cs16.png';
 import cs17 from '../Images/cs17.png'; import cs18 from '../Images/cs18.png';
 import cs19 from '../Images/cs19.png'; import cs20 from '../Images/cs20.png';
@@ -136,7 +136,7 @@ const services = [
         </HeroContent>
         <HeroGallery>
           <Zoom triggerOnce>
-           <GridImg src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=600&q=80" alt="Easy Workspace" />
+           {/* <GridImg src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=600&q=80" alt="Easy Workspace" /> */}
             <GridImg src={p1} alt="Elexdon Services" />
           </Zoom>
         </HeroGallery>
@@ -606,7 +606,7 @@ const StatCard = styled.div`
 
 const HeroGallery = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: 10px;
 `;
 

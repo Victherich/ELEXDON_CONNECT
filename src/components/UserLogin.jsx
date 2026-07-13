@@ -81,7 +81,7 @@ const navigate =useNavigate()
        <MarketingPanel>
   <Fade triggerOnce>
     <Logo href="/">
-      <FaGlobeAfrica size={22} /> ELEXDON<span>CONNECT</span>
+      <FaGlobeAfrica size={22} /> ELEXDON PAY<span>CONNECT</span>
     </Logo>
     <h2>Welcome Back to Your Account</h2>
     <p>Sign in to manage your bills, process CAC registrations, print identity slips, and check your transactions instantly.</p>

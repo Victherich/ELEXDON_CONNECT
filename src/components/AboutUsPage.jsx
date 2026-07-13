@@ -94,10 +94,11 @@ import { Fade } from "react-awesome-reveal";
 import { FaHeadset, FaWeight } from "react-icons/fa";
 
 // Replace with your actual assets
-import MichaelPic from '../Images/t1.jpeg'; 
+import MichaelPic from '../Images/ab9.png'; 
 import OfficePic from '../Images/cs6.png';
 import TeamSection from "./OurTeam";
 import { useNavigate } from "react-router-dom";
+import FeatureSection from "./FeatureSection";
 
 const AboutUsPage = () => {
     const navigate = useNavigate();
@@ -131,13 +132,14 @@ const AboutUsPage = () => {
           </LeaderContent>
           <div>
           <LeaderImage src={MichaelPic} alt="Michael Okoronkwo" />
-            <h3 style={{textAlign:"center", color:" #2563eb",}}>Michael Okoronkwo</h3>    
+            {/* <h3 style={{textAlign:"center", color:" #2563eb",}}>Michael Okoronkwo</h3>     */}
           </div>
       
         </LeaderGrid>
       </Section>
 
-      <TeamSection/>
+      {/* <TeamSection/> */}
+      <FeatureSection/>
 
       {/* 4. OFFICE LOCATION */}
       <Section>
