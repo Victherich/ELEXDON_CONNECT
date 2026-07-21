@@ -93,14 +93,14 @@ const serviceActions = [
       icon: <FaShield size={14} />, 
       color: "#dc2626" 
     },
-    // { 
-    //   path: "/userdashboard/cac-modification", 
-    //   title: "CAC Modification", 
-    //   badge: "9 new services", 
-    //   badgeColor: "#7c3aed",
-    //   icon: <FaPenToSquare size={14} />, 
-    //   color: "#dc2626" 
-    // },
+    { 
+      path: "/userdashboard/service/cac-modification", 
+      title: "CAC Modification", 
+      badge: "9 new services", 
+      badgeColor: "#7c3aed",
+      icon: <FaPenToSquare size={14} />, 
+      color: "#dc2626" 
+    },
     { 
       path: "/userdashboard/service/annualreturns", 
       title: "CAC Annual Return", 

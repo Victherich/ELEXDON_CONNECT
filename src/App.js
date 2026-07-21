@@ -45,6 +45,9 @@ import ContactUsPage from './components/ContactUsPage';
 import GotvSubscription from './components/GotvSubscription';
 
 import TvServiceSelector from './components/TvServiceSelector';
+import VerificationSuccessPage from './components/NinVerificationSuccessPage';
+import CacModificationsPortal from './components/CacModificationsPortal';
+import BVNVerificationSuccessPage from './components/BVNVerificationSuccessPage';
 
 function App() {
   return (
@@ -94,6 +97,9 @@ function App() {
              <Route path='alltransactions' element={<AdminTransactionHistory/>}/>
               <Route path='service/tvsubscriptions' element={<TvServiceSelector/>}/>
               <Route path='service/gotv' element={<GotvSubscription/>}/>
+              <Route path='service/nin-verification-success' element={<VerificationSuccessPage/>}/>
+              <Route path='service/bvn-verification-success' element={<BVNVerificationSuccessPage/>}/>
+              <Route path='service/cac-modification' element={<CacModificationsPortal/>}/>
              
           </Route>
         </Route>

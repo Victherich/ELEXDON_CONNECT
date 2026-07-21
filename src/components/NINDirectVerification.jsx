@@ -7,6 +7,7 @@ import {
 } from 'react-icons/fa6';
 import Swal from 'sweetalert2';
 import { Context } from './Context';
+import { useNavigate } from 'react-router-dom';
 
 const NINDirectVerification = () => {
   // Extract wallet credentials seamlessly from your global Redux authentication state structure
@@ -19,6 +20,7 @@ const NINDirectVerification = () => {
   const [loading, setLoading] = useState(false);
   const [returnedResult, setReturnedResult] = useState(null);
   const {api_url,user,fetchUserProfileById}=useContext(Context);
+  const navigate = useNavigate();
 
 const priceMap = {
   nin_regular: 350.00,
@@ -166,15 +168,18 @@ console.log(data)
           if (response.ok && data.success) {
             // Save search results, show success alert, and reset form inputs
             setReturnedResult(data.profile); 
+            // 2. Save to localStorage (Converting to string)
+    localStorage.setItem('last_nin_verification', JSON.stringify(data));
             Swal.fire({ 
               icon: 'success', 
               title: 'Verification Successful', 
-              text: 'Go to your TRANSACTION HISTORY and DOWNLOAD your slip.', 
+              text: 'You can now DOWNLOAD your slip.', 
               confirmButtonColor: '#2563eb', 
               allowOutsideClick:false
             });
             
             fetchUserProfileById(); // Refresh user wallet balance text on screen
+            navigate('/userdashboard/service/nin-verification-success');
             
             // Clear the form fields
             setNinNumber('');

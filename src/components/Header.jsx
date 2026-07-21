@@ -111,7 +111,7 @@ const NavElement = styled.header`
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 2000;
+  z-index: 200;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.85); /* Crisp Light Matte */
   backdrop-filter: blur(10px);

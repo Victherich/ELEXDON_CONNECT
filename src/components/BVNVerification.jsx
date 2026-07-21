@@ -6,6 +6,7 @@ import {
 } from 'react-icons/fa6';
 import Swal from 'sweetalert2';
 import { Context } from './Context';
+import { useNavigate } from 'react-router-dom';
 
 const BVNVerification = () => {
   // Local Component State
@@ -14,6 +15,7 @@ const BVNVerification = () => {
   const [confirmedConsent, setConfirmedConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [returnedResult, setReturnedResult] = useState(null);
+  const navigate = useNavigate();
   
   // App Global Context Config Strings & Methods
   const { api_url, user, fetchUserProfileById } = useContext(Context);
@@ -104,14 +106,15 @@ const BVNVerification = () => {
 
         if (response.ok && data.success) {
           // Save results, show success message, and refresh balance
-          setReturnedResult(data.profile); 
+          setReturnedResult(data); 
+          localStorage.setItem('last_bvn_verification', JSON.stringify(data));
           Swal.fire({ 
             icon: 'success', 
             title: 'Verification Successful', 
             text: 'BVN details retrieved successfully.', 
             confirmButtonColor: '#2563eb' 
           });
-          
+           navigate('/userdashboard/service/bvn-verification-success');
           fetchUserProfileById(); // Refresh user wallet balance text on screen
           
           // Clear form fields

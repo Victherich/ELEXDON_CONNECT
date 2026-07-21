@@ -37,7 +37,7 @@ const UserDashboardLayout = () => {
     <PortalContainer>
       
       {/* GLOBAL TOP INFRASTRUCTURE HEADER */}
-      <PortalTopHeader>
+      {/* <PortalTopHeader>
         <BrandLogoGroup to="/dashboard/overview">
           <FaGlobe size={18} />
           ELEXDON<span>CONNECT</span>
@@ -53,7 +53,7 @@ const UserDashboardLayout = () => {
             {mobileMenuOpen ? "" : <FaBars size={16} />}
           </MenuToggleBtn>
         </RightMetaCluster>
-      </PortalTopHeader>
+      </PortalTopHeader> */}
 
       <SplitLowerLayoutGrid>
         {/* PERSISTENT SIDEBAR NAVIGATION TREE */}
@@ -130,6 +130,7 @@ const PortalContainer = styled.div`
   font-family: system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
   box-sizing: border-box;
+  margin-top:50px;
 `;
 
 const PortalTopHeader = styled.header`

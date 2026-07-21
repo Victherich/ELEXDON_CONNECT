@@ -369,6 +369,7 @@ import {
 } from 'react-icons/fa6';
 import Swal from 'sweetalert2';
 import { Context } from './Context';
+import { useNavigate } from 'react-router-dom';
 
 const NINDemographyVerification = () => {
   // Local Form Parameters State
@@ -382,8 +383,7 @@ const NINDemographyVerification = () => {
   const [confirmedConsent, setConfirmedConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [returnedResult, setReturnedResult] = useState(null);
-
-  // App Global Context Config Metrics & Methods
+const navigate = useNavigate();  // App Global Context Config Metrics & Methods
   const { api_url, user, fetchUserProfileById } = useContext(Context);
 
   const userWallet = user?.balance ? parseFloat(user.balance) : 0;
@@ -502,20 +502,21 @@ const priceMap = {
           });
 
           const data = await response.json();
-
+console.log(data)
           if (response.ok && data.success) {
             // Save results on preview area card components
-            setReturnedResult(data.data); 
-            
+            setReturnedResult(data.profile); 
+           localStorage.setItem('last_nin_verification', JSON.stringify(data));   
             Swal.fire({ 
               icon: 'success', 
               title: 'Verification Successful', 
-              text: 'Go to your TRANSACTION HISTORY and DOWNLOAD your slip.', 
+              text: 'You can now DOWNLOAD your slip.', 
               confirmButtonColor: '#2563eb' 
             });
             
             fetchUserProfileById(); // Refresh global wallet balance numbers
-
+ navigate('/userdashboard/service/nin-verification-success');
+           
             // Clear the form state fields safely
             setFormData({ firstname: '', lastname: '', gender: '', dob: '' });
             setConfirmedConsent(false);
