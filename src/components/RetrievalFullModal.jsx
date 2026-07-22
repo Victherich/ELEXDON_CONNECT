@@ -178,8 +178,15 @@ export default function RetrievalFullModal({ isOpen, onClose }) {
     confirmAccurate: false,
     authorizeDeduction: false
   });
+const {services}=useContext(Context)
 
-  const servicePrice = 36000.00;
+
+// Find the specific service by its id
+const targetService = services.find(service => service.id === 'retrieval_full');
+
+// Extract and assign the price to a variable
+const servicePrice = targetService ? targetService.price : null;
+
 
 
   if (!isOpen) return null;

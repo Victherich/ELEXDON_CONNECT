@@ -177,7 +177,7 @@ const SubmitButton = styled.button`
 
 // --- MAIN COMPONENT ---
 const TinRetrievalForm = () => {
-  const SERVICE_FEE = 1200;
+  const SERVICE_FEE = 1500;
   const navigate = useNavigate();
   const {user,fetchUserProfileById,api_url}=useContext(Context)
 
@@ -245,7 +245,7 @@ const TinRetrievalForm = () => {
     <FormContainer>
       <BackButton onClick={() => navigate('/userdashboard/overview')}>← Back to Services Portal</BackButton>
       
-      <FormTitle>TIN Registration/Retrieval2</FormTitle>
+      <FormTitle>TIN Registration/Retrieval</FormTitle>
       <FormSubtitle>Register or Retrieve your Tax Identification Number</FormSubtitle>
 
       {/* <InfoBox>

@@ -267,9 +267,9 @@ const NINPhoneVerification = () => {
 
   // Dynamic Base Rate Logic Engine
   const getServiceFee = () => {
-    if (slipType === 'nin_regular') return 380;
-    if (slipType === 'nin_standard') return 450;
-    if (slipType === 'nin_premium') return 500;
+    if (slipType === 'nin_regular') return 450;
+    if (slipType === 'nin_standard') return 500;
+    if (slipType === 'nin_premium') return 600;
     return 0;
   };
 

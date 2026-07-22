@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { use, useContext, useState } from 'react';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
 import { Context } from './Context';
@@ -180,7 +180,13 @@ export default function RetrievalCertModal({ isOpen, onClose }) {
     authorizeDeduction: false
   });
 
-  const servicePrice = 17000.00;
+  const {services}=useContext(Context);
+
+// Find the specific service by its id
+const targetService = services.find(service => service.id === 'retrieval_cert');
+
+// Extract and assign the price to a variable
+const servicePrice = targetService ? targetService.price : null;
 
   if (!isOpen) return null;
 

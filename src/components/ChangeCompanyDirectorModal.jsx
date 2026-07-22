@@ -223,7 +223,13 @@ export default function ChangeCompanyDirectorModal({ isOpen, onClose }) {
     authorizeDeduction: false
   });
 
-  const servicePrice = 18000.00;
+   const {services}=useContext(Context);
+    
+    // Find the specific service by its id
+    const targetService = services.find(service => service.id === 'change_dir');
+    
+    // Extract and assign the price to a variable
+    const servicePrice = targetService ? targetService.price : null;
 
   if (!isOpen) return null;
 

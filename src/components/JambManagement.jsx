@@ -24,6 +24,17 @@ const JambManagement = () => {
   const [variations, setVariations] = useState([]);
   const [selectedVariation, setSelectedVariation] = useState('');
   const [fetchingVariations, setFetchingVariations] = useState(false);
+  const [ourOwnTargetAmount,setOurOwnTargetPrice]=useState(null);
+
+  console.log(selectedVariation)
+
+  useEffect(()=>{
+    if(selectedVariation==='utme-mock'){
+      setOurOwnTargetPrice(8600)
+    }else if(selectedVariation==='utme-no-mock'){
+      setOurOwnTargetPrice(7100)
+    }
+  },[selectedVariation])
 
 
 // Synchronize product variation codes on init
@@ -147,6 +158,7 @@ useEffect(() => {
     setProfileId('');
     setVerifiedCandidateName('');
     setSelectedVariation('');
+    setOurOwnTargetPrice(null)
   };
 
   const handleCopyPinToken = (text) => {
@@ -172,7 +184,7 @@ useEffect(() => {
 
     Swal.fire({
       title: 'Confirm Pin Dispense',
-      text: `Charge ₦${targetAmount.toLocaleString()} to generate "${targetPackage?.name}" for candidate: ${verifiedCandidateName}?`,
+      text: `Charge ₦${ourOwnTargetAmount.toLocaleString()} to generate "${targetPackage?.name}" for candidate: ${verifiedCandidateName}?`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#2563eb',
@@ -189,6 +201,7 @@ useEffect(() => {
           variation_code: selectedVariation,
           billersCode: profileId.trim(),
           amount: targetAmount,
+          amount2: ourOwnTargetAmount,
           phone: phone.trim()
         };
 
@@ -335,11 +348,12 @@ useEffect(() => {
                       <option value="">{fetchingVariations ? "-- Synchronizing catalog profiles... --" : "-- Choose Package Variation --"}</option>
                       {variations.map(v => (
                         <option key={v.variation_code} value={v.variation_code}>
-                          {v.name} (₦{parseFloat(v.variation_amount).toLocaleString()})
+                          {v.name}
                         </option>
                       ))}
                     </select>
-                  </div>
+                    {ourOwnTargetAmount&&<p style={{color:"blue", fontWeight:"bold", fontsize:"0.85rem"}}>₦{parseFloat(ourOwnTargetAmount).toLocaleString()}</p>
+                 } </div>
 
                   <div>
                     <MicroFieldInlineLabel>Candidate Profile ID Code</MicroFieldInlineLabel>

@@ -651,8 +651,8 @@ export default function ScumlRegistrationPage() {
   });
 
   // Calculate pricing matrices dynamically
-  const BASE_PRICE_REGULAR = 45000;
-  const BASE_PRICE_OIL_GAS = 60000;
+  const BASE_PRICE_REGULAR = 50000;
+  const BASE_PRICE_OIL_GAS = 65000;
   const currentPrice = formData.businessCategory === 'oil_gas' ? BASE_PRICE_OIL_GAS : BASE_PRICE_REGULAR;
 
   // Track text updates dynamically

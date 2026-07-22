@@ -22,8 +22,8 @@ const BVNVerification = () => {
 
   // Dynamic pricing for BVN items
   const priceMap = {
-    slip: 350.00,
-    card: 450.00
+    slip: 500.00,
+    card: 550.00
   };
 
   const serviceFee = priceMap[slipType] || 0.00;
@@ -166,8 +166,8 @@ const BVNVerification = () => {
             </StepIndicatorRow>
             <FormSelectorDropdown value={slipType} onChange={(e) => setSlipType(e.target.value)}>
               <option value="">-- Choose between traditional slip format or modern ID card design --</option>
-              <option value="slip">BVN Slip - ₦350.00</option>
-              <option value="card">BVN Card - ₦450.00</option>
+              <option value="slip">BVN Slip</option>
+              <option value="card">BVN Card</option>
             </FormSelectorDropdown>
             <DynamicCostFootnote>Cost: ₦{serviceFee.toFixed(2)}</DynamicCostFootnote>
           </InputGroupBlock>

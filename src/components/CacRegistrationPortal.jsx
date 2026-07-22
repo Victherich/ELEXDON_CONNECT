@@ -567,7 +567,7 @@ export default function CacRegistrationPortal() {
     business_name: {
       title: 'Business Name Registration',
       description: 'Ideal for sole proprietors, direct partnerships, and small business vendors.',
-      price: 35000,
+      price: 40000,
       time: '3-5 business days',
       requirements: [
         'Valid Means of Identification (NIN, Voter Card, International Passport or Driver License)',
@@ -578,7 +578,7 @@ export default function CacRegistrationPortal() {
     company: {
       title: 'Company Registration',
       description: 'Private Limited Liability Company (Ltd) offering explicit corporate shielding and shares allocations.',
-      price: 60000,
+      price: 70000,
       time: '5-7 business days',
       requirements: [
         'Valid Means of Identification for all Directors & Shareholders (NIN / International Passport)',

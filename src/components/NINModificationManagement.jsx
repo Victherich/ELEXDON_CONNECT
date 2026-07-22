@@ -814,10 +814,10 @@ const NINModificationManagement = () => {
   };
 
   const serviceOptions = [
-    { id: 'nin_name_modification', label: 'NIN Name Modification', desc: 'Update registered Surnames, First names, or Middle strings.', rate: 16000 },
-    { id: 'nin_phone_modification', label: 'NIN Phone Modification', desc: 'Update primary telephony routing parameters.', rate: 16000 },
-    { id: 'nin_address_modification', label: 'NIN Address Modification', desc: 'Modify official residential localization context lines.', rate: 16000 },
-    { id: 'nin_validation', label: 'NIN Digit Validation', desc: 'Re-validate operational structural numbers and date mappings.', rate: 6000 }
+    { id: 'nin_name_modification', label: 'NIN Name Modification', desc: 'Update registered Surnames, First names, or Middle strings.', rate: 17000 },
+    { id: 'nin_phone_modification', label: 'NIN Phone Modification', desc: 'Update primary telephony routing parameters.', rate: 17000 },
+    { id: 'nin_address_modification', label: 'NIN Address Modification', desc: 'Modify official residential localization context lines.', rate: 17000 },
+    { id: 'nin_validation', label: 'NIN Digit Validation', desc: 'Re-validate operational structural numbers and date mappings.', rate: 7500 }
   ];
 
   return (
@@ -1328,7 +1328,7 @@ const AddressMetadataBoxWrapperBlock = styled.div`
 
 /* --- MODAL SURFACE ARCHITECTURE STYLES --- */
 const ModalFixedDimmerOverlay = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100vw;

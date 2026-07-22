@@ -180,7 +180,13 @@ export default function RetrievalMemartModal({ isOpen, onClose }) {
     authorizeDeduction: false
   });
 
-  const servicePrice = 17000.00;
+  const {services}=useContext(Context);
+ 
+ // Find the specific service by its id
+ const targetService = services.find(service => service.id === 'retrieval_memart');
+ 
+ // Extract and assign the price to a variable
+ const servicePrice = targetService ? targetService.price : null;
 
   if (!isOpen) return null;
 

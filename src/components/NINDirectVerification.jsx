@@ -23,9 +23,9 @@ const NINDirectVerification = () => {
   const navigate = useNavigate();
 
 const priceMap = {
-  nin_regular: 350.00,
+  nin_regular: 450.00,
   nin_standard: 500.00,
-  nin_premium: 800.00
+  nin_premium: 600.00
 };
 
 // Calculate service fee on the fly based on current dropdown selection state

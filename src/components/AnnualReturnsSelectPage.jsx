@@ -125,16 +125,16 @@ const AnnualReturnsSelectPage = () => {
       id: 'business_name',
       title: 'Business Name',
       description: 'Annual returns for sole proprietors',
-      basePrice: 14000,
-      penaltyPrice: 5000,
+      basePrice: 15000,
+      penaltyPrice: 6000,
       route: "/userdashboard/service/annualreturns/businessname"
     },
     {
       id: 'registered_company',
       title: 'Registered Company',
       description: 'Annual returns for limited companies',
-      basePrice: 15000,
-      penaltyPrice: 6000,
+      basePrice: 16500,
+      penaltyPrice: 7000,
       route: "/userdashboard/service/annualreturns/company"
     }
   ];

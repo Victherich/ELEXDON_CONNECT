@@ -57,8 +57,73 @@ useEffect(()=>{
 
 
 
+
+
+
+
+
+
+
+
+//CAC MODIFICATION SERVICES
+  const services = [
+    {
+      id: 'retrieval_full',
+      title: 'Retrieval - Certificate, Status Report & MEMART',
+      price: 37000
+    },
+    {
+      id: 'retrieval_cert',
+      title: 'Retrieval - Certificate Only',
+      price: 18000
+    },
+    {
+      id: 'retrieval_status',
+      title: 'Retrieval - Status Report Only',
+      price: 11000
+    },
+    {
+      id: 'retrieval_memart',
+      title: 'Retrieval - MEMART Only',
+      price: 18000
+    },
+    {
+      id: 'change_sec',
+      title: 'Addition / Change of Company Secretary',
+      price: 19000
+    },
+    {
+      id: 'change_dir',
+      title: 'Addition / Change of Company Director',
+      price: 19000
+    },
+    {
+      id: 'edit_dir_share',
+      title: "Edit / Change of Director's or Shareholder's Details",
+      price: 19000
+    },
+    {
+      id: 'change_address',
+      title: 'Change of Company Address',
+      price: 19000
+    },
+    {
+      id: 'shareholder',
+      title: 'Addition or Removal of Shareholder',
+      price: 19000
+    }
+  ];
+
+
+
+
+
+
+
+
+
   return (
-    <Context.Provider value={{api_url, user, fetchUserProfileById}}>
+    <Context.Provider value={{api_url, user, fetchUserProfileById, services}}>
 
         {children}
     </Context.Provider>

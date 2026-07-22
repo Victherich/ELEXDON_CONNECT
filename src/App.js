@@ -48,11 +48,13 @@ import TvServiceSelector from './components/TvServiceSelector';
 import VerificationSuccessPage from './components/NinVerificationSuccessPage';
 import CacModificationsPortal from './components/CacModificationsPortal';
 import BVNVerificationSuccessPage from './components/BVNVerificationSuccessPage';
+import AppUpdate from './components/AppUpdate';
 
 function App() {
   return (
   <BrowserRouter>
   <ScrollToTop/>
+  <AppUpdate/>
   <Header/>
   <Routes>
     <Route path='/' element={<LandingPage/>}/>

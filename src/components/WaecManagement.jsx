@@ -21,6 +21,17 @@ const WaecManagement = () => {
   const [variations, setVariations] = useState([]);
   const [selectedVariation, setSelectedVariation] = useState('');
   const [fetchingVariations, setFetchingVariations] = useState(false);
+  const [ourOwnTargetAmount,setOurOwnTargetPrice]=useState(null);
+
+
+
+  useEffect(()=>{
+if(activeModal==='waec-registration'){
+setOurOwnTargetPrice(39000)
+}else{
+setOurOwnTargetPrice(6000)
+}
+  },[activeModal])
 
   const serviceMetaData = {
     'waec-registration': { name: 'WAEC Registration PIN', themeColor: '#00524d', bgColor: '#ccfbf1', textBrandColor: '#115e59', desc: 'Purchase official WAEC registration token keys for Private/School candidate streams.' },
@@ -85,7 +96,7 @@ const WaecManagement = () => {
 
     Swal.fire({
       title: 'Confirm Pin Generation',
-      text: `You will be charged ₦${targetAmount.toLocaleString()} to generate "${targetPackage.name}" sent to ${phone}`,
+      text: `You will be charged ₦${ourOwnTargetAmount.toLocaleString()} to generate "${targetPackage.name}" sent to ${phone}`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#2563eb',
@@ -102,7 +113,8 @@ const WaecManagement = () => {
           variation_code: targetPackage.variation_code,
           amount: targetAmount,
           phone: phone,
-          consent: confirmedConsent
+          consent: confirmedConsent,
+          amount2: ourOwnTargetAmount
         };
 
         try {
@@ -267,7 +279,7 @@ const WaecManagement = () => {
                       <option value="">{fetchingVariations ? "-- Synchronizing options... --" : "-- Choose Variation --"}</option>
                       {variations.map(v => (
                         <option key={v.variation_code} value={v.variation_code}>
-                          {v.name} (₦{parseFloat(v.variation_amount).toLocaleString()})
+                          {v.name} (₦{parseFloat(ourOwnTargetAmount).toLocaleString()})
                         </option>
                       ))}
                     </select>

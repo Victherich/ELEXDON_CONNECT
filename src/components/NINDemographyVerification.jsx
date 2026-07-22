@@ -390,9 +390,9 @@ const navigate = useNavigate();  // App Global Context Config Metrics & Methods
 
   // Dynamic pricing matching backend expectations
 const priceMap = {
-  nin_regular: 350.00,
-  nin_standard: 500.00,
-  nin_premium: 800.00
+  nin_regular: 700.00,
+  nin_standard: 800.00,
+  nin_premium: 900.00
 };
 
   const serviceFee = priceMap[slipType] || 0.00;
@@ -565,9 +565,9 @@ console.log(data)
             </StepIndicatorRow>
             <FormSelectorDropdown value={slipType} onChange={(e) => setSlipType(e.target.value)}>
               <option value="">-- Choose between traditional slip format or modern ID card design --</option>
-              <option value="nin_regular">NIN Regular clip - ₦350.00</option>
-              <option value="nin_standard">NIN Standard slip - ₦500.00</option>
-              <option value="nin_premium">NIN Premium card - ₦800.00</option>
+              <option value="nin_regular">NIN Regular clip</option>
+              <option value="nin_standard">NIN Standard slip</option>
+              <option value="nin_premium">NIN Premium card</option>
             </FormSelectorDropdown>
             <DynamicCostFootnote>Cost: ₦{serviceFee.toFixed(2)}</DynamicCostFootnote>
           </InputGroupBlock>
