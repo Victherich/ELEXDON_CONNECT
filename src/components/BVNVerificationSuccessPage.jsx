@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaPrint, FaArrowLeft, FaIdCard } from 'react-icons/fa6';
-// import { downloadSlip } from './BVNPdfGenerator';
+import { downloadSlip2 } from './BVNPdfGenerator';
 
 const BVNVerificationSuccessPage = () => {
     const [profile, setProfile] = useState(null);
@@ -24,7 +24,7 @@ const BVNVerificationSuccessPage = () => {
 
 const handleDownload = () => {
         // profile.slip comes from your API response stored in localStorage
-        // downloadSlip(profile.slip, profile.profile);
+        downloadSlip2(profile.slip, profile.profile);
 
     };
 
@@ -53,13 +53,20 @@ const handleDownload = () => {
                 
                 <DetailsGrid>
                     {/* <p>{profile.data.photo}</p> */}
-                    <div><label>Full Name</label><p>{profile.profile.data.firstName} {profile.middleName} {profile.surname}</p></div>
+                    <div><label>Full Name</label><p>{profile.profile.data.firstName} {profile.profile.data.middleName} {profile.profile.data.lastName}</p></div>
                     <div><label>BVN</label><p>{profile.profile.data.bvn}</p></div>
                     <div><label>Gender</label><p>{profile.profile.data.gender}</p></div>
                     <div><label>Date of Birth</label><p>{profile.profile.data.dateOfBirth}</p></div>
                     <div><label>Phone</label><p>{profile.profile.data.phoneNumber1}</p></div>
                     {profile.profile.data.residentialAddress&&<div><label>Address</label><p>{profile.profile.data.residentialAddress}, {profile.profile.data.stateOfResidence}, {profile.profile.data.residence_state}</p></div>}
                     {profile.profile.data.residence_address&&<div><label>Address</label><p>{profile.profile.data.residence_address}, {profile.profile.data.residence_town}, {profile.profile.data.residence_state}</p></div>}
+                 <div><label>Nationality</label><p>{profile.profile.data.nationality}</p></div>
+                 <div><label>Email</label><p>{profile.profile.data.email}</p></div>
+                 <div><label>Enrollment Bank</label><p>{profile.profile.data.enrollmentBank}</p></div>
+                 <div><label>Enrollment Branch</label><p>{profile.profile.data.enrollmentBranch}</p></div>
+                  <div><label>Registration Date</label><p>{profile.profile.data.registrationDate}</p></div>
+                   <div><label>Account Level</label><p>{profile.profile.data.levelOfAccount}</p></div>
+                    <div><label>Watch Listed</label><p>{profile.profile.data.watchListed}</p></div>
                 </DetailsGrid>
             </ResultCard>
         </PageContainer>

@@ -16,6 +16,7 @@ const BVNVerification = () => {
   const [loading, setLoading] = useState(false);
   const [returnedResult, setReturnedResult] = useState(null);
   const navigate = useNavigate();
+  console.log(slipType)
   
   // App Global Context Config Strings & Methods
   const { api_url, user, fetchUserProfileById } = useContext(Context);
