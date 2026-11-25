@@ -48,6 +48,7 @@ import cs21 from '../Images/cs21.png'; import cs22 from '../Images/cs22.png';
 import cs23 from '../Images/cs23.png'; import cs24 from '../Images/cs24.png';
 import BrandPartnership from "./BrandPartnership";
 import featureimage2 from '../Images/featureimage2.jpeg'
+import how2 from '../Images/how2.jpeg'
 
 
 const LandingPage = () => {
@@ -223,6 +224,9 @@ const services = [
 </ServicesGrid>
       </Section>
 
+<img src={how2} alt='how2'
+style={{width:"100%"}}
+/>
 
       {/* 5. WHY CHOOSE ELEXDON */}
       <Section id="why-us">

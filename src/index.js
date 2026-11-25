@@ -29,6 +29,7 @@ import { store, persistor } from "./Features/Store";
 import ContextProvider from './components/Context';
 // Import the unregister function from your serviceWorker.js file
 import { unregister } from './serviceWorker';
+import { VasBillsProvider } from './components/VasBillsContext';
 
 
 
@@ -38,9 +39,13 @@ root.render(
   <React.StrictMode>
      <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
+    
     <ContextProvider>
+          <VasBillsProvider>
     <App />
+      </VasBillsProvider>
     </ContextProvider>
+  
     </PersistGate>
     </Provider>
   </React.StrictMode>

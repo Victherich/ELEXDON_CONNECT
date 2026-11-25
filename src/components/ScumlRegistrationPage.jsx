@@ -622,7 +622,13 @@ import Swal from 'sweetalert2';
 import { Context } from './Context'; // Assuming path matches your setup
 
 export default function ScumlRegistrationPage() {
-  const { api_url, user, fetchUserProfileById } = useContext(Context);
+  const { api_url, user, fetchUserProfileById, prices } = useContext(Context);
+
+
+const regularSCUMLPriceItem = prices.find(p => p.id === "26");
+const oilandgasSCUMLPriceItem = prices.find(p => p.id === "27");
+
+
 
   // Multi-step pointer state
   const [currentStep, setCurrentStep] = useState(1);
@@ -650,9 +656,12 @@ export default function ScumlRegistrationPage() {
     mergedPdf: null
   });
 
-  // Calculate pricing matrices dynamically
-  const BASE_PRICE_REGULAR = 50000;
-  const BASE_PRICE_OIL_GAS = 65000;
+
+    const BASE_PRICE_REGULAR = regularSCUMLPriceItem?.price;
+  const BASE_PRICE_OIL_GAS = oilandgasSCUMLPriceItem?.price;
+
+
+
   const currentPrice = formData.businessCategory === 'oil_gas' ? BASE_PRICE_OIL_GAS : BASE_PRICE_REGULAR;
 
   // Track text updates dynamically
@@ -832,8 +841,8 @@ const handleFileChange = (e) => {
           <h2>SCUML Registration</h2>
           <p>Special Control Unit against Money Laundering Secure Validation Portal</p>
           <PriceTagContainer>
-            <span className="badge regular">Regular: ₦{BASE_PRICE_REGULAR.toLocaleString()}</span>
-            <span className="badge oil">Oil & Gas: ₦{BASE_PRICE_OIL_GAS.toLocaleString()}</span>
+            <span className="badge regular">Regular: ₦{BASE_PRICE_REGULAR?.toLocaleString()}</span>
+            <span className="badge oil">Oil & Gas: ₦{BASE_PRICE_OIL_GAS?.toLocaleString()}</span>
           </PriceTagContainer>
         </BrandHeadingBlock>
 
@@ -908,8 +917,8 @@ const handleFileChange = (e) => {
                 <FormGroup>
                   <label>Business Category *</label>
                   <select name="businessCategory" value={formData.businessCategory} onChange={handleInputChange} required>
-                    <option value="regular">Regular Business (₦{BASE_PRICE_REGULAR.toLocaleString()})</option>
-                    <option value="oil_gas">Oil & Gas (₦{BASE_PRICE_OIL_GAS.toLocaleString()})</option>
+                    <option value="regular">Regular Business (₦{BASE_PRICE_REGULAR?.toLocaleString()})</option>
+                    <option value="oil_gas">Oil & Gas (₦{BASE_PRICE_OIL_GAS?.toLocaleString()})</option>
                   </select>
                   <span className="input-hint">Oil & Gas businesses are subject to different regulatory tariffs.</span>
                 </FormGroup>

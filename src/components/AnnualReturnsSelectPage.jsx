@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import {Context} from './Context.jsx'
 
 // 1. Create the styled layout containers
 const PageContainer = styled.div`
@@ -120,21 +121,29 @@ const ActionButton = styled.button`
 const AnnualReturnsSelectPage = () => {
 
     const navigate = useNavigate();
+const {prices}=useContext(Context);
+
+const businessNamePriceItem = prices.find(p => p.id === "21");
+const businessNamePenaltyPriceItem = prices.find(p => p.id === "22");
+const companyPriceItem = prices.find(p => p.id === "23");
+const companyPenaltyPriceItem = prices.find(p => p.id === "24");
+
+
   const returnOptions = [
     {
       id: 'business_name',
       title: 'Business Name',
       description: 'Annual returns for sole proprietors',
-      basePrice: 15000,
-      penaltyPrice: 6000,
+      basePrice: businessNamePriceItem?.price,
+      penaltyPrice: businessNamePenaltyPriceItem?.price,
       route: "/userdashboard/service/annualreturns/businessname"
     },
     {
       id: 'registered_company',
       title: 'Registered Company',
       description: 'Annual returns for limited companies',
-      basePrice: 16500,
-      penaltyPrice: 7000,
+      basePrice: companyPriceItem?.price,
+      penaltyPrice: companyPenaltyPriceItem?.price,
       route: "/userdashboard/service/annualreturns/company"
     }
   ];
@@ -163,10 +172,10 @@ const AnnualReturnsSelectPage = () => {
 
             <CardBottom>
               <BasePriceText>
-                From ₦{option.basePrice.toLocaleString()}.00 / year
+                From ₦{option?.basePrice?.toLocaleString()}.00 / year
               </BasePriceText>
               <PenaltyPriceText>
-                With penalty: ₦{option.penaltyPrice.toLocaleString()}.00 / year
+                With penalty: ₦{option?.penaltyPrice?.toLocaleString()}.00 / year
               </PenaltyPriceText>
             </CardBottom>
 

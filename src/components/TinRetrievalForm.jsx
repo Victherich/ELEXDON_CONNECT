@@ -177,13 +177,19 @@ const SubmitButton = styled.button`
 
 // --- MAIN COMPONENT ---
 const TinRetrievalForm = () => {
-  const SERVICE_FEE = 1500;
-  const navigate = useNavigate();
-  const {user,fetchUserProfileById,api_url}=useContext(Context)
 
+  const navigate = useNavigate();
+  const {user,fetchUserProfileById,api_url, prices}=useContext(Context)
   // Component States
   const [corporateType, setCorporateType] = useState('');
   const [regNumber, setRegNumber] = useState('');
+
+  const tinRetrievalPriceItem = prices.find(p => p.id === "28");
+
+
+
+  const SERVICE_FEE = tinRetrievalPriceItem?.price;
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -222,7 +228,7 @@ const TinRetrievalForm = () => {
           });
 
           if (!response.ok) throw new Error(`HTTP code failure: ${response.status}`);
-          const data = await response.json();
+          const data   = await response.json();
 
           if (data.success) {
             Swal.fire({ icon: 'success', title: 'Order Submitted Successfully', text: data.message || 'TIN processing setup successfully completed.', confirmButtonColor: '#2563eb' });
@@ -260,7 +266,7 @@ const TinRetrievalForm = () => {
             <h4>Corporate</h4>
             <p>For business/company TIN registration/retrieval management</p>
           </CardMeta>
-          <CardPrice>₦{SERVICE_FEE.toLocaleString()}.00</CardPrice>
+          <CardPrice>₦{SERVICE_FEE?.toLocaleString()}.00</CardPrice>
         </SelectionCard>
 
         <SectionTitle>Corporate TIN Retrieval</SectionTitle>
@@ -295,7 +301,7 @@ const TinRetrievalForm = () => {
 
         <TotalSummaryBox>
           <span>Service Fee:</span>
-          <span>₦{SERVICE_FEE.toLocaleString()}.00</span>
+          <span>₦{SERVICE_FEE?.toLocaleString()}.00</span>
         </TotalSummaryBox>
 
         <SubmitButton type="submit">Pay & Submit Request</SubmitButton>

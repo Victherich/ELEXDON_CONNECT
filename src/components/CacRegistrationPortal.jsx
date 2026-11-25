@@ -551,7 +551,7 @@ export default function CacRegistrationPortal() {
   const [selectedType, setSelectedType] = useState(null); // 'business_name' or 'company'
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const {user,fetchUserProfileById,api_url}=useContext(Context)
+  const {user,fetchUserProfileById,api_url, prices}=useContext(Context)
 
   const [formData, setFormData] = useState({
     proposedName1: '',
@@ -563,11 +563,20 @@ export default function CacRegistrationPortal() {
     businessAddress: ''
   });
 
+
+
+  // Find individual price items by their specific database ID from your fetched prices array
+const businessNamePriceItem = prices.find(p => p.id === "19");
+const companyPriceItem = prices.find(p => p.id === "20");
+
+
+
   const registrationOptions = {
     business_name: {
       title: 'Business Name Registration',
       description: 'Ideal for sole proprietors, direct partnerships, and small business vendors.',
-      price: 40000,
+      // price: 40000,
+      price:businessNamePriceItem?.price,
       time: '3-5 business days',
       requirements: [
         'Valid Means of Identification (NIN, Voter Card, International Passport or Driver License)',
@@ -578,7 +587,8 @@ export default function CacRegistrationPortal() {
     company: {
       title: 'Company Registration',
       description: 'Private Limited Liability Company (Ltd) offering explicit corporate shielding and shares allocations.',
-      price: 70000,
+      // price: 70000,
+      price:companyPriceItem?.price,
       time: '5-7 business days',
       requirements: [
         'Valid Means of Identification for all Directors & Shareholders (NIN / International Passport)',
@@ -697,7 +707,7 @@ export default function CacRegistrationPortal() {
               <p>{registrationOptions.business_name.description}</p>
             </CardHeader>
             <div>
-              <PriceTag>₦{registrationOptions.business_name.price.toLocaleString()}.00</PriceTag>
+              <PriceTag>₦{registrationOptions?.business_name?.price?.toLocaleString()}.00</PriceTag>
               <MetaInfo>Processing Window: {registrationOptions.business_name.time}</MetaInfo>
             </div>
           </OptionCard>
@@ -708,7 +718,7 @@ export default function CacRegistrationPortal() {
               <p>{registrationOptions.company.description}</p>
             </CardHeader>
             <div>
-              <PriceTag>₦{registrationOptions.company.price.toLocaleString()}.00</PriceTag>
+              <PriceTag>₦{registrationOptions?.company?.price?.toLocaleString()}.00</PriceTag>
               <MetaInfo>Processing Window: {registrationOptions.company.time}</MetaInfo>
             </div>
           </OptionCard>
@@ -725,7 +735,7 @@ export default function CacRegistrationPortal() {
         <FormHeader>
           <div>
             <h2 style={{ margin: '0 0 4px 0', fontSize: '1.25rem', color: '#0f172a' }}>{currentPackage.title} Filing</h2>
-            <span style={{ fontSize: '0.85rem', color: '#2563eb', fontWeight: 'bold' }}>Cost: ₦{currentPackage.price.toLocaleString()}</span>
+            <span style={{ fontSize: '0.85rem', color: '#2563eb', fontWeight: 'bold' }}>Cost: ₦{currentPackage?.price?.toLocaleString()}</span>
           </div>
           <BackButton onClick={() => { setSelectedType(null); setSelectedFile(null); }}>Change Type</BackButton>
         </FormHeader>

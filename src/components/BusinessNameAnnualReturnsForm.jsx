@@ -715,9 +715,10 @@ const SubmitButton = styled.button`
 
 // --- MAIN COMPONENT ---
 const BusinessNameAnnualReturnsForm = ({ userWalletBalance, onFilingSuccess }) => {
-  const BASE_PRICE_PER_YEAR = 14000;
-  const PENALTY_PER_YEAR = 5000;
-  const CURRENT_COMPLETED_YEAR = 2025;
+
+
+
+
 
   // Form states
   const [businessName, setBusinessName] = useState('');
@@ -725,7 +726,7 @@ const BusinessNameAnnualReturnsForm = ({ userWalletBalance, onFilingSuccess }) =
   const [nin, setNin] = useState('');
   const [startingYear, setStartingYear] = useState('');
   const navigate = useNavigate();
-  const {user,fetchUserProfileById,api_url}=useContext(Context)
+  const {user,fetchUserProfileById,api_url, prices}=useContext(Context)
   
   // Single merged document file state
   const [mergedDocument, setMergedDocument] = useState(null);
@@ -733,6 +734,17 @@ const BusinessNameAnnualReturnsForm = ({ userWalletBalance, onFilingSuccess }) =
   // Checkbox states
   const [infoConfirmed, setInfoConfirmed] = useState(false);
   const [walletAuthorized, setWalletAuthorized] = useState(false);
+
+  const businessNamePriceItem = prices.find(p => p.id === "21");
+const businessNamePenaltyPriceItem = prices.find(p => p.id === "22");
+
+
+  const BASE_PRICE_PER_YEAR = businessNamePriceItem?.price
+  const PENALTY_PER_YEAR = businessNamePenaltyPriceItem?.price;
+  const CURRENT_COMPLETED_YEAR = 2025;
+
+
+
 
   // Price calculation states
   const [pricing, setPricing] = useState({ totalYears: 0, baseTotal: 0, penaltyTotal: 0, grandTotal: 0 });

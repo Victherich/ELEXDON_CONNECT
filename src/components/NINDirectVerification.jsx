@@ -8,6 +8,9 @@ import {
 import Swal from 'sweetalert2';
 import { Context } from './Context';
 import { useNavigate } from 'react-router-dom';
+import regular_nin_sample from '../Images/regular_nin_sample.png'
+import standard_nin_sample from '../Images/standard_nin_sample.png'
+import premium_nin_sample from '../Images/premium_nin_sample.png'
 
 const NINDirectVerification = () => {
   // Extract wallet credentials seamlessly from your global Redux authentication state structure
@@ -19,13 +22,30 @@ const NINDirectVerification = () => {
   const [confirmedConsent, setConfirmedConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [returnedResult, setReturnedResult] = useState(null);
-  const {api_url,user,fetchUserProfileById}=useContext(Context);
+  const {api_url,user,fetchUserProfileById, prices}=useContext(Context);
   const navigate = useNavigate();
 
+
+const slipPreviewImages = {
+  nin_regular: regular_nin_sample,
+  nin_standard: standard_nin_sample,
+  nin_premium: premium_nin_sample
+};
+
+
+
+
+// Find individual price items by their specific database ID from your fetched prices array
+const regularPriceItem = prices.find(p => p.id === "1");
+const standardPriceItem = prices.find(p => p.id === "8");
+const premiumPriceItem = prices.find(p => p.id === "9"); // Change to your actual premium ID if different
+
+
+
 const priceMap = {
-  nin_regular: 450.00,
-  nin_standard: 500.00,
-  nin_premium: 600.00
+  nin_regular: regularPriceItem ? regularPriceItem.price : null,
+  nin_standard: standardPriceItem ? standardPriceItem.price : null,
+  nin_premium: premiumPriceItem ? premiumPriceItem.price : null
 };
 
 // Calculate service fee on the fly based on current dropdown selection state
@@ -214,7 +234,7 @@ console.log(data)
       <HeaderLabelBoundary>
         <IconBoxWrapper><FaAddressCard size={14} /></IconBoxWrapper>
         <div>
-          <ViewMainTitle>NIN Verification </ViewMainTitle>
+          <ViewMainTitle>Print NIN (by ID number) </ViewMainTitle>
           <ViewSubTitle>Verify any National Identity Number instantly</ViewSubTitle>
         </div>
       </HeaderLabelBoundary>
@@ -237,6 +257,15 @@ console.log(data)
               <option value="nin_premium">Premium</option>
             </FormSelectorDropdown>
             <DynamicCostFootnote>Service Fee: ₦{serviceFee.toFixed(2)}</DynamicCostFootnote>
+            {slipType && (
+  <SlipPreviewContainer>
+    <PreviewLabel>Selected Slip Preview:</PreviewLabel>
+    <SlipPreviewImage 
+      src={slipPreviewImages[slipType]} 
+      alt="Slip Sample Preview" 
+    />
+  </SlipPreviewContainer>
+)}
           </InputGroupBlock>
 
           {/* STEP 2 SECTION */}
@@ -684,4 +713,30 @@ const AddressMetadataBoxWrapperBlock = styled.div`
 
   label { font-size: 9px; font-weight: 600; color: #94a3b8; display: block; margin-bottom: 2px; }
   p { font-size: 11px; line-height: 1.4; color: #334155; font-weight: 600; margin: 0; }
+`;
+
+const SlipPreviewContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 6px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 8px;
+  border-radius: 6px;
+`;
+
+const PreviewLabel = styled.span`
+  font-size: 10px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+`;
+
+const SlipPreviewImage = styled.img`
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
 `;

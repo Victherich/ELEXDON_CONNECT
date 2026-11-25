@@ -696,7 +696,7 @@ import Swal from 'sweetalert2';
 import { Context } from './Context';
 
 const NINModificationManagement = () => {
-  const { api_url, user, fetchUserProfileById } = useContext(Context);
+  const { api_url, user, fetchUserProfileById, prices } = useContext(Context);
 
   console.log(user?.balance)
 
@@ -713,12 +713,29 @@ const NINModificationManagement = () => {
     new_phone_number: '', new_address: '', date_of_birth: ''
   });
 
+
+  // Find individual price items by their specific database ID from your fetched prices array
+const ninNamePriceItem = prices.find(p => p.id === "15");
+const ninPhonePriceItem = prices.find(p => p.id === "16");
+const ninAddressPriceItem = prices.find(p => p.id === "17");
+const ninValidationPriceItem = prices.find(p => p.id === "18");
+
+
   const baseRates = {
-    nin_name_modification: 16000,
-    nin_phone_modification: 16000,
-    nin_address_modification: 16000,
-    nin_validation: 6000
+    nin_name_modification: ninNamePriceItem ? ninNamePriceItem.price : null,
+    nin_phone_modification: ninPhonePriceItem ? ninPhonePriceItem.price : null,
+    nin_address_modification: ninAddressPriceItem ? ninAddressPriceItem.price : null,
+    nin_validation: ninValidationPriceItem ? ninValidationPriceItem.price : null
   };
+
+
+
+  // const baseRates = {
+  //   nin_name_modification: 16000,
+  //   nin_phone_modification: 16000,
+  //   nin_address_modification: 16000,
+  //   nin_validation: 6000
+  // };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -814,10 +831,10 @@ const NINModificationManagement = () => {
   };
 
   const serviceOptions = [
-    { id: 'nin_name_modification', label: 'NIN Name Modification', desc: 'Update registered Surnames, First names, or Middle strings.', rate: 17000 },
-    { id: 'nin_phone_modification', label: 'NIN Phone Modification', desc: 'Update primary telephony routing parameters.', rate: 17000 },
-    { id: 'nin_address_modification', label: 'NIN Address Modification', desc: 'Modify official residential localization context lines.', rate: 17000 },
-    { id: 'nin_validation', label: 'NIN Digit Validation', desc: 'Re-validate operational structural numbers and date mappings.', rate: 7500 }
+    { id: 'nin_name_modification', label: 'NIN Name Modification', desc: 'Update registered Surnames, First names, or Middle strings.', rate: ninNamePriceItem?.price },
+    { id: 'nin_phone_modification', label: 'NIN Phone Modification', desc: 'Update primary telephony routing parameters.', rate: ninPhonePriceItem?.price },
+    { id: 'nin_address_modification', label: 'NIN Address Modification', desc: 'Modify official residential localization context lines.', rate: ninAddressPriceItem?.price },
+    { id: 'nin_validation', label: 'NIN Digit Validation', desc: 'Re-validate operational structural numbers and date mappings.', rate: ninValidationPriceItem?.price }
   ];
 
   return (
@@ -849,7 +866,7 @@ const NINModificationManagement = () => {
                 <div className="meta-info">
                   <h4>{opt.label}</h4>
                   <p>{opt.desc}</p>
-                  <span>Launch Order Form • ₦{opt.rate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                  <span>Launch Order Form • ₦{opt?.rate?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                 </div>
               </ServiceCardOptionItem>
             ))}

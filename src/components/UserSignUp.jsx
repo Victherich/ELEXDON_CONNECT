@@ -9,7 +9,9 @@ import {
   FaGlobeAfrica, 
   FaArrowRight, 
   FaCheckCircle, 
-  FaExclamationCircle 
+  FaExclamationCircle,
+  FaEye,
+  FaEyeSlash
 } from "react-icons/fa";
 import { Fade, Zoom } from "react-awesome-reveal";
 import { useNavigate } from "react-router-dom";
@@ -33,6 +35,8 @@ const UserSignup = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -172,21 +176,52 @@ const UserSignup = () => {
 
               {/* PASSWORD FIELDS CONTAINER */}
               <TwinGridRow>
-                <InputGroupField>
+              <InputGroupField>
                   <label htmlFor="password">Password</label>
                   <InputWrapperInner>
                     <FaLock className="input-icon" />
-                    <input type="password" id="password" name="password" placeholder="••••••••" value={formData.password} onChange={handleChange} required minLength="6" />
+                    <input 
+                      type={showPassword ? "text" : "password"} 
+                      id="password" 
+                      name="password" 
+                      placeholder="••••••••" 
+                      value={formData.password} 
+                      onChange={handleChange} 
+                      required 
+                      minLength="6" 
+                    />
+                    <PasswordToggleButton 
+                      type="button" 
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? <FaEyeSlash size={14} /> : <FaEye size={14} />}
+                    </PasswordToggleButton>
                   </InputWrapperInner>
                 </InputGroupField>
-                <InputGroupField>
+              <InputGroupField>
                   <label htmlFor="confirmPassword">Confirm Password</label>
                   <InputWrapperInner>
                     <FaLock className="input-icon" />
-                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••" value={formData.confirmPassword} onChange={handleChange} required minLength="6" />
+                    <input 
+                      type={showConfirmPassword ? "text" : "password"} 
+                      id="confirmPassword" 
+                      name="confirmPassword" 
+                      placeholder="••••••••" 
+                      value={formData.confirmPassword} 
+                      onChange={handleChange} 
+                      required 
+                      minLength="6" 
+                    />
+                    <PasswordToggleButton 
+                      type="button" 
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    >
+                      {showConfirmPassword ? <FaEyeSlash size={14} /> : <FaEye size={14} />}
+                    </PasswordToggleButton>
                   </InputWrapperInner>
                 </InputGroupField>
               </TwinGridRow>
+          
 
               {/* CONVERSION SUBMIT MECHANISM */}
               <SubmitButton type="submit" disabled={loading}>
@@ -446,3 +481,20 @@ const FormFooterRoute = styled.p`
     &:hover { text-decoration: underline; }
   }
 `;
+
+const PasswordToggleButton = styled.button`
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+
+  &:hover {
+    color: #2563eb;
+  }
+`;
+

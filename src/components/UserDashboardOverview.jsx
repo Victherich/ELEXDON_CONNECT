@@ -21,9 +21,11 @@ FaClockRotateLeft,  // Added
   FaUserCheck, FaPhoneVolume, FaBuildingShield, FaCode,
   FaFileCircleCheck,
   FaArrowRightFromBracket,
-  FaScreenpal
+  FaScreenpal,
+  FaMoneyBill
 } from 'react-icons/fa6';
 import { Context } from './Context';
+import { FaMonero } from 'react-icons/fa';
 
 const UserDashboardOverview = () => {
   const dispatch = useDispatch();
@@ -79,6 +81,15 @@ const adminActions =[
       color: "#dc2626" 
     },
 
+      { 
+      path: "/userdashboard/manage-prices", 
+      title: "Manage Prices", 
+      badge: "Manage prices", 
+      badgeColor: "#7c3aed",
+      icon: <FaFileInvoiceDollar size={14} />, 
+      color: "#dc2626" 
+    },
+
 ]
 
 
@@ -103,7 +114,7 @@ const serviceActions = [
     },
     { 
       path: "/userdashboard/service/annualreturns", 
-      title: "CAC Annual Return", 
+      title: "CAC Annual Return ✔", 
       badge: "NEW", 
       badgeColor: "#7c3aed",
       icon: <FaCalendarCheck size={14} />, 
@@ -111,7 +122,7 @@ const serviceActions = [
     },
     { 
       path: "/userdashboard/service/nindirectverification", 
-      title: "Print NIN Slip", 
+      title: "Print NIN (by ID number)", 
       icon: <FaAddressCard size={14} />, 
       color: "#6366f1" 
     },
@@ -155,7 +166,7 @@ const serviceActions = [
     // },
     { 
       path: "/userdashboard/service/cacregistration", 
-      title: "CAC Registration", 
+      title: "CAC Registration ✔", 
       icon: <FaBuildingShield size={14} />, 
       color: "#dc2626" 
     },
@@ -182,31 +193,31 @@ const serviceActions = [
   icon: <FaCode size={14} />, // Feel free to swap out with an energy icon if preferred
   color: "#059669" // Stable deep green shell
 },
+{ 
+  path: "/userdashboard/service/examinationpins", 
+  title: "EXAMINATION PINS", 
+  badge: "24/7 Auto", 
+  badgeColor: "#ea580c", // Warning amber active notice
+  icon: <FaFileCircleCheck size={14} />, // Feel free to swap out with an energy icon if preferred
+  color: "#059669" // Stable deep green shell
+},
 // { 
-//   path: "/userdashboard/service/examinationpins", 
-//   title: "EXAMINATION PINS", 
+//   path: "/userdashboard/service/waecservices", 
+//   title: "WAEC Services", 
 //   badge: "24/7 Auto", 
 //   badgeColor: "#ea580c", // Warning amber active notice
 //   icon: <FaFileCircleCheck size={14} />, // Feel free to swap out with an energy icon if preferred
 //   color: "#059669" // Stable deep green shell
 // },
-{ 
-  path: "/userdashboard/service/waecservices", 
-  title: "WAEC Services", 
-  badge: "24/7 Auto", 
-  badgeColor: "#ea580c", // Warning amber active notice
-  icon: <FaFileCircleCheck size={14} />, // Feel free to swap out with an energy icon if preferred
-  color: "#059669" // Stable deep green shell
-},
 
-{ 
-  path: "/userdashboard/service/jambservices", 
-  title: "JAMB Services", 
-  badge: "24/7 Auto", 
-  badgeColor: "#ea580c", // Warning amber active notice
-  icon: <FaFileCircleCheck size={14} />, // Feel free to swap out with an energy icon if preferred
-  color: "#059669" // Stable deep green shell
-},
+// { 
+//   path: "/userdashboard/service/jambservices", 
+//   title: "JAMB Services", 
+//   badge: "24/7 Auto", 
+//   badgeColor: "#ea580c", // Warning amber active notice
+//   icon: <FaFileCircleCheck size={14} />, // Feel free to swap out with an energy icon if preferred
+//   color: "#059669" // Stable deep green shell
+// },
 { 
   path: "/userdashboard/service/tvsubscriptions", 
   title: "TV Subscriptions", 
@@ -215,14 +226,48 @@ const serviceActions = [
   icon: <FaScreenpal size={14} />, // Feel free to swap out with an energy icon if preferred
   color: "#059669" // Stable deep green shell
 },
+
+
+//interswitch 
 // { 
-//   path: "/userdashboard/service/gotv", 
-//   title: "Gotv", 
+//   path: "/userdashboard/service/airtime", 
+//   title: "Airtime Recharge", 
+//   badge: "Instant", 
+//   badgeColor: "#16a34a", // Vibrant green accent
+//   icon: <FaPhoneVolume size={14} />, 
+//   color: "#2563eb" // Elexdon Blue primary shell
+// },
+// { 
+//   path: "/userdashboard/service/data", 
+//   title: "Mobile Data Recharge", 
+//   icon: <FaMobileScreenButton size={14} />, 
+//   color: "#7c3aed" // Royal purple shell
+// },
+// { 
+//   path: "/userdashboard/service/electricity", 
+//   title: "Electricity Bill Payment", 
+//   badge: "24/7 Auto", 
+//   badgeColor: "#ea580c", // Warning amber active notice
+//   icon: <FaCode size={14} />, // Feel free to swap out with an energy icon if preferred
+//   color: "#059669" // Stable deep green shell
+// },
+// { 
+//   path: "/userdashboard/service/cabletv", 
+//   title: "TV Subscriptions", 
 //   // badge: "24/7 Auto", 
 //   badgeColor: "#16a34a", // Warning amber active notice
 //   icon: <FaScreenpal size={14} />, // Feel free to swap out with an energy icon if preferred
 //   color: "#059669" // Stable deep green shell
-// }
+// },
+{ 
+  path: "/userdashboard/service/betting", 
+  title: "Betting", 
+  // badge: "24/7 Auto", 
+  badgeColor: "#16a34a", // Warning amber active notice
+  icon: <FaMoneyBill size={14} />, // Feel free to swap out with an energy icon if preferred
+  color: "#059669" // Stable deep green shell
+},
+
   ];
 
   return (

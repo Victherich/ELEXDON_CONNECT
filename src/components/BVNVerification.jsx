@@ -7,6 +7,8 @@ import {
 import Swal from 'sweetalert2';
 import { Context } from './Context';
 import { useNavigate } from 'react-router-dom';
+import slip_bvn_sample from '../Images/slip_bvn_sample.png'
+import card_bvn_sample from '../Images/card_bvn_sample.png'
 
 const BVNVerification = () => {
   // Local Component State
@@ -17,15 +19,30 @@ const BVNVerification = () => {
   const [returnedResult, setReturnedResult] = useState(null);
   const navigate = useNavigate();
   console.log(slipType)
+
   
   // App Global Context Config Strings & Methods
-  const { api_url, user, fetchUserProfileById } = useContext(Context);
+  const { api_url, user, fetchUserProfileById, prices } = useContext(Context);
 
-  // Dynamic pricing for BVN items
-  const priceMap = {
-    slip: 500.00,
-    card: 550.00
+
+ const slipPreviewImages = {
+    slip: slip_bvn_sample,
+    card: card_bvn_sample,
   };
+
+
+// Find individual price items by their specific database ID from your fetched prices array
+const slipPriceItem = prices.find(p => p.id === "13");
+const cardPriceItem = prices.find(p => p.id === "14");
+
+
+
+   // Dynamic pricing for BVN items
+  const priceMap = {
+    slip: slipPriceItem ? slipPriceItem.price : null,
+    card: cardPriceItem ? cardPriceItem.price : null
+  };
+
 
   const serviceFee = priceMap[slipType] || 0.00;
 
@@ -171,6 +188,16 @@ const BVNVerification = () => {
               <option value="card">BVN Card</option>
             </FormSelectorDropdown>
             <DynamicCostFootnote>Cost: ₦{serviceFee.toFixed(2)}</DynamicCostFootnote>
+
+             {slipType && (
+  <SlipPreviewContainer>
+    <PreviewLabel>Selected Slip Preview:</PreviewLabel>
+    <SlipPreviewImage 
+      src={slipPreviewImages[slipType]} 
+      alt="Slip Sample Preview" 
+    />
+  </SlipPreviewContainer>
+)}
           </InputGroupBlock>
 
           {/* STEP 2 SECTION */}
@@ -615,4 +642,32 @@ const AddressMetadataBoxWrapperBlock = styled.div`
 
   label { font-size: 9px; font-weight: 600; color: #94a3b8; display: block; margin-bottom: 2px; }
   p { font-size: 11px; line-height: 1.4; color: #334155; font-weight: 600; margin: 0; }
+`;
+
+
+
+const SlipPreviewContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 6px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 8px;
+  border-radius: 6px;
+`;
+
+const PreviewLabel = styled.span`
+  font-size: 10px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+`;
+
+const SlipPreviewImage = styled.img`
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
 `;

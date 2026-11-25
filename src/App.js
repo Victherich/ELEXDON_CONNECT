@@ -49,6 +49,19 @@ import VerificationSuccessPage from './components/NinVerificationSuccessPage';
 import CacModificationsPortal from './components/CacModificationsPortal';
 import BVNVerificationSuccessPage from './components/BVNVerificationSuccessPage';
 import AppUpdate from './components/AppUpdate';
+import ManagePrices from './components/ManagePrices';
+import BillsPayment from './components/BillsPayment';
+import AirtimePage from './components/AirtimePage';
+import DataBundlePage from './components/DataBundlePage';
+import BettingPage from './components/BettingPage';
+import CableTvPage from './components/CableTvPage';
+import ElectricityPage from './components/ElectricityPage';
+import PeyflexAirtimeRecharge from './components/Peyflex/PeyFlexAirtimeRecharge';
+import PeyflexDataBundle from './components/Peyflex/PeyflexDataBundle';
+import PeyflexElectricityRecharge from './components/Peyflex/PeyflexElectricityRecharge';
+import PeyflexCableRecharge from './components/Peyflex/PeyflexCableRecharge';
+import PeyflexBettingRecharge from './components/Peyflex/PeyflexBettingRecharge';
+import PeyflexEducationPin from './components/Peyflex/PeyflexEducationPin';
 
 function App() {
   return (
@@ -79,17 +92,24 @@ function App() {
             <Route path='service/bvnphoneprint' element={<BVNPhoneVerification/>}/>
             <Route path='service/nindemographyverification' element={<NINDemographyVerification/>}/>
             <Route path='service/ninmodificationmanagement' element={<NINModificationManagement/>}/>
-            <Route path='service/airtimerecharge' element={<AirtimeRechargeManagement/>}/>
-            <Route path='service/datarecharge' element={<DataRechargeSelector/>}/>
-            <Route path='service/datarecharge/:serviceID' element={<DataPurchasePage/>}/>
+            {/* <Route path='service/airtimerecharge' element={<AirtimeRechargeManagement/>}/> */}
+            {/* <Route path='service/airtimerecharge' element={<AirtimePage/>}/> */}
+            <Route path='service/airtimerecharge' element={<PeyflexAirtimeRecharge/>}/>
+            {/* <Route path='service/datarecharge' element={<DataRechargeSelector/>}/> */}
+              {/* <Route path='service/datarecharge' element={<DataBundlePage/>}/> */}
+            <Route path='service/datarecharge' element={<PeyflexDataBundle/>}/>
+            {/* <Route path='service/datarecharge/:serviceID' element={<DataPurchasePage/>}/> */}
             <Route path='service/scumlregistration' element={<ScumlRegistrationPage/>}/>
             <Route path='service/annualreturns' element={<AnnualReturnsSelectPage/>}/>
             <Route path='service/annualreturns/businessname' element={<BusinessNameAnnualReturnsForm/>}/>
              <Route path='service/annualreturns/company' element={<CompanyAnnualReturnsForm/>}/>
              <Route path='service/tinretrieval' element={<TinRetrievalForm/>}/>
-             <Route path='service/electricityrecharge' element={<ElectricityForm/>}/>
+             {/* <Route path='service/electricityrecharge' element={<ElectricityForm/>}/> */}
+             {/* <Route path='service/electricityrecharge' element={<ElectricityPage/>}/> */}
+             <Route path='service/electricityrecharge' element={<PeyflexElectricityRecharge/>}/>
              <Route path='service/cacregistration' element={<CacRegistrationPortal/>}/>
-             <Route path='service/examinationpins' element={<ExamPinManagement/>}/>
+             {/* <Route path='service/examinationpins' element={<ExamPinManagement/>}/> */}
+ <Route path='service/examinationpins' element={<PeyflexEducationPin/>}/>
 <Route path='service/waecservices' element={<WaecManagement/>}/>
 <Route path='service/jambservices' element={<JambManagement/>}/>
              <Route path='transactions' element={<TransactionHistory/>}/>
@@ -97,11 +117,23 @@ function App() {
              <Route path='profile' element={<UserProfilePage/>}/>
              <Route path='allusers' element={<AdminUserManagement/>}/>
              <Route path='alltransactions' element={<AdminTransactionHistory/>}/>
-              <Route path='service/tvsubscriptions' element={<TvServiceSelector/>}/>
+              {/* <Route path='service/tvsubscriptions' element={<TvServiceSelector/>}/> */}
+              {/* <Route path='service/tvsubscriptions' element={<CableTvPage/>}/> */}
+              <Route path='service/tvsubscriptions' element={<PeyflexCableRecharge/>}/>
               <Route path='service/gotv' element={<GotvSubscription/>}/>
               <Route path='service/nin-verification-success' element={<VerificationSuccessPage/>}/>
               <Route path='service/bvn-verification-success' element={<BVNVerificationSuccessPage/>}/>
               <Route path='service/cac-modification' element={<CacModificationsPortal/>}/>
+              <Route path='manage-prices' element={<ManagePrices/>}/>
+              <Route path='service/billpayments' element={<BillsPayment/>}/>
+             
+            
+              {/* <Route path='service/betting' element={<BettingPage/>}/> */}
+               <Route path='service/betting' element={<PeyflexBettingRecharge/>}/>
+              
+              
+              
+
              
           </Route>
         </Route>

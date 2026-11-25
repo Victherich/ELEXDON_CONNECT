@@ -219,12 +219,9 @@ const SubmitButton = styled.button`
 // --- MAIN COMPONENT ---
 const CompanyAnnualReturnsForm = ({ userWalletBalance, onFilingSuccess }) => {
   // Pricing configuration rules for Companies
-  const BASE_PRICE_PER_YEAR = 19000; 
-  const PENALTY_PER_YEAR = 8000;     
-  const AUDIT_PRICE = 5000;
-  const CURRENT_COMPLETED_YEAR = 2025;
 
-  const {user,fetchUserProfileById,api_url}=useContext(Context)
+
+  const {user,fetchUserProfileById,api_url, prices}=useContext(Context)
 
   // Form states
   const [companyName, setCompanyName] = useState('');
@@ -241,6 +238,17 @@ const CompanyAnnualReturnsForm = ({ userWalletBalance, onFilingSuccess }) => {
   // Agreement states
   const [infoConfirmed, setInfoConfirmed] = useState(false);
   const [walletAuthorized, setWalletAuthorized] = useState(false);
+
+
+  const companyPriceItem = prices.find(p => p.id === "23");
+const companyPenaltyPriceItem = prices.find(p => p.id === "24");
+const companyAuditPriceItem = prices.find(p => p.id === "25");
+
+
+    const BASE_PRICE_PER_YEAR = companyPriceItem?.price; 
+  const PENALTY_PER_YEAR = companyPenaltyPriceItem?.price;     
+  const AUDIT_PRICE = companyAuditPriceItem?.price;
+  const CURRENT_COMPLETED_YEAR = 2025;
 
   // Pricing calculations
   const [pricing, setPricing] = useState({ totalYears: 0, baseTotal: 0, penaltyTotal: 0, auditFee: 0, grandTotal: 0 });

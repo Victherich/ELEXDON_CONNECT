@@ -446,7 +446,7 @@ const {services}=useContext(Context);
           >
             <ServiceTitleText>{item.title}</ServiceTitleText>
             <CardFooter>
-              <PriceBadge>₦{item.price.toLocaleString()}.00</PriceBadge>
+              <PriceBadge>₦{item?.price?.toLocaleString()}.00</PriceBadge>
               <ActionHint>Select ➔</ActionHint>
             </CardFooter>
           </ServiceCard>

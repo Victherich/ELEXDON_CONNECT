@@ -370,6 +370,9 @@ import {
 import Swal from 'sweetalert2';
 import { Context } from './Context';
 import { useNavigate } from 'react-router-dom';
+import regular_nin_sample from '../Images/regular_nin_sample.png'
+import standard_nin_sample from '../Images/standard_nin_sample.png'
+import premium_nin_sample from '../Images/premium_nin_sample.png'
 
 const NINDemographyVerification = () => {
   // Local Form Parameters State
@@ -384,15 +387,29 @@ const NINDemographyVerification = () => {
   const [loading, setLoading] = useState(false);
   const [returnedResult, setReturnedResult] = useState(null);
 const navigate = useNavigate();  // App Global Context Config Metrics & Methods
-  const { api_url, user, fetchUserProfileById } = useContext(Context);
+  const { api_url, user, fetchUserProfileById, prices } = useContext(Context);
 
   const userWallet = user?.balance ? parseFloat(user.balance) : 0;
 
+
+
+  const slipPreviewImages = {
+    nin_regular: regular_nin_sample,
+    nin_standard: standard_nin_sample,
+    nin_premium: premium_nin_sample
+  };
+
+  // Find individual price items by their specific database ID from your fetched prices array
+const regularPriceItem = prices.find(p => p.id === "10");
+const standardPriceItem = prices.find(p => p.id === "11");
+const premiumPriceItem = prices.find(p => p.id === "12"); // Change to your actual premium ID if different
+
+
   // Dynamic pricing matching backend expectations
 const priceMap = {
-  nin_regular: 700.00,
-  nin_standard: 800.00,
-  nin_premium: 900.00
+  nin_regular: regularPriceItem ? regularPriceItem.price : null,
+  nin_standard: standardPriceItem ? standardPriceItem.price : null,
+  nin_premium: premiumPriceItem ? premiumPriceItem.price : null
 };
 
   const serviceFee = priceMap[slipType] || 0.00;
@@ -570,6 +587,16 @@ console.log(data)
               <option value="nin_premium">NIN Premium card</option>
             </FormSelectorDropdown>
             <DynamicCostFootnote>Cost: ₦{serviceFee.toFixed(2)}</DynamicCostFootnote>
+ {slipType && (
+  <SlipPreviewContainer>
+    <PreviewLabel>Selected Slip Preview:</PreviewLabel>
+    <SlipPreviewImage 
+      src={slipPreviewImages[slipType]} 
+      alt="Slip Sample Preview" 
+    />
+  </SlipPreviewContainer>
+)}
+
           </InputGroupBlock>
 
           {/* STEP 2 SECTION */}
@@ -1043,4 +1070,30 @@ const AddressMetadataBoxWrapperBlock = styled.div`
   padding: 8px;
   label { font-size: 9px; font-weight: 600; color: #94a3b8; display: block; margin-bottom: 2px; }
   p { font-size: 11px; line-height: 1.4; color: #334155; font-weight: 600; margin: 0; }
+`;
+
+const SlipPreviewContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 6px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 8px;
+  border-radius: 6px;
+`;
+
+const PreviewLabel = styled.span`
+  font-size: 10px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+`;
+
+const SlipPreviewImage = styled.img`
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
 `;
